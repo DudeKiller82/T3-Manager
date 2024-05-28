@@ -1,0 +1,859 @@
+B(B $(C=@0|@L(B $(C5i8i(B $(C1t9Z@L8&(B $(C?rAw@L4B(B $(C4Y8%(B
+$(C0m1^(B $(C8m7I5i55(B $(C=10T(B $(C9h?o(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(C4k:N:P@G(B Emacs $(C8m7I?!4B(B $(C<}@Z(B $(C@N<v8&(B $(CA$GXAY(B $(C<v(B $(C@V=@4O4Y(B; $(C@L4B(B $(C4k:N:P(B,
+$(C8m7I@G(B $(C9]:9(B $(CH=<v8&(B $(CA$GX(B $(CA]4O4Y(B.  $(C@L780T(B $(C8m7I?!(B $(C9]:9(B $(CH=<v8&(B $(CA$GXAV4B(B
+$(C9f9}@:(B $(C8m7I@;(B $(CD!1b(B $(C@|?!(B C-u$(C?M(B $(C<}@Z8&(B $(CD!4B(B $(C0M@87N(B $(C@L7g>nA}4O4Y(B.  META$(C<h(B
+($(CH$@:(B EDIT$(C<h3*(B $(C13C<<h(B)$(C0!(B $(C@V@88i(B $(C4Y8%(B $(C9f9}@87N(B $(C<}@Z(B $(C@N<v8&(B $(C@T7BGR(B $(C<v(B
+$(C@V=@4O4Y(B: MEAT$(C<h8&(B $(C4)8%(B $(CC$(B $(C<}@Z8&(B $(CD!=J=C?@(B.  C-u $(C9f9}@:(B $(C>n62(B
+$(C4\8;1b?!<-55(B $(C;g?kGR(B $(C<v(B $(C@V1b(B $(C6'9.?!(B $(C@L8&(B $(C;g?kGO1b(B $(C9Y6x4O4Y(B.
+
+$(C?98&(B $(C5i>n(B, C-u 8 C-f$(C4B(B $(C9.@Z(B $(C?)4|03@G(B $(C>UBJ@87N(B $(C?rAw@T4O4Y(B.
+
+>> $(CGQ(B $(C9x@G(B $(C8m7I@87N(B $(C1t9Z@L0!(B $(C@L(B $(CAY(B $(C1YC3?!(B $(C?@557O(B, $(C<}@Z(B $(C@N<v0!(B $(CAV>nAx(B
+   C-n $(CH$@:(B C-p$(C8&(B $(C=C55GX(B $(C:8=J=C?@(B.
+
+$(C4k:N:P@G(B $(C8m7I5i@:(B $(C<}@Z(B $(C@N<v8&(B $(C9]:9(B $(CH=<v7N(B $(C;g?kGOAv88(B $(C0f?l?!(B $(C5{6s<-4B(B
+$(C?9?\@{@N(B $(C8m7I5i@L(B $(C4Y8%(B $(C?k557N(B $(C>5(B $(C<v(B $(C@V=@4O4Y(B.  C-v$(C?M(B M-v$(C4B(B $(C@L71(B $(C?9?\?!(B
+$(C<SGU4O4Y(B.  $(C@N<v8&(B $(CAV8i(B $(C1W(B $(C88E-@G(B $(CH-8i(B $(C<v8&(B $(C5N7g8;1b(B $(CGOAv(B $(C>J0m(B $(C1W(B
+$(C88E-@G(B $(CAY@;(B $(CH-8i@G(B $(C@'3*(B $(C>F7!7N(B $(C5N7g8;1b(B $(CGU4O4Y(B.  $(CAo(B, C-u 4 C-v$(C4B(B
+$(CH-8i@;(B 4 $(CAY(B $(C88E-(B $(C5N7g8;1b(B $(CGU4O4Y(B.
+
+>> $(C@LA&(B C-u 8 C-v$(C8&(B $(CCD(B $(C:8=J=C?@(B.
+
+$(C@L7N<-(B $(CH-8i@:(B 8 $(CAY@L(B $(C@'7N(B $(C5N7g8;1b(B $(C5F@;(B $(C0M@T4O4Y(B.  $(C4Y=C(B $(C9X@87N(B
+$(C5N7g8;1b(B $(CGO1b(B $(C@'GX<-4B(B $(C@N<v8&(B M-v$(C?!(B $(CA]4O4Y(B.
+
+X Windows$(C8&(B $(C>5(B $(C0f?l?!4B(B Emacs $(CC"@G(B $(C?^Fm?!(B $(C5N7g8;1b(B $(C874k6s0m(B $(C:R8.?l4B(B
+$(C1b4Y6u(B $(C;g0"G|(B $(C8p>g@G(B $(CEM0!(B $(C@V@;(B $(C0M@T4O4Y(B.  $(C@L(B $(C5N7g8;1b(B $(C874k?!(B $(C4Y6wAc8&(B
+$(C5~1oGT@87N=a(B $(C1[?y@;(B $(C5N7g8;1b(B $(CGR(B $(C<v(B $(C@V=@4O4Y(B.
+
+>> $(C5N7g8;1b(B $(C874k(B $(C3;?!<-(B $(C4+?!(B $(C6g4B(B $(C:N:P@G(B $(C2@4k1b8&(B $(CA_0#(B $(C4\C_7N(B $(C4-7/(B
+   $(C:8=J=C?@(B.  $(C1W7/8i(B $(C1[?y@:(B $(C4Y6wAc7N(B $(C4)8%(B $(C@'D!?!(B $(C5{8%(B $(C>g(B $(C88E-@G(B $(C@'D!8&(B
+   $(C@'3*(B $(C>F7!7N(B $(C5N7g8;1b(B $(C5I(B $(C0M@T4O4Y(B.
+
+>> $(C4Y6wAc8&(B $(CA_0#(B $(C4\C_0!(B $(C4-7/Ax(B $(C;sEB?!<-(B $(C@'3*(B $(C>F7!7N(B $(C?rAw?)(B $(C:8=J=C?@(B.
+   $(C1W7/8i(B $(C1[?y@L(B $(C4Y6wAc0!(B $(C?rAw@L4B4k7N(B $(C@'3*(B $(C>F7!7N(B $(C5N7g8;1b(B $(C5I(B
+   $(C0M@T4O4Y(B.
+
+
+* EMACS$(C@G(B $(C@[5?@L(B $(C4\@}5I(B $(C6'(B
+--------------------------
+
+$(C8m7I@;(B $(CAV>n55(B Emacs$(C0!(B $(C9]@@@;(B $(CGOAv(B $(C>J@;(B $(C6'4B(B C-g$(C8&(B $(CCD<-(B Emacs$(C@G(B $(C@[5?@;(B
+$(C>H@|GO0T(B $(CA$Av=CE3(B $(C<v(B $(C@V=@4O4Y(B.  C-g$(C4B(B $(C=GG`GO4B5%(B $(C3J9+(B $(C?@7#(B $(C=C0#@L(B
+$(C0I8.4B(B $(C8m7I@;(B $(CA_Av=CE3(B $(C6'?!(B $(C;g?k5I(B $(C<v(B $(C@V=@4O4Y(B.
+
+C-g$(C4B(B $(C<}@Z(B $(C@N<v8&(B $(C9+=CGX(B $(C9v81(B $(C6'3*(B $(C>n62(B $(C8m7I@;(B $(C=C@[GO?4Av88(B $(C=GG`=CE00m(B
+$(C=MAv(B $(C>J@;(B $(C6'?!55(B $(C;g?k5I(B $(C<v(B $(C@V=@4O4Y(B.
+
+>> C-u 100$(C@;(B $(CCD<-(B $(C<}@Z(B $(C@N<v8&(B 100$(C@87N(B $(CGO0m(B $(C3-(B $(CHD(B C-g$(C8&(B $(CCD(B
+   $(C:8=J=C?@(B.  $(C1W8.0m(B $(C3*<-(B C-f$(C8&(B $(CD(4O4Y(B.  $(C@N<v4B(B C-g$(C7N=a(B $(C>x>]@=@87N(B $(CGQ(B
+   $(C9.@Z88(B $(C>U@87N(B $(C?rAw?)>_(B $(CGU4O4Y(B.
+
+
+* $(C9+4I(B $(C8m7I(B
+-----------
+
+$(C>n62(B Emacs $(C8m7I@:(B "$(CGc?k5GAv(B $(C>J>F<-(B"(disabled) $(CCJ:8@Z0!(B $(C@_8x(B $(C;g?kGOAv(B
+$(C>J557O(B $(C5G>n(B $(C@V=@4O4Y(B.
+
+$(C@L71(B $(C9+4I(B $(C8m7I@;(B $(C>28i(B, Emacs$(C4B(B $(C@L(B $(C8m7I@L(B $(C9+>y@L>z@88g(B, $(C@L(B $(C8m7I@;(B $(C1W3I(B
+$(C1W4k7N(B $(C=GG`GR(B $(C0M@NAv8&(B $(C90>n(B $(C:84B(B $(C>K828;@;(B $(CH-8i(B $(CG%=CGU4O4Y(B.
+
+$(C?x7!0!(B $(C@L(B $(C8m7I@;(B $(C>20m@Z(B $(CGO?44Y8i(B, $(C90@=?!(B $(C4kGX(B $(C;g@L(B $(C9.@Z(B(Space)$(C8&(B $(CCD<-(B
+$(C4dGO=J=C?@(B.  $(C:8Ek@:(B $(C9+4I(B $(C8m7I@;(B $(C=GG`=CE0Av(B $(C>J1b(B $(C@'GX(B $(C90@=?!(B "n"$(C@87N(B
+$(C4dGU4O4Y(B.
+
+>> <ESC> : ($(C9+4I(B $(C8m7I@G(B $(CGO3*@T4O4Y(B)$(C@;(B $(CD#(B $(CHD(B n$(C@87N(B $(C90@=?!(B $(C4dGO=J=C?@(B.
+
+
+* $(CC"(B
+----
+
+Emacs$(C4B(B $(C?)7/(B $(CC"@;(B $(C0!Az(B $(C<v(B $(C@V@88g(B $(C0"0"@:(B $(C5{7N(B $(C9.<-8&(B $(CH-8i(B $(CG%=CGU4O4Y(B.
+$(C4YA_(B $(CC"@;(B $(C>24B(B $(C9f9}?!(B $(C4kGX<-4B(B $(C3*A_?!(B $(C<38mGO1b7N(B $(CGU4O4Y(B.  $(CAv1]4B(B
+$(C4Y8%(B $(CC"@;(B $(C>x>V0m(B $(C?x7!?!(B $(C@V4x(B $(CC"(B $(CGO3*7N(B $(C59>F0!(B $(CFmA}@;(B $(C0h<SGO4B(B $(C9f9}88@;(B
+$(C<38mGU4O4Y(B.  $(C0#4\GU4O4Y(B:
+
+	C-x 1	$(CC"@;(B $(CGO3*7N(B $(C885i1b(B ($(CAo(B, $(C4Y8%(B $(CC"5i@;(B $(C>x>[4O4Y(B).
+
+$(C@L(B $(C0M@:(B $(CA&>n9.@Z(B-x $(C4Y@=?!(B $(C<}@Z(B $(C1[<h(B 1$(C@T4O4Y(B.  C-x 1$(C@:(B $(C1t9Z@L0!(B $(C@V4B(B
+$(CC"@;(B $(CH.@eGX<-(B $(C@|C<(B $(CH-8i@;(B $(C>2557O(B $(CGU4O4Y(B.  $(C4Y8%(B $(CC"5i@:(B $(CAv?vA}4O4Y(B.
+
+>> $(C1t9Z@L8&(B $(C@L(B $(CAY7N(B $(C?rAw@N(B $(CHD(B C-u 0 C-l$(C@;(B $(CD!=J=C?@(B.
+>> $(CA&>n9.@Z(B-h k $(CA&>n9.@Z(B-f$(C8&(B $(CD!=J=C?@(B.
+   $(CA&>n9.@Z(B-f $(C8m7I?!(B $(C4kGQ(B $(C9.<-H-8&(B $(CH-8i(B $(CG%=CGO1b(B $(C@'GX(B $(C;u(B $(CC"@L(B
+   $(C3*E83*8i<-(B $(C@L(B $(CC"@L(B $(C>n6;0T(B $(CAY>n(B $(C5e4B0!8&(B $(C0|B{GO=J=C?@(B.
+
+>> C-x 1$(C@;(B $(CCD<-(B $(C9.<-H-(B $(C8q7O(B $(C@[<:(B $(CC"@L(B $(C>n6;0T(B $(C;g6sAv4B0!8&(B $(C:8=J=C?@(B.
+
+$(C@L(B $(C8m7I@:(B $(C5N(B $(C9.@Z7N(B $(C18<:5G>n(B $(C@V4Y4B(B $(CA!?!<-(B $(CAv1]1nAv(B $(C9h?n(B $(C4Y8%(B $(C8m7I5i0z(B
+$(C4Y8(4O4Y(B.  $(C=C@[@:(B $(CA&>n9.@Z(B-x$(C7N(B $(CGU4O4Y(B.  $(CA&>n9.@Z(B-x$(C7N(B $(C=C@[GO4B(B $(C8m7I5i@:(B
+$(C9+C4(B $(C89=@4O4Y(B; $(C1W71(B $(C89@:(B $(C8m7I5i@:(B $(CC"@L3*(B $(CFD@O(B, $(C;g@LD-(B(buffer) $(C3;Av4B(B
+$(C1W71(B $(C0M0z(B $(C?,0|<:@L(B $(C@V4B(B $(C8m7I5i@T4O4Y(B.  $(C@L71(B $(C8m7I5i@:(B $(C5Q(B, $(C<B(B $(CH$@:(B
+$(C3W03@G(B $(C9.@Z8&(B $(C>94O4Y(B.
+
+
+* $(C3"?l1b?M(B $(CAv?l1b(B
+-----------------
+
+$(C1[?y@;(B $(C3"?l1b(B $(C@'GX<-4B(B $(C1W(B $(C1[?y@;(B $(CE8@ZD!8i(B $(C5K4O4Y(B.  A, 7, *, $(C5n5n0z(B
+$(C00@L(B, $(C:<(B $(C<v(B $(C@V4B(B $(C9.@Z5i@:(B Emacs$(C0!(B $(C1[?y7N(B $(C@N=DGO?)(B $(CAo0"(B $(C3"?s4O4Y(B.
+<Return>($(C:91M<h(B)$(C8&(B $(CD!8i(B $(C;uAY(B $(C9.@Z0!(B $(C3"?vA}4O4Y(B.
+
+<Delete>$(C8&(B $(CD!8i(B $(C86Av87@87N(B $(C@T7B5H(B $(C9.@Z0!(B $(CAv?vA}4O4Y(B.  <Delete>$(C4B(B
+$(C1[<hFG?!(B "Del"$(C@L6s0m55(B $(C@L8'G%0!(B $(C4^7A(B $(C@V=@4O4Y(B.  $(C>n62(B $(C0f?l?!4B(B
+"Backspace" $(C1[<h0!(B <Delete>$(C@G(B $(C?*GR@;(B $(CGO1b55(B $(CGOAv88(B $(CGW;s(B $(C1W78Av4B(B
+$(C>J=@4O4Y(B!
+
+$(CA;(B $(C4u(B $(C@O9]@{@87N(B, <Delete>$(C4B(B $(C1t9Z@L(B $(CGv@'D!@G(B $(C9Y7N(B $(C@|?!(B $(C@V4B(B $(C9.@Z8&(B
+$(CAv?s4O4Y(B.
+
+>> $(C1W(B $(C0M@;(B $(CGX(B $(C:8=J=C?@(B--$(C8n8n(B $(C9.@Z8&(B $(CD#(B $(CHD(B <Delete>$(C8&(B $(CCD<-(B
+   $(CAv?v:8=J=C?@(B.  $(C@L(B $(CFD@O@L(B $(C:/0f5G4B(B $(C0M?!(B $(C4kGQ(B $(C0FA$@:(B $(CGOAv(B $(C>J>F55(B
+   $(C5K4O4Y(B; $(C@86d(B $(CAvD'<-4B(B $(C:/0f5GAv(B $(C>J=@4O4Y(B.  $(C@L(B $(CFD@O@:(B $(C@86d(B $(CAvD'<-@G(B
+   $(C03@N?k(B $(C:9;g:;@T4O4Y(B.
+
+$(C1[?y@L(B $(CH-8i@G(B $(CGQ(B $(CAY?!(B $(C4Y(B $(C5i>n0!Av(B $(C8xGR(B $(CA$557N(B $(CD?Av8i(B $(C1[?y@G(B $(CAY@:(B
+$(CH-8i@G(B $(C5N9xB0(B $(CAY?!<-(B "$(C0h<S(B"$(C5K4O4Y(B.  $(C?@8%BJ(B $(CGQ0h?!(B $(C@V4B(B $(C?*;g<1(B $(C9.@Z(B
+("\")$(C4B(B $(CAY@L(B $(C4Y@=(B $(CAY7N(B $(C@L>nAv4B(B $(C0M@;(B $(C0!8.E54O4Y(B.
+
+>> $(C1[?y@;(B $(C0h<S(B $(C3"?v<-(B $(C?@8%BJ(B $(CGQ0h8&(B $(C3Q>n<-557O(B $(CGO=J=C?@(B.  $(C1W7/8i(B $(CAY(B
+   $(C0h<S(B $(CG%=C0!(B $(C3*E83/(B $(C0M@T4O4Y(B.
+
+>> <Delete>$(C8&(B $(C=a<-(B $(C1[?y@G(B $(CAY@L(B $(CGQ(B $(CH-8i(B $(CAY?!(B $(C2K(B $(CBw557O(B $(C4Y=C(B
+   $(CAv?l=J=C?@(B. $(CAY(B $(C0h<S(B $(CG%=C4B(B $(C>x>nA}4O4Y(B.
+
+$(C;uAY(B $(C9.@Z55(B $(C4Y8%(B $(C9.@ZC373(B $(CAv?o(B $(C<v(B $(C@V=@4O4Y(B.  $(CAY@;(B $(C5Q7N(B $(C3*4)4B(B $(C;uAY(B
+$(C9.@Z8&(B $(CAv?l8i(B $(C5N(B $(CAY@L(B $(CGO3*7N(B $(CGUD!0T(B $(C5K4O4Y(B.  $(C@L(B $(CGUD#(B $(CAY@L(B $(C3J9+(B $(C1f>n<-(B
+$(CH-8i@G(B $(C3J:q8&(B $(C3Q>n<-8i(B $(C1W(B $(CAY@:(B $(CAY(B $(C0h<S(B $(C9.@Z0!(B $(CG%=C5G8i<-(B $(C4Y@=(B $(CAY?!(B
+$(C0h<S(B $(CH-8i(B $(CG%=C5I(B $(C0M@T4O4Y(B.
+
+>> $(C1t9Z@L8&(B $(CAY@G(B $(C=C@[@87N(B $(C?rAw?)<-(B <Delete>$(C8&(B $(CD!=J=C?@(B.  $(C1W7/8i(B $(C1W(B
+   $(CAY@L(B $(C@L@|(B $(CAY0z(B $(CGUCDAz(B $(C0M@T4O4Y(B.
+
+>> $(C4Y=C(B <Return>$(C@;(B $(CCD<-(B $(CAv?vAx(B $(C;uAY(B $(C9.@Z8&(B $(C3"?l=J=C?@(B.
+
+$(C4k:N:P@G(B Emacs $(C8m7I?!4B(B $(C9]:9(B $(CH=<v8&(B $(CAY(B $(C<v(B $(C@V4Y4B(B $(C0M@;(B $(C1b>oGO=J=C?@(B;
+$(C1[?y(B $(C9.@Z55(B $(CGX4g5K4O4Y(B.  $(C1[?y(B $(C9.@Z8&(B $(C9]:9GO4B(B $(C0M@:(B $(C1W(B $(C0M@;(B $(C?)7/9x(B
+$(C3"?l4B(B $(C0M@T4O4Y(B.
+
+>> $(C1W(B $(C0M@;(B $(CAv1](B $(CGX(B $(C:>4O4Y(B -- C-u 8 *$(C@;(B $(CCD<-(B ********$(C@;(B $(C3"?l=J=C?@(B.
+
+$(C@LA&(B Emacs$(C?!<-(B $(C9+>p0!8&(B $(CD!0m(B $(CBx?@8&(B $(C13A$GO4B(B $(C0!@e(B $(C1b:;@{@N(B $(C9f9}@;(B
+$(C9h?|=@4O4Y(B.  $(C398;@L3*(B $(CAY55(B $(CGQ9x?!(B $(CAv?o(B $(C<v(B $(C@V=@4O4Y(B.  $(C?)1b?!(B $(CAv?l4B(B
+$(C@[5?@;(B $(C?d>`GU4O4Y(B.
+
+       	<Delete>     $(C1t9Z@L(B $(CAw@|@G(B $(C9.@Z(B $(CAv?l1b(B
+	C-d   	     $(C1t9Z@L(B $(C4Y@=@G(B $(C9.@Z(B $(CAv?l1b(B
+
+	M-<Delete>   $(C1t9Z@L(B $(CAw@|@G(B $(C398;(B $(CAW@L1b(B
+	M-d	     $(C1t9Z@L(B $(C4Y@=@G(B $(C398;(B $(CAW@L1b(B
+
+	C-k	     $(C1t9Z@L(B $(C@'D!7N:NEM(B $(CAY(B $(C3!1nAv(B $(CAW@L1b(B
+	M-k	     $(CGv@g(B $(C9.@e@G(B $(C3!1nAv(B $(CAW@L1b(B
+
+C-f$(C?M(B M-f$(C?!<-(B $(C=C@[GQ(B $(C@/;g<:@L(B <Delete>$(C?M(B C-d $(C1W8.0m(B M-<Delete>$(C?M(B M-d$(C7N(B
+$(C@L>nAv4B(B $(C0M@;(B $(C@/@GGO=J=C?@(B (<Delete>$(C4B(B $(CAxA$GQ(B $(CA&>n(B $(C9.@Z4B(B $(C>F4OAv88(B
+$(C1W715%?!(B $(C;s3dGOAv(B $(C>J557O(B $(CGU=C4Y(B).  $(CAY0z(B $(C9.@e@L(B $(C4Y8#5m@L(B C-k$(C?M(B M-k$(C4B(B
+C-e$(C?M(B M-e$(C?M(B $(C4Y8(4O4Y(B.
+
+$(C@O7|@{@N(B $(C9f9}(B $(CGO3*7N(B $(C;g@LD-@G(B $(C>n62(B $(C:N:P55(B $(CAW@O(B $(C<v(B $(C@V=@4O4Y(B.
+$(C8U@z(B $(C1W(B $(C:N:P@G(B $(CGQBJ(B $(C3!@87N(B $(C@L5?GX<-(B C-@$(C@L3*(B C-SPC ($(C5Q(B $(CA_(B $(CGO3*(B)$(C8&(B $(CD(4O4Y(B.
+$(C1W(B $(C:N:P@G(B $(C4Y8%BJ(B $(C3!@87N(B $(C@L5?GX<-(B C-w$(C8&(B $(CD(4O4Y(B.  $(C1W7/8i(B $(C1W(B $(C5N(B
+$(C@'D!;g@L@G(B $(C8p5g(B $(C1[?y@:(B $(CAW?)A}4O4Y(B.
+
+>> $(C1t:}@L8&(B $(C@|(B $(C9.4\@G(B $(C=C@[@N(B `$(C@O(B'$(C@Z7N(B $(C?rAw@L=J=C?@(B.
+>> C-SPC$(C8&(B $(CD!=C?@(B.  $(C@L8F=:4B(B $(CH-8i@G(B $(C9Y4Z?!(B "Mark set"$(C@L6s4B(B $(C>K828;@;(B
+   $(C:8?)AY(B $(C0M@T4O4Y(B.
+>> $(C1t:}@L8&(B $(C@'(B $(C9.4\@G(B $(C5N9xB0(B $(CAY?!(B $(C@V4B(B `$(C3!(B'$(C@Z7N(B $(C?rAw@L=C?@(B.
+>> C-w$(C8&(B $(CD!=C?@(B.  $(C1W7/8i(B `$(C@O(B'$(C@Z7N(B $(C=C@[GX<-(B `$(C3!(B'$(C@Z1nAv@G(B $(C1[?y@L(B $(CAW?)Az(B
+   $(C0M@T4O4Y(B.
+
+"$(CAW@L1b(B"$(C?M(B "$(CAv?l1b(B"$(C@G(B $(C4Y8%(B $(CA!@:(B "$(CAW?)Ax(B" $(C1[?y@:(B $(C@gBw(B $(C3"?v3V@;(B $(C<v(B $(C@V4B(B
+$(C9]8i(B "$(CAv?vAx(B" $(C0M5i@:(B $(C4Y=C(B $(C3"?v3V@;(B $(C<v(B $(C>x4Y4B(B $(C0M@T4O4Y(B.  $(CAW?)Ax(B $(C1[?y@;(B
+$(C4Y=C(B $(C;g?kGO4B(B $(C0M@;(B "$(C@b>F4g1b1b(B(yanking)"$(C6s0m(B $(CGU4O4Y(B.  $(C@O9]@{@87N(B $(C89@:(B
+$(C1[?y@;(B $(CA&0EGO4B(B $(C8m7I@:(B $(C1[?y@;(B $(CAW@L3*(B ($(C1W71(B $(C8m7I5i@:(B $(C1W(B $(C1[?y5i@;(B $(C4Y=C(B
+$(C@b>F4g1f(B $(C<v(B $(C@V557O(B $(C1W780T(B $(C<3A$5G>nA.(B $(C@V=@4O4Y(B), $(CGQ(B $(C9.@Z8&(B $(CA&0EGO0E3*(B
+$(C:s(B $(CAY(B $(CH$@:(B $(C0x0#9.@Z8&(B $(CA&0EGO4B(B $(C8m7I5i@:(B $(CAv?r@[?k@;(B $(CGU4O4Y(B ($(C1W7!<-(B $(C1W(B
+$(C1[?y5i@:(B $(C4Y=C(B $(C@b>F(B $(C4g1f(B $(C<v(B $(C>x=@4O4Y(B).
+
+>> $(C1t9Z@L8&(B $(C:q>nA.(B $(C@VAv(B $(C>J@:(B $(CAY@G(B $(C=C@[@87N(B $(C?rAw@L=J=C?@(B. $(C1W8.0m4B(B
+   C-k$(C8&(B $(CCD<-(B $(C1W(B $(CAY@G(B $(C1[?y@;(B $(CAW@L=J=C?@(B.
+>> C-k$(C8&(B $(C4Y=C(B $(CD!=J=C?@(B.  $(C1W7/8i(B $(C1W(B $(CAY(B $(C4Y@=?!(B $(C@V4B(B $(C;uAY(B $(C9.@Z0!(B $(CAW?)Av4B(B
+   $(C0M@;(B $(C:<(B $(C<v(B $(C@V=@4O4Y(B.
+
+C-k$(C8&(B $(CGQ(B $(C9x(B $(CD!8i(B $(C1W(B $(CAY@G(B $(C3;?k@;(B $(CAW@L0m(B $(C5N9xB0?!4B(B $(C1W(B $(CAY(B $(C@ZC<8&(B
+$(CAW@S@87N<-(B $(C@L>nAv4B(B $(C8p5g(B $(CAY@;(B $(C@'7N(B $(C?C834O4Y(B.  C-k$(C4B(B $(C<}@Z(B $(C@N<v8&(B $(CF/:0Hw(B
+$(CCk1^GU4O4Y(B: $(C1W(B $(C<}@Z88E-@G(B $(CAY0z(B $(C1W(B $(CAY@G(B $(C3;?k@;(B $(CGT22(B $(CAW@T4O4Y(B.  $(C@L0M@:(B
+$(C4\<xGQ(B $(C9]:9@L(B $(C>F4U4O4Y(B.  C-u 2 C-k$(C4B(B $(C5N(B $(CAY0z(B $(C1W(B $(CAY@G(B $(C;uAY(B $(C9.@Z8&(B
+$(CAW@T4O4Y(B; C-k$(C8&(B $(C5N(B $(C9x(B $(CD!8i(B $(C1W78Av(B $(C>J=@4O4Y(B.
+
+$(CAW?)Ax(B $(C1[?y@;(B $(C4Y=C(B $(CH8<vGO4B(B $(C0M@;(B "$(C@b>F4g1b1b(B"$(C6s0m(B $(C:N8(4O4Y(B.  ($(C4)1:0!0!(B
+$(C;/>F0#(B $(C0M@;(B $(C4Y=C(B $(C@b>F(B $(C4g1b4B(B $(C0MC373(B $(C;}0"GO=J=C?@(B.)  $(CAW?)Ax(B $(C1[?y@:(B
+$(CAW?)Ax(B $(C1W(B $(C0w?!(B $(C4Y=C(B $(C@b>F(B $(C4g0\Az(B $(C<v55(B $(C@VAv88(B $(C;g@LD-@G(B $(C4Y8%(B $(C@e<R?!<-55(B
+$(CH$@:(B $(C4Y8%(B $(CFD@O?!<-A6Bw55(B $(C@b>F4g0\Az(B $(C<v(B $(C@V=@4O4Y(B.  $(C1W(B $(C1[?y@:(B $(C?)7/9x?!(B
+$(C0ICD(B $(C@b>F4g0\A|@87N=a(B $(C?)7/(B $(C:9;g:;@;(B $(C885i0T(B $(C5I(B $(C<v55(B $(C@V=@4O4Y(B.
+
+$(C@b>F4g1b1b(B $(C8m7I@:(B C-y$(C@T4O4Y(B.  $(C1W7/8i(B $(C0!@e(B $(C86Av87@87N(B $(CAW?)Ax(B $(C1[?y@;(B
+$(CGv@g@G(B $(C1t:}@L(B $(C@'D!?!(B $(CH8<v=CE54O4Y(B.
+
+>> $(CGX(B $(C:8=J=C?@(B; C-y$(C8&(B $(CCD<-(B $(C1[?y@;(B $(C4Y=C(B $(C@b>F4g1b=J=C?@(B.
+
+$(CGQ(B $(C0!7ND-?!<-(B C-k$(C8&(B $(C?)7/9x(B $(C>28i(B $(CAW?)Ax(B $(C1[?y5i@L(B $(CGT22(B $(C0%9+8.5G>n(B $(C1W(B $(CAY(B
+$(C8p5N8&(B C-y $(CGQ(B $(C9x@87N(B $(C@b>F4g1f(B $(C<v(B $(C@V4Y4B(B $(C0M?!(B $(C@/@GGO=J=C?@(B.
+
+>> C-k$(C8&(B $(C?)7/9x(B $(CCD<-(B $(C1W(B $(C0M@;(B $(CGX(B $(C:8=J=C?@(B.
+
+$(CAW?)Ax(B $(C1[?y@;(B $(CH8<vGO1b(B $(C@'GX<-4B(B:
+
+>> C-y$(C8&(B $(CD!=J=C?@(B.  $(C1W8.0m4B(B $(C1t9Z@L8&(B $(C8n(B $(CAY(B $(C>F7!7N(B $(C?rAw?)<-(B C-y$(C8&(B $(C4Y=C(B
+   $(CD!=J=C?@(B.  $(C1[?y@L(B $(C>n6;0T(B $(C:9;g5G4B0!8&(B $(C>K(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(C4Y=C(B $(C@b>F4g1f(B $(C1[?y@L(B $(C@V4B5%(B $(C4Y8%(B $(C0M@;(B $(C6G(B $(CAW@L8i(B $(C>n6;0T(B $(C5G0Z=@4O1n(B?
+C-y$(C4B(B $(C4u(B $(CCV1Y?!(B $(CAW?)Ax(B $(C0M@;(B $(C@b>F4g1f(B $(C0M@T4O4Y(B.  $(C1W7/3*(B $(C1W(B $(C@|@G(B $(C1[?y@:(B
+$(C@R>n9v80(B $(C0M@L(B $(C>F4U4O4Y(B.  $(C1W(B $(C0M@:(B M-y $(C8m7I@;(B $(C=a<-(B $(CH8<vGR(B $(C<v(B $(C@V=@4O4Y(B.
+$(C0!@e(B $(CCV=E?!(B $(CAW?)Ax(B $(C1[?y@;(B C-y$(C7N(B $(CH8<vGQ(B $(CHD(B M-y$(C8&(B $(CD!8i(B $(C1W(B $(C@b>F4g0\A34x(B
+$(C1[?y@L(B $(C1W(B $(C@|?!(B $(CAW?)Ax(B $(C0M@87N(B $(C;u7N9Y2n>nA}4O4Y(B(replace).  M-y$(C8&(B $(CC$Bw(B
+$(C?,0EG*(B $(CD!8i(B $(C@L@|?!(B $(CAW?)Ax(B $(C0M5i@L(B $(CBw7J7N(B $(C3*?I4O4Y(B.  $(CC#0m@Z(B $(CGO4B(B $(C1[?y@L(B
+$(C3*?@8i(B $(C4Y8%(B $(C@O@;(B $(CGR(B $(CGJ?d0!(B $(C>x=@4O4Y(B.  $(C4\<xHw(B $(CFmA}@;(B $(C0h<SGO8i(B
+$(C@b>F4g0\Ax(B $(C1[?y@L(B $(C1W0w?!(B $(C32>F(B $(C@V0T(B $(C5K4O4Y(B.
+
+M-y$(C8&(B $(C0h<S(B $(CD!8i(B $(CCb9_A!(B ($(C0!@e(B $(CCV1Y?!(B $(CAW?)Ax(B $(C0M(B)$(C@87N(B $(C5G59>F(B $(C?I4O4Y(B.
+
+>> $(CGQ(B $(CAY@;(B $(CAW@L0m(B $(CAV@'7N(B $(C?rAw@N(B $(CHD(B $(C4Y8%(B $(CAY@;(B $(CAW@L=J=C?@(B.
+   $(C1W8.0m4B(B C-y$(C7N(B $(C5N9xB0(B $(CAW?)Ax(B $(CAY@;(B $(CH8<vGO=J=C?@(B.
+   $(C1W71(B $(C4Y@=?!(B M-y$(C8&(B $(CD!8i(B $(CC99xB0?!(B $(CAW?)Ax(B $(CAY7N(B $(C;u7N9Y2n0T(B $(C5K4O4Y(B.
+   M-y$(C8&(B $(C4u(B $(CCD<-(B $(C9+>y@L(B $(C3*?@4B0!8&(B $(C:8=J=C?@(B.  $(C5N9xB0(B $(CAW?)Ax(B $(CAY@L(B $(C3*?C(B
+   $(C6'1n4O(B $(C1W780T(B $(C0h<S(B $(CGQ(B $(CHD(B $(C8n(B $(C9x(B $(C4u(B $(CGO=J=C?@(B.
+   $(C?xGO8i(B, M-y$(C?!(B $(C>g<v3*(B $(C@=<v@G(B $(C@N<v8&(B $(CAY(B $(C<v(B $(C@V=@4O4Y(B.
+
+
+* $(C9+8#1b(B
+--------
+
+$(C1[?y@;(B $(C:/0fGO0m<-(B $(C1W(B $(C0M@L(B $(C=G<v?4@=@;(B $(C>K0T(B $(C5G8i(B $(C9+8#1b(B(undo) $(C8m7I(B, C-x
+u$(C7N(B $(C:/0f;gGW@;(B $(C9+8&(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(C:8Ek(B, C-x u$(C4B(B $(CGO3*@G(B $(C8m7I?!(B $(C@GGX(B $(C:/0f5H(B $(C;gGW@;(B $(C9+8(4O4Y(B; $(CGQ(B $(C0!7ND-?!<-(B
+C-x u$(C8&(B $(C?)7/9x(B $(C9]:9GO8i(B $(C0"0"@G(B $(C9]:9@:(B $(CC_0!@{@87N(B $(C8m7I@;(B $(C9+8(4O4Y(B.
+
+$(C1W7/3*(B $(C5N0!Av(B $(C?9?\0!(B $(C@V=@4O4Y(B: $(C1[?y@;(B $(C:/0fGOAv(B $(C>J4B(B $(C8m7I@:(B $(C0m7A(B
+$(C4k;s?!<-(B $(CA&?\5K4O4Y(B ($(C?)1b?!4B(B $(C1t9Z@L8&(B $(C?rAw@L4B(B $(C8m7I0z(B $(CH-8i(B $(C5N7g8;1b(B
+$(C8m7I@L(B $(C@V=@4O4Y(B). $(C1W8.0m(B $(C@ZC<3"?l1b(B(self-inserting) $(C9.@Z5i@:(B
+$(CFr;s@{@87N(B 20$(C031nAv@G(B $(CA}4\@87N(B $(CC38.5K4O4Y(B.  ($(C@L4B(B $(C1[?y(B $(C3"?l1b8&(B $(C9+8#1b(B
+$(C@'GX<-(B $(CE8@ZGX>_(B $(CGO4B(B C-x u$(C@G(B $(C<v8&(B $(CAY@L1b(B $(C@'GT@T4O4Y(B.)
+
+>> $(C@L(B $(CAY@;(B C-k$(C7N(B $(CAW@N(B $(CHD(B C-x u$(C8&(B $(CD!8i(B $(CAY@L(B $(C4Y=C(B $(C3*E83/(B $(C0M@T4O4Y(B.
+
+C-_$(C4B(B $(C9+8#1b(B $(C8m7I@G(B $(C4Y8%(B $(CG|EB@T4O4Y(B; C-x u$(C?M(B $(C00@:(B $(C@[?k@;(B $(CGOAv88(B $(CGQ(B
+$(C0!7ND-?!<-(B $(C?)7/9x(B $(CE8@ZGO1b?!(B $(CFmGU4O4Y(B.  C-_$(C@G(B $(C4\A!@:(B, $(C>n62(B
+$(C1[<hFG?!<-4B(B $(C@L(B $(C0M@;(B $(C>n6;0T(B $(CE8@ZGX>_(B $(C5G4B0!0!(B $(C:R8m7aGO4Y4B(B $(C0M@T4O4Y(B.
+$(C1W7!<-(B C-x u$(C55(B $(C;g?kGR(B $(C<v(B $(C@V557O(B $(C5G>n(B $(C@V4B(B $(C0M@T4O4Y(B.  $(C>n62(B
+$(C4\8;1b?!<-4B(B, CONTROL$(C<h8&(B $(C4)8%(B $(C;sEB?!<-(B /$(C8&(B $(CD'@87N=a(B C-_$(C8&(B $(CD%(B $(C<v(B
+$(C@V=@4O4Y(B.
+
+C-_$(C3*(B C-x u$(C@G(B $(C<}@Z(B $(C@N<v4B(B $(C9]:9(B $(CH=<v7N(B $(C;g?k5K4O4Y(B.
+
+$(C1[?y@G(B $(CAv?l1b8&(B $(C9+8#4B(B $(C0M@:(B $(C1[?y(B $(CAW@L1b8&(B $(C9+8#4B(B $(C0M0z(B $(C00@:(B $(C=D@87N(B
+$(CGU4O4Y(B.  $(C>n62(B $(C0M@;(B $(CAW@L4B(B $(C0M0z(B $(CAv?l4B(B $(C0M@G(B $(CBw@LA!@:(B C-y$(C7N(B $(C@b>F4g1f(B $(C<v(B
+$(C@V4@3D4B(B $(C;g=G?!(B $(C@V=@4O4Y(B; $(C9+8#1b?!4B(B $(CBw@LA!@L(B $(C>x=@4O4Y(B.
+
+* $(CFD@O(B
+------
+
+$(CFmA}GQ(B $(C1[?y@;(B $(C?518@{@87N(B $(CGO1b(B $(C@'GX<-4B(B $(CFD@O?!(B $(C3V>n(B $(C5N>n>_(B $(CGU4O4Y(B.
+$(C1W780T(B $(CGOAv(B $(C>J@88i(B, Emacs$(C0!(B $(C>x>nA|0z(B $(CGT22(B $(C1[?y55(B $(C;g6sA}4O4Y(B.  $(C1[?y@;(B
+$(CFD@O?!(B $(C3V1b(B $(C@'GX<-4B(B $(C1W7/1b(B $(C@|?!(B $(C1W(B $(CFD@O@;(B "$(CC#>F>_(B" $(CGU4O4Y(B. ($(C@L4B(B
+$(CFD@O@;(B "$(C9f9.GO4B(B $(C0M(B"$(C@L6s0m55(B $(CGU4O4Y(B.)
+
+$(CFD@O@;(B $(CC#4B4Y4B(B $(C0M@:(B Emacs $(C>H?!<-(B $(C1W(B $(CFD@O@G(B $(C3;?k@;(B $(C:;4Y4B(B $(C0M@;(B
+$(C@G9LGU4O4Y(B. $(C?)7/0!Av(B $(C8i?!<-(B, $(C1W0M@:(B $(C1W(B $(CFD@O(B $(C@ZC<8&(B $(CFmA}GO7A4B(B $(C0M0z(B
+$(C4Y8'>x=@4O4Y(B.  $(C1W7/3*(B, Emacs$(C7N(B $(C:/0fGQ(B $(C;gGW@:(B $(C1W(B $(CFD@O@;(B "$(C0%9+8.(B"$(CGO1b(B
+$(C@|1nAv4B(B $(C?518@{@LAv(B $(C8xGU4O4Y(B.  $(C@L4B(B $(C@}9]Bk(B $(C:/0f5H(B $(CFD@O@;(B $(C?xD!(B $(C>J0T(B
+$(C?n?5(B $(CC<0h?!(B $(C320\(B $(C5N4B(B $(C0M@;(B $(CGGGO1b(B $(C@'GX<-(B $(C1W78=@4O4Y(B. $(C0%9+8.8&(B $(CGX55(B
+Emacs$(C4B(B $(C:/0f(B $(C;gGW@L(B $(C3*A_?!(B $(C=G<v?44Y0m(B $(C0aA$5G4B(B $(C0f?l8&(B $(C0(>HGX(B $(C1Y?x(B
+$(CFD@O@;(B $(C:/0f5H(B $(C@L8'@87N(B $(C320\5S4O4Y(B.
+
+$(CH-8i@G(B $(C9Y4Z(B $(C0!1n@L8&(B $(C:88i(B "--:-- TUTORIAL.ko"$(C?M(B $(C00@:(B $(C=D@87N(B $(C=C@[GO4B(B,
+$(C4k=C(B $(C9.@Z7N(B $(C=C@[GX<-(B $(C4k=C(B $(C9.@Z7N(B $(C3!3*4B(B $(CAY@L(B $(C@V@;(B $(C0M@T4O4Y(B.  $(CH-8i@G(B $(C@L(B
+$(C:N:P@:(B $(C:8Ek(B, $(C9f9.GO0m(B $(C@V4B(B $(CFD@O@G(B $(C@L8'@;(B $(C:8?)(B $(CA]4O4Y(B.  $(CAv1]@:(B Emacs
+$(CAvD'<-@G(B $(C:9;g:;@N(B "TUTORIAL.ko"$(C6s4B(B $(CFD@O@;(B $(C9f9.GO0m(B $(C@V4B(B $(CA_@T4O4Y(B.
+Emacs$(C7N(B $(CFD@O(B $(CC#1b8&(B $(CGO8i(B $(CA$H.Hw(B $(C1W(B $(C0w?!(B $(CFD@O@G(B $(C@L8'@L(B $(C3*E8334O4Y(B.
+
+$(CFD@O(B $(CC#1b(B $(C8m7I@G(B $(CF/:0GQ(B $(CA!@:(B $(C?xGO4B(B $(CFD@O@G(B $(C@L8'@;(B $(C8;GX>_(B $(CGO4B(B
+$(C0M@T4O4Y(B.  $(C8m7I@L(B "$(C4\8;1b7N:NEM(B $(C@N<v8&(B $(C@P4B4Y(B"$(C6s0m(B $(CGU4O4Y(B ($(C@L(B $(C0f?l(B,
+$(C@N<v4B(B $(CFD@O@G(B $(C@L8'@T4O4Y(B).  $(C>F7!@G(B $(C8m7I@;(B $(CD!0m(B $(C3*8i(B
+
+	C-x C-f   $(CFD@O(B $(CC#1b(B
+
+Emacs$(C4B(B $(CFD@O@G(B $(C@L8'@;(B $(CD!6s0m(B $(C?d18GU4O4Y(B.  $(CFD@O(B $(C@L8'@;(B $(CD!8i(B $(CH-8i@G(B $(C9Y4Z(B
+$(CAY?!(B $(C@L8'@L(B $(C3*E8334O4Y(B.  $(C@L71(B $(CA>7y@G(B $(C@T7B?!(B $(C>2@O(B $(C6'?!4B(B $(C9Y4Z(B $(CAY@;(B $(C@[@:(B
+$(C;g@LD-(B(minibuffer)$(C@L6s0m(B $(C:N8(4O4Y(B.  $(CFr;s=C?!(B $(C>24B(B Emacs$(C@G(B $(CFmA}(B
+$(C8m7I@87N(B $(CFD@O(B $(C@L8'@;(B $(CFmA}GR(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(CFD@O(B $(C@L8'@;(B ($(CH$@:(B $(C8p5g(B $(CA>7y@G(B $(C@[@:(B $(C;g@LD-(B $(C@T7B@;(B) $(C3V@;(B $(C6'(B, $(C8m7I@G(B
+$(CCk<R4B(B C-g$(C7N(B $(CGU4O4Y(B.
+
+>> C-x C-f$(C8&(B $(CD!0m(B C-g$(C8&(B $(CD!=J=C?@(B.  $(C@L4B(B $(C@[@:(B $(C;g@LD-@;(B $(CCk<RGO0m(B $(C6G(B,
+   $(C@[@:(B $(C;g@LD-@;(B $(C>20m(B $(C@V4B(B C-x C-f $(C8m7I55(B $(CCk<RGU4O4Y(B.  $(C1W7/9G7N(B $(C>F9+(B
+   $(CFD@O55(B $(CC#Av(B $(C>J4B(B $(C0M@T4O4Y(B.
+
+$(CFD@O(B $(C@L8'@;(B $(C4Y(B $(C1b@TG_@88i(B <Return>$(C@;(B $(CCD<-(B $(CA>7aGO=J=C?@(B.  $(C1W7/8i(B C-x
+C-f $(C8m7I@L(B $(C@[5?5G>n(B $(C<1EC5H(B $(CFD@O@;(B $(CC#1b(B $(C=C@[GU4O4Y(B.  C-x C-f $(C8m7I@L(B
+$(C3!3*8i(B $(C@[@:(B $(C;g@LD-@:(B $(C;g6sA}4O4Y(B.
+
+$(C@a=C(B $(CHD?!4B(B $(CFD@O@G(B $(C3;?k@L(B $(CH-8i?!(B $(C3*E83*0m(B $(C1W(B $(C3;?k@;(B $(CFmA}GR(B $(C<v(B $(C@V0T(B
+$(C5K4O4Y(B.  $(C:/0f(B $(C;gGW@;(B $(C?518@{@87N(B $(CGO0m(B $(C=M@88i(B $(C4Y@=@G(B $(C8m7I@;(B $(CD(4O4Y(B.
+
+	C-x C-s   $(CFD@O(B $(C0%9+8.(B
+
+$(C@L(B $(C8m7I@:(B Emacs $(C3;@G(B $(C1[?y@;(B $(CFD@O?!(B $(C:9;gGU4O4Y(B.  $(C@L(B $(C8m7I@L(B $(CC99xB07N(B
+$(C<vG`5I(B $(C6'4B(B Emacs$(C0!(B $(C1Y?x(B $(CFD@O@;(B $(C;u(B $(C@L8'@87N(B $(C9Y2Y>n(B $(C3u@=@87N=a(B $(C@R>n9v81(B
+$(C?l7A8&(B $(C9fAvGU4O4Y(B.  $(C;u(B $(C@L8'@:(B $(C1Y?x(B $(CFD@O(B $(C@L8'@G(B $(C3!?!(B "~"$(C@;(B $(C4uGT@87N=a(B
+$(C885i>nA}4O4Y(B.
+
+$(C0%9+8.0!(B $(C3!3*8i(B Emacs$(C4B(B $(C>2?)Ax(B $(CFD@O@G(B $(C@L8'@;(B $(C@N<bGU4O4Y(B.  $(CFD@O@:(B $(C>FAV(B
+$(C@ZAV(B $(C0%9+8.GT@87N=a(B $(C?n?5(B $(CC<0h0!(B $(C?M8#8#(B $(C9+3JA.55(B $(C89@:(B $(C@[>w@L(B $(C<U=G5GAv(B
+$(C>J557O(B $(CGU4O4Y(B.
+
+>> C-x C-s$(C8&(B $(CCD<-(B $(CAvD'<-@G(B $(C:9;g:;@;(B $(C0%9+8.(B $(CGO=J=C?@(B.
+   $(C1W7/8i(B "Wrote ...TUTORIAL.ko"$(C6s0m(B $(CH-8i@G(B $(C9Y4Z?!(B $(C@N<b5I(B $(C0M@T4O4Y(B.
+
+$(C@/@G(B: $(C>n62(B $(C?n?5(B $(CC<0h?!<-4B(B C-x C-s$(C8&(B $(CD!8i(B $(CH-8i@;(B $(C5?0a=CDQ<-(B, Emacs$(C0!(B
+$(C>F9+(B $(CCb7B55(B $(CGOAv(B $(C>J4B(B $(C0M@;(B $(C:<(B $(C0f?l0!(B $(C@V=@4O4Y(B.  $(C@L0M@:(B "$(CHe8'(B $(CA&>n(B"$(C6s0m(B
+$(C:R8.?l4B(B $(C?n?5(B $(CC<0h@G(B "$(CF/B!(B"$(C@L(B C-s$(C8&(B $(C0!7NC$<-(B Emacs$(C8&(B $(CEkGX(B $(C@|4^5GAv(B
+$(C>J557O(B $(CGO1b(B $(C6'9.@T4O4Y(B.  C-q$(C8&(B $(C4)8#8i(B $(CH-8i@L(B $(CGXA&5K4O4Y(B.  $(C1W8.0m(B $(C3*<-(B
+Emacs $(C<38m<-@G(B "Spontaneous Entry to Incremental Search"$(C6s4B(B  $(C4\?x@;(B
+$(C:88i(B $(C@L71(B "$(CF/B!(B"$(C@;(B $(C>n6;0T(B $(CCk1^GR(B $(C<v(B $(C@V4B0!?!(B $(C4kGQ(B $(CA6>p@;(B $(C@P@;(B $(C<v(B
+$(C@V=@4O4Y(B.
+
+$(C:80E3*(B $(CFmA}GO1b(B $(C@'GX(B, $(CA8@gGO4B(B $(CFD@O@;(B $(CC#@;(B $(C<v(B $(C@V=@4O4Y(B.  $(C6GGQ(B $(CA8@gGOAv(B
+$(C>J4B(B $(CFD@O55(B $(CC#@;(B $(C<v(B $(C@V=@4O4Y(B.  $(C@L780T(B $(CGO8i(B Emacs$(C7N(B $(CFD@O@;(B $(C885i0T(B
+$(C5K4O4Y(B: $(C:s(B $(C3;?k@87N(B $(C=C@[5G4B(B $(CFD@O@;(B $(CC#>F<-(B $(C1[?y@;(B $(C3"?l1b(B $(C=C@[GU4O4Y(B.
+$(CFD@O@;(B "$(C0%9+8.(B"$(CGO557O(B $(C?dC;GO8i(B Emacs$(C4B(B $(C3"?vAx(B $(C1[?y@;(B $(C3;?k@87N(B $(CGO4B(B
+$(CFD@O@;(B $(C=GA&7N(B $(C885i>n(B $(C3@4O4Y(B.  $(C1W71(B $(CHD?!4B(B $(C@L(B $(CFD@O@:(B $(C@L9L(B $(CA8@gGO4B(B
+$(CFD@O@L(B $(C5K4O4Y(B.
+
+
+* $(C;g@LD-(B
+--------
+
+$(C5N9xB0(B $(CFD@O@;(B C-x C-f$(C7N(B $(CC#@88i(B, $(CC99xB0(B $(CFD@O@:(B Emacs$(C@G(B $(C3;:N?!(B $(C32>F(B
+$(C@V=@4O4Y(B. $(C1W(B $(CFD@O@:(B C-x C-f$(C7N(B $(C@gBw(B $(CC#@=@87N<-(B $(C4Y=C(B $(C>y9Y2\(B $(C<v(B
+$(C@V=@4O4Y(B. $(C@L71(B $(C=D@87N(B $(C8E?l(B $(C89@:(B $(C<v@G(B $(CFD@O5i@;(B Emacs $(C3;:N?!(B $(C:R7/(B $(C5i@O(B
+$(C<v(B $(C@V=@4O4Y(B.
+
+>> C-x C-f foo <Return>$(C@;(B $(CCD<-(B "foo"$(C6s4B(B $(C@L8'@G(B $(CFD@O@;(B $(C885e=J=C?@(B.
+   $(C1W8.0m4B(B $(C1[?y@;(B $(C3"?l0m(B $(CFmA}GO?)(B C-x C-s$(C7N(B "foo"$(C8&(B $(C0%9+8.GO=J=C?@(B.
+   $(C86Av87@87N(B, C-x C-f TUTORIAL.ko <Return>$(C@;(B $(CCD<-(B $(CAvD'<-7N(B $(C4Y=C(B $(C59>F(B
+   $(C?@=J=C?@(B.
+
+Emacs$(C4B(B $(C0"(B $(CFD@O@G(B $(C1[?y@;(B "$(C;g@LD-(B"$(C@L6s0m(B $(C:R8.?l4B(B $(C0M(B $(C>H?!(B $(C@z@eGU4O4Y(B.
+$(CFD@O@;(B $(CC#4B(B $(C0M@:(B Emacs$(C@G(B $(C3;:N?!(B $(C;u(B $(C;g@LD-@;(B $(C885e4B(B $(C0M0z(B $(C00=@4O4Y(B.
+Emacs$(C@G(B $(C@O7N(B $(CGvA8GO0m(B $(C@V4B(B $(C;g@LD-@G(B $(C8q7O@;(B $(C:81b(B $(C@'GX<-4B(B $(C4Y@=0z(B $(C00@L(B
+$(CD!=J=C?@(B.
+
+	C-x C-b   $(C;g@LD-(B $(C8q7O(B
+
+>> C-x C-b$(C8&(B $(CAv1](B $(CCD(B $(C:8=J=C?@(B.
+
+$(C0"(B $(C;g@LD-@L(B $(C>n62(B $(C@L8'@;(B $(C0.0m(B $(C@V4B0!(B $(C:8=J=C?@(B.  $(C;g@LD-@:(B $(C0#AwGO0m(B $(C@V4B(B
+$(C1[?y@G(B $(C8pC<0!(B $(C5G4B(B $(CFD@O@G(B $(C@L8'@;(B $(C0.0m(B $(C@V@;(B $(C<v55(B $(C@V=@4O4Y(B.  $(C>n62(B
+$(C;g@LD-5i@:(B $(CFD@O0z(B $(C9+0|GU4O4Y(B.  $(C?98&(B $(C5i>n(B, "*Buffer List*"$(C6s4B(B $(C;g@LD-@:(B
+$(C>F9+(B $(CFD@O55(B $(C0.0m(B $(C@VAv(B $(C>J=@4O4Y(B.  $(C@L(B $(C;g@LD-@:(B C-x C-b$(C7N(B $(C885i>nAx(B $(C;g@LD-(B
+$(C8q7O@;(B $(C4c0m(B $(C@V@;(B $(C;S@T4O4Y(B.  Emacs $(CC"(B $(C>H?!<-(B $(C:<(B $(C<v(B $(C@V4B(B $(C8p5g(B $(C1[?y@:(B
+$(C>n62(B $(C;g@LD-@G(B $(C@O:N:P(B $(C@T4O4Y(B.
+
+>> C-x 1$(C@;(B $(CCD<-(B $(C;g@LD-(B $(C8q7O@;(B $(C>x>V=J=C?@(B.
+
+$(CGQ(B $(CFD@O@G(B $(C1[?y@;(B $(C:/0fGQ(B $(CHD(B $(C4Y8%(B $(CFD@O@;(B $(CC#@88i(B $(CC99xB0(B $(CFD@O@:(B $(C0%9+8.5GAv(B
+$(C>J@:(B $(C0M@T4O4Y(B.  $(C1W(B $(C:/0f(B $(C;gGW@:(B Emacs $(C3;:N@G(B $(CFD@O(B $(C;g@LD-?!88(B $(C32>F(B
+$(C@V=@4O4Y(B.  $(C5N9xB0(B $(CFD@O@G(B $(C;g@LD-@;(B $(C885i0E3*(B $(CFmA}GO4B(B $(C0M@:(B $(CC99xB0(B $(CFD@O@G(B
+$(C;g@LD-?!(B $(C@|Gt(B $(C?5Gb@;(B $(CAVAv(B $(C>J=@4O4Y(B.  $(C@L4B(B $(C8E?l(B $(C@/?kGO1b4B(B $(CGO3*(B $(C4Y8%(B
+$(C8i?!<-4B(B $(CC99xB0(B $(CFD@O@G(B $(C;g@LD-@;(B $(C0%9+8.GR(B $(C<v(B $(C@V4B(B $(C0#FmGQ(B $(C4Y8%(B $(C9f9}@L(B
+$(CGJ?dGO4Y4B(B $(C0M@;(B $(C@G9LGU4O4Y(B.  C-x C-f$(C8&(B $(CCD<-(B $(C1W(B $(C;g@LD-@87N(B $(C>y9Y2[(B $(CHD(B
+C-x C-s$(C7N(B $(C0%9+8.GO4B(B $(C0M@:(B $(C1MBz@:(B $(C@O@T4O4Y(B.  $(C1W7!<-(B $(C4Y@=0z(B $(C00@:(B $(C8m7I@L(B
+$(C@V=@4O4Y(B
+
+	C-x s     $(C8n8n(B $(C;g@LD-(B $(C0%9+8.(B
+
+C-x s$(C4B(B, $(C:/0f5G>zAv88(B $(C0%9+8.5GAv(B $(C>J@:(B $(C;g@LD-@L(B $(C@V3*(B $(CA6;gGX(B $(C:>4O4Y(B.
+$(C1W8.0m4B(B $(C1W71(B $(C;g@LD-5i?!(B $(C4kGX<-(B $(C1W(B $(C0M@;(B $(C0%9+8.GR(B $(C0M@N0!8&(B $(C90>n(B
+$(C:>4O4Y(B.
+
+>> $(CGQ(B $(CAY@G(B $(C1[?y@;(B $(C3"?n(B $(CHD(B C-x s$(C8&(B $(CD!=J=C?@(B.
+   $(C1W7/8i(B TUTORIAL.ko$(C6s4B(B $(C@L8'@G(B $(C;g@LD-@;(B $(C0%9+8.GR(B $(C0M@NAv(B $(C90>n(B $(C:<(B
+   $(C0M@T4O4Y(B.  "y"$(C8&(B $(CCD<-(B $(C90@=?!(B $(C?96s0m(B $(C4dGO=J=C?@(B.
+
+* $(C8m7I>n@G(B $(CH.@e(B
+---------------
+
+Emacs$(C@G(B $(C8m7I>n4B(B $(C3J9+(B $(C89>F<-(B $(C@L(B $(C8p5g(B $(C8m7I@;(B $(CA&>n<h3*(B meta$(C<h?!(B $(CGR4gGR(B
+$(C<v(B $(C>x=@4O4Y(B.  Emacs$(C4B(B $(C@L71(B $(C9.A&8&(B X (eXtend) $(C8m7I@87N(B $(CGX0aGU4O4Y(B.
+$(C@L?!4B(B $(C5N0!Av(B $(CA>7y0!(B $(C@V=@4O4Y(B:
+
+	C-x	$(C9.@Z(B $(CH.@e(B.  $(C9.@Z(B $(CGO3*0!(B $(C5Z5{8'(B.
+	M-x	$(C@L8'(B $(C8m7I@G(B $(CH.@e(B.  $(C1d(B $(C@L8'@L(B $(C5Z5{8'(B.
+
+$(C@L(B $(C8m7I5i@:(B $(C4k03(B $(C@/?kGOAv88(B, $(CAv1]1nAv(B $(C9h?v(B $(C?B(B $(C8m7I5i:84Y4B(B $(C4z(B $(C:s9xGO0T(B
+$(C;g?k5K4O4Y(B.  $(C@L71(B $(CA>7y@G(B $(C8m7I@;(B $(C@L9L(B $(C5N(B $(C03(B $(C>K0m(B $(C@V=@4O4Y(B: $(CFD@O(B
+$(C8m7I(B $(CA_?!(B C-x C-f$(C7N(B $(CC#1b?M(B C-x C-s$(C7N(B $(C0%9+8.GO1b(B.  $(C4Y8%(B $(C?94B(B Emacs $(C@[>w(B
+$(C=C0#@;(B $(C86D!4B(B $(C8m7I@T4O4Y(B--$(C@L4B(B C-x C-c $(C8m7I(B.  ($(C:/0f(B $(C;gGW@;(B
+$(C@R>n9v8.Av3*(B $(C>J@;1n(B $(CGO4B(B $(C0FA$@:(B $(C>J(B $(CGX55(B $(C5K4O4Y(B; C-x C-c$(C4B(B Emacs$(C8&(B
+$(CAW@L1b(B $(C@|?!(B $(C0"0"@G(B $(C:/0f5H(B $(CFD@O@;(B $(C0%9+8.GR(B $(C1bH88&(B $(CA]4O4Y(B.)
+
+C-z$(C4B(B Emacs$(C8&(B *$(C@S=C7N(B* $(C3*?@1b(B $(C@'GQ(B $(C8m7I@T4O4Y(B--$(C1W7!<-(B $(C4Y@=?!(B, $(CGO4x(B
+$(CA_@G(B Emacs $(C@[>w(B $(C=C0#@87N(B $(C4Y=C(B $(C5G59>F(B $(C0%(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(C?n?5(B $(CC<0h0!(B $(CGc?kGO8i(B C-z$(C4B(B Emacs$(C8&(B "$(CA_Av(B"$(C=CE54O4Y(B(suspend); $(CAo(B, $(C@L(B
+$(C8m7I@:(B $(CA60!:q(B(shell)$(C7N(B $(C59>F(B $(C0!557O(B $(CGOAv88(B Emacs$(C8&(B $(CFD1+GO4B(B $(C0M@:(B
+$(C>F4U4O4Y(B. $(C4k:N:P@G(B $(CA60!:q?!<-4B(B `fg'$(C3*(B `%emacs'$(C8m7I@87N(B Emacs$(C8&(B $(C0h<SGR(B
+$(C<v(B $(C@V=@4O4Y(B.
+
+$(CA_AvGO4B(B $(C0M@;(B $(CA&0xGOAv(B $(C>J4B(B $(C?n?5(B $(CC<0h?!<-4B(B C-z$(C?!(B $(C@GGX(B, Emacs $(C9X?!<-(B
+$(C=GG`5G4B(B $(C>F7'A60!:q0!(B $(C885i>n(B $(CAv0T(B $(C5G4B5%(B $(C?)1b<-(B $(C4Y8%(B $(CGA7N1W7%5i@;(B
+$(C=GG`GQ(B $(CHD(B Emacs$(C7N(B $(C59>F(B $(C?C(B $(C<v(B $(C@V4B(B $(C1bH80!(B $(C@V=@4O4Y(B; $(C;g=G;s(B Emacs$(C7N:NEM(B
+"$(C3*0!4B(B" $(C0M@:(B $(C>F4U4O4Y(B.  $(C@L(B $(C0f?l(B $(C:8Ek(B, $(CA60!:q(B $(C8m7I@N(B `exit'$(C@87N(B
+$(C>F7'A60!:q?!<-(B Emacs$(C?!(B $(C5G59>F(B $(C?I4O4Y(B.
+
+C-x C-c$(C4B(B $(C@|;j1b?!<-(B $(C9~>n3*1b(B $(CGR(B $(C6'3*(B $(C;g?kGU4O4Y(B.  $(CFmAv8&(B $(CCk1^GO4B(B
+$(CGA7N1W7%@L3*(B $(C4Y8%(B $(C@b4YGQ(B $(C55?r8p(B(utilities)$(C5i@L(B $(C>_1bGQ(B Emacs$(C4B(B
+$(CA_Av=CE24Y4B(B $(C0M@;(B $(C8p8#1b(B $(C6'9.?!(B $(C3*0!1b8&(B $(CGX>_(B $(CGU4O4Y(B.  $(CGOAv88(B, $(C:8Ek@G(B
+$(C0f?l(B, $(C9~>n3*1b8&(B $(CGOAv(B $(C>J4B(B $(CGQ(B, Emacs$(C8&(B $(C3*0!1b:84Y4B(B $(CA_AvGO4B(B $(C0M@L(B
+$(CAA=@4O4Y(B.
+
+C-x $(C8m7I>n4B(B $(C89@L(B $(C@V=@4O4Y(B. $(C@L9L(B $(C9h?n(B $(C0M@;(B $(C>F7!?!(B $(CAW:8@T4O4Y(B.
+
+	C-x C-f		$(CFD@O(B $(CC#1b(B.
+	C-x C-s		$(CFD@O(B $(C0%9+8.(B.
+	C-x C-b		$(C;g@LD-(B $(C8q7O(B.
+	C-x C-c		Emacs $(C3!3;1b(B.
+	C-x u		$(C9+8#1b(B.
+
+$(C@L8'(B $(CH.@e(B $(C8m7I@:(B $(C@ZAV(B $(C;g?k5GAv(B $(C>J0E3*(B $(CF/:0GQ(B $(C9f=D?!<-3*(B $(C>2@L4B(B
+$(C8m7I@T4O4Y(B.  $(CGQ0!Av(B $(C?94B(B replace-string $(C8m7I@N5%(B $(C@L4B(B $(C@|?*@{@87N(B $(CGQ(B
+$(C9.@Z?-@;(B $(C4Y8%(B $(C9.@Z?-7N(B $(C;u7N9Y2_4O4Y(B.  M-x$(C8&(B $(CD!8i(B Emacs$(C4B(B $(CH-8i@G(B
+$(C9Y4Z?!<-(B M-x$(C6s0m(B $(C1f@b@LGO?)(B $(C8m7I@G(B $(C@L8'@;(B $(CD!557O(B $(CGU4O4Y(B; $(C@L(B $(C0f?l4B(B
+"replace-string".  "repl s<TAB>"$(C88(B $(CCD55(B Emacs$(C4B(B $(C@L8'@;(B $(C?O<:=CE3(B
+$(C0M@T4O4Y(B.  $(C8m7I(B $(C@L8'@:(B <Return>$(C@87N(B $(C3!334O4Y(B.
+
+replace-string $(C8m7I@:(B $(C5N03@G(B $(C@N<v8&(B $(C?d18GU4O4Y(B--$(C9Y2n>nA.>_(B $(CGR(B $(C9.@Z?-0z(B
+$(C;u7N9Y2n>nAz(B $(C9.@Z?-(B.  $(C0"0"@G(B $(C@N<v4B(B <Return>$(C@87N(B $(C3!3;>_(B $(CGU4O4Y(B.
+
+>> $(C1t9Z@L8&(B $(C@L(B $(CAY?!<-(B $(C5N(B $(CAY(B $(C>F7!@G(B $(C:s(B $(CAY7N(B $(C?rAw@L=J=C?@(B.
+   $(C1W(B $(CHD(B M-x repl s<Return>$(C:/H-5G(B<Return>$(C9Y2n(B<Return>$(C@;(B $(CD!=J=C?@(B.
+
+   $(C@L(B $(CAY@L(B $(C>n6;0T(B $(C:/H-5G>z4B0!8&(B $(C@/@GGO=J=C?@(B: $(C1t9Z@L0!(B $(C@V4B(B $(CCJ1b(B $(C@'D!(B
+   $(C4Y@=?!(B $(C:/(B-$(CH-(B-$(C5G(B $(C6s4B(B $(C398;@L(B $(C3*?C(B $(C6'864Y(B "$(C9Y2n(B"$(C6s0m(B
+   $(C;u7N9Y2n>z=@4O4Y(B.
+
+
+* $(C@Z5?(B $(C0%9+8.(B
+-------------
+
+$(CFD@O@;(B $(C:/0fGQ(B $(CHD?!(B $(C>FAw(B $(C0%9+8.8&(B $(CGOAv(B $(C>J>R@88i(B $(C@|;j1b0!(B $(C?M8#8#(B
+$(C9+3JA|@87N=a(B $(C:/0f(B $(C;gGW@;(B $(C@R>n(B $(C9v81(B $(C<v(B $(C@V=@4O4Y(B.  $(C@L71(B $(C@g>S@;(B $(C9fAvGO1b(B
+$(C@'GX(B, Emacs$(C4B(B $(CFmA}GO0m(B $(C@V4B(B $(C0"0"@G(B $(CFD@O@;(B $(CAV1b@{@87N(B "$(C@Z5?(B $(C0%9+8.(B"
+$(CFD@O?!(B $(C>94O4Y(B.  $(C@Z5?(B $(C0%9+8.5H(B $(CFD@O@G(B $(C@L8'@:(B $(C>U5Z7N(B # $(C9.@Z0!(B $(C@V=@4O4Y(B;
+$(C?98&(B $(C5i>n(B, "hello.c"$(C6s4B(B $(C@L8'@G(B $(CFD@O@:(B "#hello.c#"$(C6s4B(B $(C@L8'@G(B $(C@Z5?(B
+$(C0%9+8.(B $(CFD@O@;(B $(C0.0T(B $(C5K4O4Y(B.  $(CA$;s@{@87N(B $(CFD@O@;(B $(C0%9+8.GO8i(B Emacs$(C4B(B $(C@Z5?(B
+$(C0%9+8.(B $(CFD@O@;(B $(CAv?s4O4Y(B.
+
+$(C@|;j1b0!(B $(C?M8#8#(B $(C9+3JAv8i(B $(C1W(B $(CFD@O@;(B ($(C@Z5?(B $(C0%9+8.5H(B $(CFD@O@L(B $(C>F4O6s(B
+$(CFmA}GO4x(B $(CFD@O(B) $(CFr;s=CC373(B $(CC#@:(B $(CHD(B M-x recover-file<Return>$(C@;(B $(CD'@87N=a(B
+$(C@Z5?(B $(C0%9+8.5H(B $(CFmA}90@;(B $(CH8:9=CE3(B $(C<v(B $(C@V=@4O4Y(B.  $(CH.@NGR(B $(C0M@;(B $(C?d18GO8i(B
+yes<Return>$(C@;(B $(CCD<-(B $(C0h<S(B $(CAxG`GO?)(B $(C@Z5?(B $(C0%9+8.5H(B $(C@Z7a8&(B $(CH8:9=CE0=J=C?@(B.
+
+
+* $(C8^>F8.(B $(CEM(B
+-----------
+
+Emacs$(C0!(B, $(C8m7I@;(B $(CD!4B(B $(C<S550!(B $(C4@8.4Y0m(B $(C@N=DGO8i(B $(CH-8i(B $(C9Y4Z@G(B "$(C8^>F8.(B
+$(CEM(B"$(C6s0m(B $(C:R8.4B(B $(C:s(B $(CEM?!(B $(CD#(B $(C8m7I@;(B $(C:8?)A]4O4Y(B.  $(C8^>F8.(B $(CEM4B(B $(CH-8i@G(B $(C9Y4Z(B
+$(CAY@T4O4Y(B.
+
+
+* $(C9f=D(B $(CAY(B
+---------
+
+$(C8^>F8.(B $(CEM@G(B $(C9Y7N(B $(C@-(B $(CAY@:(B "$(C9f=D(B $(CAY(B"$(C@L6s0m(B $(C:N8(4O4Y(B.  $(C9f=D(B $(CAY@:(B $(C4Y@=0z(B
+$(C00@:(B $(C=D@87N(B $(CG%=C5G>n(B $(C@V=@4O4Y(B.
+
+--:**  TUTORIAL.ko        (Fundamental)--L670--58%----------------
+
+$(C@L(B $(CAY?!4B(B Emacs$(C3*(B $(CFmA}GO0m(B $(C@V4B(B $(C1[?y@G(B $(C;sH2?!(B $(C4kGQ(B $(C@/?kGQ(B $(CA$:80!(B
+$(C0#Aw5G>n(B $(C@V=@4O4Y(B.
+
+$(CFD@O(B $(C@L8'@L(B $(C9+>y@;(B $(C@G9LGO4BAv4B(B $(C@L9L(B $(C>K0m(B $(C@V=@4O4Y(B--$(C1W(B $(C0M@:(B $(CC#>R4x(B
+$(CFD@O@T4O4Y(B.  -NN%--$(C4B(B $(C1[?y?!<-@G(B $(CGv@g(B $(C@'D!8&(B $(C0!8.E54O4Y(B; $(C@L4B(B $(CH-8i(B
+$(C2@4k1b(B $(C@'7N(B NN $(CF[<>F.@G(B $(C1[?y@L(B $(C@V@=@;(B $(C@G9LGU4O4Y(B.  $(CFD@O@G(B $(C2@4k1b0!(B
+$(CH-8i?!(B $(C@V@88i(B --00%-- $(C4k=E?!(B --Top--$(C@L6s0m(B $(CG%=C5K4O4Y(B.  $(C1[?y@G(B
+$(C9X9Y4Z@L(B $(CH-8i?!(B $(C@V@88i(B --Bot--$(C@L6s0m(B $(CG%=C5K4O4Y(B.  $(C1[?y@L(B $(C>FAV(B $(C@[>F<-(B
+$(C8p5g(B $(C3;?k@L(B $(CH-8i?!(B $(C4Y(B $(C3*E83*8i(B $(C9f=D(B $(CAY?!4B(B --All--$(C@L6s0m(B $(CG%=C5K4O4Y(B.
+
+$(C0E@G(B $(C>U:N:P?!(B $(C@V4B(B $(C:0(B $(C9.@Z5i@:(B $(C1[?y@L(B $(C:/0f5G>z@=@;(B $(C@G9LGU4O4Y(B.  $(CFD@O(B
+$(C9f9.(B $(CAwHD3*(B $(C0%9+8.(B $(CAwHD?!4B(B $(C1W(B $(C0w?!(B $(C:0(B $(C9.@Z0!(B $(C>x0m(B $(C4k=C(B $(C9.@Z88(B
+$(C@V=@4O4Y(B.
+
+$(C9f=D(B $(CAY@G(B $(C0}H#(B $(C9.@Z>H@:(B $(C>n62(B $(CFmA}(B $(C9f=D@;(B $(C;g?kGO0m(B $(C@V4B0!8&(B
+$(C>K7AA]4O4Y(B.  $(C>VCJ(B $(C9f=D@:(B Fundamental$(C7N<-(B $(CAv1](B $(C;g?k5G0m(B $(C@V4B(B
+$(C9f=D@T4O4Y(B.  $(C@L4B(B "$(CAV(B $(C9f=D(B"$(C@G(B $(CGQ(B $(C?9@T4O4Y(B.
+
+Emacs$(C?!4B(B $(CAV(B $(C9f=D@L(B $(C89@L(B $(C@V=@4O4Y(B.  $(C1W(B $(CA_(B $(C8n0!Av4B(B $(C4Y8%(B $(C>p>n(B $(C6G(B/$(C6G4B(B
+$(C4Y8%(B $(CA>7y@G(B $(C1[?y@;(B $(CFmA}GO557O(B $(CGO4B5%(B $(C>2@L8g(B, Lisp $(C9f=D(B, Text $(C9f=D(B
+$(C5n5n@L(B $(C@V=@4O4Y(B.  $(CGW;s(B $(CGQ(B $(C0!Av(B $(CAV(B $(C9f=D88@L(B $(C@{?k5G8g(B $(CAv1](B
+"Fundamental"$(C@L6s0m(B $(C@{Gt(B $(C@V4B(B $(C0w?!(B $(CG%=C5K4O4Y(B.
+
+$(C0"0"@G(B $(CAV(B $(C9f=D@:(B $(C8n8n(B $(C8m7I5i@L(B $(C@[5?@;(B $(C4^8.GO557O(B $(C5G>n(B $(C@V=@4O4Y(B.  $(C?98&(B
+$(C5i>n(B, $(CGA7N1W7%?!4B(B $(C<38m9.@;(B $(C885e4B(B $(C8m7I@L(B $(C@V4B5%(B, $(CGA7N1W7%(B $(C>p>n5i@:(B
+$(C<38m9.@G(B $(CG|EB@;(B $(C0"0"(B $(C4^8.(B $(CGO1b(B $(C6'9.?!(B $(C0"0"@G(B $(CAV(B $(C9f=D@:(B $(C<38m9.@;(B $(C<-7N(B
+$(C4Y8#0T(B $(C3"?v(B $(C3V557O(B $(C5G>n(B $(C@V=@4O4Y(B.  $(C8p5g(B $(CAV(B $(C9f=D@:(B $(CH.@e(B $(C8m7I@G(B $(C@L8'@;(B
+$(C;g?kGO9G7N<-(B $(C1W(B $(C9f=D@87N(B $(C>y9Y2Y4B(B $(C0M@L(B $(C=10T(B $(C@N=D5I(B $(C<v(B $(C@V=@4O4Y(B. $(CGQ(B
+$(C?97N(B M-x fundamental-mode$(C4B(B Fundamental $(C9f=D@87N(B $(C>y9Y2Y4B(B $(C8m7I@T4O4Y(B.
+
+$(C@L(B $(CFD@O0z(B $(C00@:(B $(CGQ1[(B $(C1[?y@;(B $(CFmA}GO7A0m(B $(CGQ4Y8i(B Text $(C9f=D@;(B $(C>24B(B $(C0M@L(B
+$(CAA@;(B $(C0M@T4O4Y(B.
+>> M-x text mode<Return>$(C@;(B $(CCD(B $(C:8=J=C?@(B.
+
+$(CAv1]1nAv(B $(C9h?n(B Emacs $(C8m7I5i@:(B $(C89@L(B $(C4^6sAvAv(B $(C>J@84O(B $(C0FA$GOAv(B $(C>J>F55(B
+$(C5K4O4Y(B.  $(C1W7/3*(B M-f$(C?M(B M-b$(C0!(B $(C>U@[@:5{?HG%8&(B $(C398;@G(B $(C@O:N7N(B $(CC38.GT@;(B
+$(C0|B{GR(B $(C<v(B $(C@V@;(B $(C0M@T4O4Y(B.  $(C@|?!(B Fundamental $(C9f=D?!<-4B(B M-f$(C?M(B M-b$(C0!(B
+$(C>U@[@:5{?HG%8&(B $(C398;(B $(C:P8.(B $(C9.@Z7N(B $(CCk1^GO?4=@4O4Y(B.
+
+$(CAV(B $(C9f=D@:(B $(C:8Ek(B $(C4Y@=0z(B $(C00@:(B $(C9L9&GQ(B $(C:/H-8&(B $(CCJ7!GU4O4Y(B: $(C4k:N:P@G(B $(C8m7I5i@:(B
+$(C0"0"@G(B $(CAV(B $(C9f=D?!<-(B "$(C00@:(B $(C@O(B"$(C@;(B $(CGOAv88(B $(C>`0#(B $(C4Y8#0T(B $(C@[5?GQ4Y(B.
+
+$(CGv@g@G(B $(CAV(B $(C9f=D?!(B $(C4kGQ(B $(C9.<-H-8&(B $(C:80m@Z(B $(CGO8i(B C-h m$(C@;(B $(CD!=J=C?@(B.
+
+>> C-u C-v$(C8&(B $(C8n(B $(C9x(B $(CCD<-(B $(C@L(B $(CAY@;(B $(CH-8i@G(B $(C2@4k1bBk@87N(B $(C?rAw@L=J=C?@(B.
+>> C-h m$(C@;(B $(CCD<-(B Text $(C9f=D0z(B Fundamental $(C9f=D@G(B $(CBw@LA!@;(B $(C:8=J=C?@(B.
+>> C-x 1$(C@;(B $(CCD<-(B $(C9.<-H-8&(B $(CH-8i?!<-(B $(C>x>V=J=C?@(B.
+
+$(CAV(B $(C9f=D@:(B $(C:N(B $(C9f=D@L(B $(C@V1b(B $(C6'9.?!(B $(CAV(B $(C9f=D@L6s0m(B $(C:N8(4O4Y(B.  $(C:N(B $(C9f=D@:(B $(CAV(B
+$(C9f=D@;(B $(C13C<GR(B $(C<v(B $(C@V4B(B $(C0M@L(B $(C>F4O6s(B $(CAV(B $(C9f=D@;(B $(C:NBw@{@87N(B $(C<vA$GQ(B
+$(C9f=D@T4O4Y(B.  $(C0"0"@G(B $(C:N(B $(C9f=D@:(B $(C4Y8%(B $(C:N(B $(C9f=D0z(B $(C5683@{@87N(B, $(C1W8.0m(B $(CAV(B
+$(C9f=D0z55(B $(C5683@{@87N(B, $(C1W(B $(C@ZC<7N<-(B $(C2t0m(B $(CDS(B $(C<v(B $(C@V=@4O4Y(B.  $(C1W7/9G7N(B $(C:N(B
+$(C9f=D@:(B $(C>2Av(B $(C>J@;(B $(C<v55(B $(C@V0m(B $(CGO3*88(B $(C>5(B $(C<v55(B $(C@V@88i(B $(C?)7/(B $(C:N(B $(C9f=D@;(B
+$(CB%8BCg<-(B $(C>5(B $(C<v55(B $(C@V=@4O4Y(B.
+
+$(C>FAV(B $(C@/?kGQ(B $(C:N(B $(C9f=DA_(B, $(CGQ1[(B $(C1[?y@;(B $(CFmA}GR(B $(C6'(B $(C@ZAV(B $(C;g?k5G4B(B Auto Fill
+$(C9f=D@L(B $(C@V=@4O4Y(B.  $(C@L(B $(C9f=D@L(B $(CDQA.(B $(C@V@;(B $(C6'(B Emacs$(C4B(B, $(CAY@L(B $(C3J9+(B $(C3P>nAv8i(B
+$(C1[?y@L(B $(C3"?vA|?!(B $(C5{6s(B $(C398;;g@L?!<-(B $(C@Z5?@87N(B $(CAY9Y2^@;(B $(CGU4O4Y(B.
+
+Auto Fill $(C9f=D@;(B $(CDQ1b(B $(C@'GX<-4B(B M-x auto-fill-mode<Return>$(C@;(B $(CD(4O4Y(B.
+$(C@L(B $(C9f=D@L(B $(CDQA.(B $(C@V@88i(B M-x auto-fill-mode<Return>$(C@;(B $(CCD<-(B $(C2x(B $(C<v(B
+$(C@V=@4O4Y(B.  $(C@L(B $(C9f=D@L(B $(C2(A.(B $(C@V@88i(B $(C@L(B $(C8m7I@:(B $(C1W(B $(C9f=D@;(B $(CDQ0m(B, $(C9]4k7N(B $(CDQA.(B
+$(C@V@;(B $(C6'4B(B $(C@L(B $(C9f=D@;(B $(C2|4O4Y(B.  $(C?l8.4B(B $(C@L(B $(C8m7I@L(B "$(C9f=D@;(B $(C6H5|(B"$(CGQ4Y0m(B
+(toggle) $(CGU4O4Y(B.
+
+>> M-x auto fill mode<Return>$(C@;(B $(CAv1](B $(CCD(B $(C:8=J=C?@(B.  $(C1W8.0m(B "asdf "$(C6s4B(B
+   $(CAY@;(B $(C0h<S(B $(C3"?v(B $(C3V>n<-(B $(C1W(B $(CAY@L(B $(C5Q7N(B $(C3*45557O(B $(CGO=J=C?@(B.  Auto Fill
+   $(C9f=D@:(B $(C0x0#(B $(C9.@Z?!<-88(B $(CAY9Y2^@;(B $(CGO1b(B $(C6'9.?!(B $(C2@(B $(C0x0#(B $(C9.@Z0!(B $(C5i>n(B
+   $(C@V>n>_(B $(CGU4O4Y(B.
+
+$(CGQ0h4B(B $(C:8Ek(B 70$(C03@G(B $(C9.@Z7N(B $(CA$GXA.(B $(C@VAv88(B C-x f $(C8m7I@87N(B $(C1W(B $(C0M@;(B $(C:/0fGR(B
+$(C<v(B $(C@V=@4O4Y(B.  $(C?xGO4B(B $(CGQ0h(B $(C<3A$@:(B $(C<}@Z(B $(C@N<v7N(B $(CGO?)>_(B $(CGU4O4Y(B.
+
+>> 20$(C@L6s4B(B $(C@N<v7N(B C-x f$(C8&(B $(CCD(B $(C:8=J=C?@(B.  (C-u 2 0 C-x f).
+   $(C1W8.0m(B $(C1[?y@;(B $(C9:0!(B $(CCD<-(B Emacs$(C0!(B 20$(C03@G(B $(C9.@Z7N(B $(CGQ(B $(CAY@;(B $(CC$?l4BAv8&(B
+   $(C:8=J=C?@(B.  $(C1W71(B $(C4Y@=?!(B C-x f$(C8&(B $(C4Y=C(B $(C=a<-(B $(CGQ0h8&(B 70$(C@87N(B $(C@g(B
+   $(C<3A$GO=J=C?@(B.
+
+$(C4\6t@G(B $(CA_0#?!<-(B $(C:/0fGO8i(B Auto Fill $(C9f=D@:(B $(CC$?r@;(B $(C4Y=C(B $(CGOAv(B
+$(C>J=@4O4Y(B. $(C1W(B $(C4\6t@;(B $(C4Y=C(B $(CC$?l1b(B $(C@'GX<-4B(B $(C1t9Z@L0!(B $(C4\6t(B $(C>H?!(B $(C@V4B(B
+$(C;sEB?!<-(B M-q (Meta$(C<h(B-q)$(C8&(B $(CD(4O4Y(B.
+
+>> $(C1t9Z@L8&(B $(C@L@|(B $(C4\6t@87N(B $(C?rAw@N(B $(CHD(B M-q$(C8&(B $(CD!=J=C?@(B.
+
+* $(CC#1b(B
+------
+
+Emacs$(C4B(B $(C1[?y@G(B $(C>UBJ@L3*(B $(C5^BJ@87N(B $(C9.@Z?-@;(B ($(C9.@Z?-@:(B $(C?,<S5H(B $(C9.@Z3*(B
+$(C?,<S5H(B $(C398;@T4O4Y(B) $(CC#@;(B $(C<v(B $(C@V=@4O4Y(B.  $(C9.@Z?-@;(B $(CC#4B(B $(C0M@:(B $(C1t9Z@L8&(B
+$(C?rAw@L4B(B $(C8m7I@T4O4Y(B; $(C1t9Z@L0!(B $(C1W(B $(C9.@Z?-@L(B $(C3*E83*4B(B $(C0w@87N(B $(C?rAw@T4O4Y(B.
+
+Emacs$(C@G(B $(CC#1b(B $(C8m7I@:(B "$(CAu0!@{(B"$(C@L6s4B(B $(CA!?!<-(B $(C@O9](B $(CFmA}1b@G(B $(CC#1b(B $(C8m7I0z(B
+$(C4Y8(4O4Y(B.  $(C@L4B(B $(CC#0m@Z(B $(CGO4B(B $(C9.@Z?-@;(B $(CE8@ZGO0m(B $(C@V4B(B $(C5?>H?!(B $(CC#1b0!(B
+$(C@L7g>nAv0m(B $(C@V4Y4B(B $(C0M@;(B $(C@G9LGU4O4Y(B.
+
+$(CC#1b8&(B $(C=C@[=CE04B(B $(C8m7I@:(B $(C>UBJ@87N(B $(CC#1b0!(B C-s$(C@L0m(B $(C5^BJ@87N(B $(CC#1b0!(B
+C-r$(C@T4O4Y(B.  $(C1W7/3*(B $(C@a1q(B $(C1b4Y8.=J=C?@(B!  $(CAv1](B $(C@L0M@;(B $(C=C55GX(B $(C:8Av(B
+$(C86=J=C?@(B.
+
+C-s$(C8&(B $(CD!8i(B $(C8^>F8.(B $(CEM?!(B, $(C1f@b@L7N(B "I-search"$(C6s4B(B $(C9.@Z?-@L(B $(C3*E83*4B(B $(C0M@;(B
+$(C:<(B $(C<v(B $(C@V=@4O4Y(B.  $(C@L4B(B $(CC#0m@Z(B $(CGO4B(B $(C9.@Z?-@L(B $(CE8@Z5G1b8&(B $(C1b4Y6s8i<-(B
+Emacs$(C0!(B $(CAu0!@{(B $(CC#1b(B $(CA_?!(B $(C@V4Y4B(B $(C0M@;(B $(C8;GX(B $(CA]4O4Y(B.  <Return>$(C@:(B $(CC#1b8&(B
+$(C86D(4O4Y(B.
+
+>> $(C@LA&(B C-s$(C8&(B $(CCD<-(B $(CC#1b8&(B $(C=C@[GO=J=C?@(B.  $(CC5C5Hw(B, $(CGQ(B $(C9x?!(B $(CGQ(B $(C1[@Z>?(B
+   'cursor'$(C6s0m(B $(CD!8i<-(B $(C0"0"@G(B $(C9.@Z8&(B $(CD#(B $(CHD(B $(C1t9Z@L?!(B $(C>n62(B $(C@O@L(B $(C@O>n(B
+   $(C3*4B0!8&(B $(C@/@GGO=J=C?@(B.
+   $(C@LA&(B "cursor"$(C8&(B $(CGQ(B $(C9x(B $(CC#@:(B $(C0M@T4O4Y(B.
+>> C-s$(C8&(B $(C4Y=C(B $(CCD<-(B $(C4Y@=?!(B $(C3*E83*4B(B "cursor"$(C8&(B $(CC#@8=J=C?@(B.
+>> $(C@Z(B, $(C@LA&4B(B <Delete>$(C8&(B $(C3W(B $(C9x(B $(CCD<-(B $(C1t9Z@L0!(B $(C>n6;0T(B $(C?rAw@L4B0!8&(B
+   $(C:8=J=C?@(B.
+>> <Return>$(C@;(B $(CCD<-(B $(CC#1b8&(B $(C3!3;=J=C?@(B.
+
+$(C>n62(B $(CGv;s@L(B $(C@O>n3*4BAv8&(B $(C:8>R=@4O1n(B?  $(CAu0!@{(B $(CC#1b?!<-(B Emacs$(C4B(B $(C1W6'1nAv(B
+$(CE8@ZGQ(B $(C9.@Z?-@;(B $(CC#@87A0m(B $(CGU4O4Y(B.  '$(C1t9Z@L(B'$(C0!(B $(C@V4B(B $(C4Y@=(B $(C@e<R7N(B $(C0!7A8i(B
+C-s$(C8&(B $(C4Y=C(B $(CD(4O4Y(B.  $(C1W71(B $(C0w@L(B $(C>x@88i(B Emacs$(C4B(B $(C;`<R8.8&(B $(C3;0m(B $(CC#1b0!(B $(CGv@g(B
+"$(C=GFP(B"$(CG_@=@;(B $(C>K7A(B $(CAV8g(B C-g$(C7N55(B $(CC#1b8&(B $(C3!3>(B $(C<v(B $(C@V0T(B $(CGU4O4Y(B.
+
+$(C@/@G(B: $(C>n62(B $(C?n?5(B $(CC<0h?!<-4B(B C-s$(C8&(B $(CD!8i(B $(CH-8i@;(B $(C5?0a=CDQ<-(B, Emacs$(C0!(B $(C>F9+(B
+$(CCb7B55(B $(CGOAv(B $(C>J4B(B $(C0M@;(B $(C:<(B $(C0f?l0!(B $(C@V=@4O4Y(B.  $(C@L0M@:(B "$(CHe8'(B $(CA&>n(B"$(C6s0m(B
+$(C:R8.?l4B(B $(C?n?5(B $(CC<0h@G(B "$(CF/B!(B"$(C@L(B C-s$(C8&(B $(C0!7NC$<-(B Emacs$(C8&(B $(CEkGX(B $(C@|4^5GAv(B
+$(C>J557O(B $(CGO1b(B $(C6'9.@T4O4Y(B.  C-q$(C8&(B $(C4)8#8i(B $(CH-8i@L(B $(CGXA&5K4O4Y(B.  $(C1W8.0m(B $(C3*<-(B
+Emacs $(C<38m<-@G(B "Spontaneous Entry to Incremental Search"$(C6s4B(B  $(C4\?x@;(B
+$(C:88i(B $(C@L71(B "$(CF/B!(B"$(C@;(B $(C>n6;0T(B $(CCk1^GR(B $(C<v(B $(C@V4B0!?!(B $(C4kGQ(B $(CA6>p@;(B $(C@P@;(B $(C<v(B
+$(C@V=@4O4Y(B.
+
+$(CAu0!@{(B $(CC#1b(B $(C55A_?!(B <Delete>$(C8&(B $(CD!8i(B $(CC#1b(B $(C9.@Z?-@G(B $(C86Av87(B $(C9.@Z0!(B
+$(CAv?vAv0m(B $(CC#1b4B(B $(C86Av87@87N(B $(CC#>R4x(B $(C0w?!(B $(C5G59>F(B $(C0!4B(B $(C0M@;(B $(C:<(B $(C<v(B
+$(C@V=@4O4Y(B.  $(C?98&(B $(C5i>n(B, "c"$(C0!(B $(C>n5p?!(B $(CC3@=@87N(B $(C3*?@4BAv8&(B $(C:81b(B $(C@'GX<-(B
+"c"$(C8&(B $(CCF4Y0m(B $(CGU=C4Y(B.  $(C@LA&(B "u"$(C8&(B $(CD!8i(B $(C1t9Z@L4B(B "cu"$(C0!(B $(CC3@=@87N(B $(C3*?@4B(B
+$(C0w@87N(B $(C?rAw@O(B $(C0M@T4O4Y(B.  $(C@LA&(B <Delete>$(C8&(B $(CD!=J=C?@(B.  $(C1W7/8i(B $(CC#1b(B
+$(C9.@Z?-?!<-(B "u"$(C0!(B $(CAv?vAv0m(B $(C1t9Z@L4B(B "c"$(C0!(B $(CC3@=(B $(C3*?B(B $(C0w@87N(B $(C5G59>F(B
+$(C0)4O4Y(B.
+
+$(CC#1bA_?!(B $(CA&>n(B $(C9.@Z3*(B meta $(C9.@Z8&(B $(CD!8i(B ($(C?9?\0!(B $(C@VAv88(B--$(CC#1b?!<-(B $(CF/:0GQ(B
+$(C@G9L8&(B $(C0.4B(B C-s$(C3*(B C-r$(C0z(B $(C00@:(B $(C9.@Z5i(B) $(CC#1b4B(B $(C3!3*9v834O4Y(B.
+
+C-s$(C4B(B $(C1t9Z@L@G(B $(CGv@g(B $(C@'D!(B $(C4Y@=?!(B $(C9_0_5G4B(B $(CC#1b(B $(C9.@Z?-@;(B $(CC#557O(B
+$(C=C@[=CE54O4Y(B.  $(C@L@|?!(B $(C3*?B(B $(C1[?y?!<-(B $(C9+>p0!8&(B $(CC#@87A8i(B C-r$(C8&(B $(CD(4O4Y(B.
+C-s$(C?!(B $(C@{?k5G4B(B $(C8p5g(B $(C;gGW@:(B $(C9fGb88(B $(C9Y2n>z@;(B $(C;S(B $(C8p5N(B C-r$(C?!(B $(C@{?k5K4O4Y(B.
+
+* $(C4YA_(B $(CC"(B
+---------
+
+Emacs$(C@G(B $(C1&Bz@:(B $(CF/B!(B $(CA_@G(B $(CGO3*7N(B $(CGQ(B $(C03(B $(C@L;s@G(B $(CC"@;(B $(C5?=C?!(B $(CH-8i?!(B $(CG%=CGR(B
+$(C<v(B $(C@V4Y4B(B $(C0M@;(B $(C5i(B $(C<v(B $(C@V=@4O4Y(B.
+
+>> $(C1t9Z@L8&(B $(C@L(B $(CAY7N(B $(C?rAw?)<-(B C-u 0 C-l$(C@;(B $(CCD(B $(C:8=J=C?@(B.
+
+>> C-x 2$(C8&(B $(CCD<-(B $(CH-8i@;(B $(C5N(B $(CC"@87N(B $(C3*4)=J=C?@(B.
+   $(C5N(B $(CC"@:(B $(C@L(B $(CAvD'<-8&(B $(CH-8i(B $(CG%=CGU4O4Y(B.  $(C1t9Z@L4B(B $(C@-(B $(CC"?!(B $(C@V=@4O4Y(B.
+
+>> C-M-v$(C8&(B $(CCD<-(B $(C9Y4Z(B $(CC"@;(B $(C5N7g8;1b(B $(CGO=J=C?@(B.
+   (Meta$(C<h0!(B $(C>x@88i(B ESC C-v$(C8&(B $(CD!=J=C?@(B.)
+
+>> C-x o ("o"$(C4B(B "other"$(C@G(B $(CC9(B $(C1[@Z(B)$(C8&(B $(CCD<-(B $(C1t9Z@L8&(B $(C9Y4Z(B $(CC"@87N(B
+   $(C?rAw@L=J=C?@(B.
+>> $(C9Y4Z(B $(CC"?!<-(B C-v$(C?M(B M-v$(C8&(B $(C=a<-(B $(C5N7g8;1b(B $(CGO=J=C?@(B.
+   $(C@L(B $(CAv=C8&(B $(C@P4B(B $(C0M@:(B $(C2@4k1b(B $(CC"?!<-(B $(CGU4O4Y(B.
+
+>> C-x o$(C8&(B $(C4Y=C(B $(CCD<-(B $(C1t9Z@L8&(B $(C4Y=C(B $(C2@4k1b(B $(CC"@87N(B $(C?rAw@L=J=C?@(B.
+   $(C2@4k1b(B $(CC"?!<-(B, $(C1t9Z@L4B(B $(C@|?!(B $(C@V4x(B $(C0w@87N(B $(C0%(B $(C0M@T4O4Y(B.
+
+C-x o$(C8&(B $(C0h<S(B $(C;g?kGO?)(B $(CC"5i(B $(C;g@L?!<-(B $(C>y9Y2Y1b8&(B $(CGR(B $(C<v(B $(C@V=@4O4Y(B.  $(C0"0"@G(B
+$(CC"@:(B $(C@ZC<@G(B $(C1t9Z@L(B $(C@'D!8&(B $(C0.0m(B $(C@VAv88(B $(CGQ(B $(CC"88@L(B $(C1t9Z@L8&(B $(C:8?)(B $(CA]4O4Y(B.
+$(C8p5g(B $(CA$;s@{@N(B $(CFmA}(B $(C8m7I@:(B $(C1t9Z@L0!(B $(C@V4B(B $(CC"?!(B $(C@{?k5K4O4Y(B.  $(C@L0M@;(B
+"$(C<1EC5H(B $(CC"(B"$(C@L6s0m(B $(C:N8(4O4Y(B.
+
+C-M-v $(C8m7I@:(B $(C4Y8%(B $(CC"@;(B $(CB|A6GO8i<-(B $(C1[?y@;(B $(CFmA}GR(B $(C6'(B $(C@/?kGU4O4Y(B.
+$(C1t9Z@L8&(B $(CFmA}GO0m(B $(C@V4B(B $(CC"?!(B $(C5N0m(B $(C4Y8%(B $(CC"@;(B C-M-v$(C7N(B $(C@|Ax=CE3(B $(C<v(B
+$(C@V=@4O4Y(B.
+
+C-M-v$(C4B(B CONTROL-META $(C9.@Z@G(B $(CGQ(B $(C?9@T4O4Y(B.  META$(C<h0!(B $(C@V@88i(B CONTROL$(C<h?M(B
+META$(C<h8&(B $(C4)8%(B $(CC$(B v $(C1[<h8&(B $(CD!9G7N=a(B C-M-v$(C8&(B $(CD%(B $(C<v(B $(C@V=@4O4Y(B. CONTROL$(C<h3*(B
+META$(C<h4B(B $(CE8@ZGO4B(B $(C9.@Z8&(B $(C:/0fGO4B(B $(C?*GR@;(B $(CGO1b(B $(C6'9.?!(B $(C1W(B $(C5Q(B $(CA_(B $(C9+>y@L(B
+$(CC3@=?!(B $(C?@4B0!0!(B $(C9.A&5GAv(B $(C>J=@4O4Y(B.
+
+META$(C<h0!(B $(C>x>n<-(B ESC$(C<h7N(B $(C4k?kGR(B $(C6'4B(B $(C<x<-0!(B $(C9.A&5K4O4Y(B: ESC$(C<h8&(B $(C8U@z(B
+$(CD!0m(B $(CA&>n9.@Z(B-v$(C8&(B $(CCD>_(B $(CGO8g(B $(CA&>n9.@Z(B-ESC v$(C4B(B $(C@[5?GOAv(B $(C>J=@4O4Y(B.  $(C1W(B
+$(C@L@/4B(B ESC$(C@L(B $(C:/0f<h0!(B $(C>F4O6s(B $(C@ZC<7N<-(B $(C1b4I@;(B $(C0!Ax(B $(C9.@Z@L1b(B $(C6'9.@T4O4Y(B.
+
+>> C-x 1$(C@;(B ($(C@L(B $(C2@4k1b(B $(CC"?!<-(B) $(CCD<-(B $(C9Y4Z(B $(CC"@;(B $(C>x>V=J=C?@(B.
+
+($(C9Y4Z(B $(CC"?!<-(B C-x 1$(C@;(B $(CD!8i(B $(C2@4k1b(B $(CC"@L(B $(C>x>nAz(B $(C0M@T4O4Y(B.  $(C@L(B $(C8m7I@;(B "$(CGQ(B
+$(CC"88(B $(C:8A8GO=C?@(B--$(CAv1](B $(C@[>wA_@N(B $(CC"88(B"$(C@L6s0m(B $(C;}0"GO=J=C?@(B.)
+
+$(C>gBJ(B $(CC"?!(B $(C00@:(B $(C;g@LD-@;(B $(CH-8i(B $(CG%=CGR(B $(CGJ?d4B(B $(C>x=@4O4Y(B.  $(CGQ(B $(CC"?!<-(B C-x
+C-f$(C7N(B $(CFD@O@;(B $(CC#@88i(B $(C4Y8%(B $(CC"@:(B $(C:/H-0!(B $(C>x=@4O4Y(B.  $(C0"0"@G(B $(CC"?!<-(B $(CFD@O@;(B
+$(C5683@{@87N(B $(CC#@;(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(C5N(B $(CC"@;(B $(C;g?kGO?)(B $(C4Y8%(B $(C3;?k@;(B $(CH-8i(B $(CG%=CGO4B(B $(C6G(B $(C4Y8%(B $(C9f9}@L(B $(C@V=@4O4Y(B:
+
+>> C-x 4 C-f$(C8&(B $(CD!0m(B $(CFD@O(B $(C@L8'(B $(CGO3*8&(B $(CCD(B $(C:8=J=C?@(B.
+   <Return>$(C@87N(B $(C3!3;=J=C?@(B.  $(C1W(B $(CFD@O@L(B $(C9Y4Z(B $(CC"?!(B $(C3*E83*4B(B $(C0M@;(B
+   $(C:8=J=C?@(B.  $(C1t9Z@L55(B $(C1W(B $(C0w@87N(B $(C?rAw@T4O4Y(B.
+
+>> C-x o$(C8&(B $(CCD<-(B $(C4Y=C(B $(C2@4k1b(B $(CC"@87N(B $(C59>F(B $(C0!<-(B C-x 1$(C7N(B $(C9Y4Z(B $(CC"@;(B
+   $(CAv?l=J=C?@(B.
+
+
+* $(CH81M@{(B $(CFmA}(B $(C<vAX(B
+------------------
+
+$(C0#H$(B "$(CH81M@{(B $(CFmA}(B $(C<vAX(B"$(C@L6s0m(B (recursive editing level) $(C:R8.?l4B(B $(C0M?!(B
+$(C:@BxGO0T(B $(C5K4O4Y(B.  $(C9f=D(B $(CAY?!<-(B $(CAV(B $(C9f=D(B $(C@L8'@G(B $(C>U5Z?!(B $(C@V4B(B $(C<R0}H#(B $(C9.@Z8&(B
+$(C4k0}H#(B $(C9.@Z0!(B $(C5Q7/(B $(C=N0m(B $(C@V@88i(B $(C@L8&(B $(C>K(B $(C<v(B $(C@V=@4O4Y(B.  $(C?98&(B $(C5i>n(B,
+(Fundamental) $(C4k=E?!(B [(Fundamental)]$(C@L6s0m(B $(CG%=C5I(B $(C6'(B $(C@T4O4Y(B.
+
+$(C@L(B $(CH81M@{(B $(CFmA}(B $(C<vAX?!<-(B $(C9~>n(B $(C3*1b(B $(C@'GX<-4B(B ESC ESC ESC$(C@;(B $(CD(4O4Y(B.
+$(C@L(B $(C0M@:(B $(C4Y8q@{(B "$(C9~>n3*1b(B" $(C8m7I@T4O4Y(B.  $(CC_0!5H(B $(CC"@;(B $(C>x>V0E3*(B $(C@[@:(B
+$(C;g@LD-?!<-(B $(C3*?@1b(B $(C@'GX<-55(B $(C;g?k5I(B $(C<v(B $(C@V=@4O4Y(B.
+
+>> M-x$(C8&(B $(CCD<-(B $(C@[@:(B $(C;g@LD-@87N(B $(C5i>n(B $(C0!=J=C?@(B; $(C1W8.0m4B(B ESC ESC ESC$(C@;(B
+   $(CCD<-(B $(C:|A.(B $(C3*?@=J=C?@(B.
+
+C-g$(C8&(B $(C=a<-4B(B $(CH81M@{(B $(CFmA}(B $(C<vAX?!<-(B $(C9~>n3/(B $(C<v(B $(C>x=@4O4Y(B.  $(C1W(B $(C@L@/4B(B C-g$(C0!(B
+$(CH81M@{(B $(CFmA}(B $(C<vAX(B $(C@L3;?!<-(B $(C8m7I@L3*(B $(C@N<v8&(B $(CCk<RGO1b(B $(C@'GX(B $(C;g?k5G1b(B
+$(C6'9.@T4O4Y(B.
+
+
+* $(C4u(B $(C89@:(B $(C55?r8;(B $(C>r1b(B
+---------------------
+
+$(C@L(B $(CAvD'<-?!<-4B(B Emacs $(C;g?k@;(B $(C=C@[GO1b?!(B $(CCf:PGQ(B $(CA$:88&(B $(CA&0xGO7A0m(B
+$(C3k7BGO?4=@4O4Y(B.  Emacs$(C?!4B(B $(C3J9+3*(B $(C89@:(B $(C1b4I@L(B $(C@V>n<-(B $(C?)1b<-4B(B $(C8p5N(B $(C4Y(B
+$(C<38mGR(B $(C<v(B $(C>x=@4O4Y(B.  $(C1W7/3*(B, Emacs$(C?!4B(B $(C4Y8%(B $(C89@:(B $(C@/?kGQ(B $(CF/B!5i@L(B
+$(C@V>n<-(B Emacs$(C?!(B $(C4kGX<-(B $(C4u(B $(C89@L(B $(C9h?l0m(B $(C=M@;(B $(C0M(B $(C@T4O4Y(B.  Emacs$(C4B(B Emacs
+$(C8m7I?!(B $(C4kGQ(B $(C9.<-H-8&(B $(C@P@;(B $(C<v(B $(C@V4B(B $(C8m7I@;(B $(CA&0xGU4O4Y(B.  $(C@L(B "$(C55?r8;(B"
+$(C8m7I5i@:(B $(C8p5N(B $(CA&>n9.@Z(B-h$(C7N(B $(C=C@[GO8g(B $(C@L(B $(C9.@Z8&(B "$(C55?r8;(B $(C9.@Z(B"$(C6s0m(B
+$(C:N8(4O4Y(B.
+
+$(C55?r8;(B $(CF/B!@;(B $(C;g?kGO7A8i(B C-h $(C9.@Z8&(B $(CD!0m(B $(C?xGO4B(B $(CA>7y@G(B $(C55?r8;@;(B
+$(C0!8#E04B(B $(C9.@Z8&(B $(CD(4O4Y(B.  $(C@|Gt(B $(C;}0"@L(B $(C>J3*8i(B C-h ?$(C8&(B $(CCD<-(B, Emacs$(C0!(B
+$(C>n62(B $(CA>7y@G(B $(C55?r8;@;(B $(CA&0xGR(B $(C<v(B $(C@V4B0!8&(B $(C:8?)(B $(CAV557O(B $(CGO=J=C?@(B.  C-h$(C8&(B
+$(CD#(B $(CHD(B $(C>F9+71(B $(C55?r8;@L(B $(CGJ?d>x4Y0m(B $(CFG4\5G8i(B C-g$(C8&(B $(CCD<-(B $(CCk<RGO=J=C?@(B.
+
+($(C>n62(B $(C0w?!<-4B(B C-h$(C@G(B $(C@G9L8&(B $(C:/0f=CDQ(B $(C3u=@4O4Y(B.  $(C1W5i@L(B $(C8p5g(B $(C;g?k@Z?!0T(B
+$(C@L785m(B $(C@O0}@{@N(B $(CA6C38&(B $(CCkGX<-4B(B $(C>J5G4B(B $(C0M@L9G7N(B $(C@L0M@:(B $(C?n?5(B $(CC<0h(B
+$(C0|8.@Z?!0T(B $(C:RFrGR(B $(C<v(B $(C@V4B(B $(CCf:PGQ(B $(C1Y0E0!(B $(C5K4O4Y(B.  C-h$(C0!(B $(CH-8i@G(B $(C9Y4Z?!(B
+$(C55?r(B $(C>K828;@;(B $(CH-8i(B $(CG%=CGOAv(B $(C>J@88i(B $(C:RFr@L(B $(CGX0a5I(B $(C6'1nAv4B(B F1 $(C1[<h3*(B
+M-x help <Return>$(C@;(B $(C4k=E(B $(C;g?kGO557O(B $(CGO=J=C?@(B.)
+
+$(C0!@e(B $(C1b:;@{@N(B $(C55?r8;(B $(CF/B!@:(B C-h c $(C@T4O4Y(B.  C-h$(C8&(B $(CD!0m(B $(C9.@Z(B c$(C8&(B $(CD#(B $(CHD(B
+$(C8m7I(B $(C9.@Z3*(B $(C8m7I(B $(C<xBw(B(sequence)$(C8&(B $(CD!=J=C?@(B; $(C1W7/8i(B Emacs$(C4B(B $(C1W(B $(C8m7I?!(B
+$(C4kGQ(B $(C>FAV(B $(C0#4\GQ(B $(C<38m@;(B $(CH-8i(B $(CG%=CGU4O4Y(B.
+
+>> C-h c $(CA&>n9.@Z(B-p$(C8&(B $(CD!=J=C?@(B.
+   $(C>K828;@:(B $(C4Y@=0z(B $(C00@:(B $(C=D@L>n>_(B $(CGU4O4Y(B.
+
+	C-p runs the command previous-line
+
+$(C@L4B(B "$(C1b4I@G(B $(C@L8'(B"$(C@;(B $(C8;GX(B $(CA]4O4Y(B.  $(C1b4I(B $(C@L8'@:(B Emacs$(C8&(B $(C@Z1b?!0T(B $(C8BCg(B
+$(C>20E3*(B $(CH.@eGR(B $(C6'(B $(CAV7N(B $(C;g?k5K4O4Y(B.  $(C1W7/3*(B $(C1b4I(B $(C@L8'5i@:(B $(C1W(B $(C8m7I@L(B $(C>n62(B
+$(C@O@;(B $(CGO4BAv8&(B $(C>K(B $(C<v(B $(C@V557O(B $(CA$GXAv1b(B $(C6'9.?!(B $(C1W5i@:(B $(C>FAV(B $(C0#4\GQ(B
+$(C9.<-H-7N55(B $(C:@;g5I(B $(C<v(B $(C@V=@4O4Y(B--$(C?)EB1nAv(B $(C9h?n(B $(C8m7I5i@;(B $(C1b>oGO4B5%(B
+$(CCf:PGR(B $(CA$557N(B.
+
+C-x C-s$(C?M(B (META$(C<h3*(B EDIT$(C<h(B $(CH$@:(B $(C13C<<h0!(B $(C@V@88i(B) <ESC>v$(C?M(B $(C00@:(B $(C4YA_(B
+$(C9.@Z(B $(C8m7I5i55(B C-h c$(C@G(B $(C4Y@=?!(B $(C?C(B $(C<v(B $(C@V=@4O4Y(B.
+
+$(CGQ(B $(C8m7I?!(B $(C4kGX(B $(C4u(B $(C@Z<<GQ(B $(CA$:88&(B $(C>r1b(B $(C@'GX<-4B(B C-h c $(C4k=E?!(B C-h k$(C8&(B
+$(C;g?kGO=J=C?@(B.
+
+>> C-h k $(CA&>n9.@Z(B-p$(C8&(B $(CCD(B $(C:8=J=C?@(B.
+
+$(C@L4B(B $(C1W(B $(C1b4I@G(B $(C@L8'0z(B $(CGT22(B $(C1W(B $(C9.<-H-8&(B Emacs $(CC"?!(B $(CH-8i(B $(CG%=CGU4O4Y(B.
+$(CCb7B5H(B $(C0M@;(B $(C4Y(B $(C@P>z@88i(B C-x 1$(C7N(B $(C55?r8;(B $(C1[?y@;(B $(C>x>[4O4Y(B.  $(C4g@e?!(B $(C>x>Y(B
+$(CGJ?d4B(B $(C>x=@4O4Y(B.  $(C55?r8;(B $(C1[?y@;(B $(CB|A6GO8i<-(B $(CFmA}@;(B $(CGO4Y0!(B C-x 1$(C@;(B $(CCD55(B
+$(C5K4O4Y(B.
+
+$(C?)1b?!(B $(C6G4Y8%(B $(C@/?kGQ(B C-h$(C@G(B $(CC_0!(B $(C<1EC@L(B $(C@V=@4O4Y(B:
+
+   C-h f	$(C1b4I(B $(C1b<zGO1b(B.  $(C1b4I(B $(C@L8'@;(B $(CD(4O4Y(B.
+
+>> C-h f previous-line<Return>$(C@;(B $(CCD(B $(C:8=J=C?@(B.
+   $(C1W7/8i(B Emacs$(C0!(B C-p $(C8m7I@L(B $(CA&0xGO4B(B $(C1b4I?!(B $(C4kGQ(B $(C8p5g(B $(CA$:88&(B $(C@N<bGR(B
+   $(C0M@T4O4Y(B.
+
+$(C@/;gGQ(B $(C8m7I@87N(B C-h v $(C0!(B $(C@V@88g(B $(C@L4B(B $(C@L8F=:@G(B $(CG`5?@;(B $(C@{@}GO0T(B $(CGO4B5%(B
+$(C;g?k5G4B(B $(C:/<v0*?!(B $(C4kGQ(B $(C9.<-H-8&(B $(C:8?)AX4Y(B.
+
+   C-h a	$(C8m7I(B $(CGY=I>n(B(apropos).  $(CGY=I>n8&(B $(CD!8i(B Emacs$(C0!(B $(C@L(B
+		$(CGY=I>n0!(B $(C5i>n(B $(C@V4B(B $(C8p5g(B $(C8m7I5i@G(B $(C8q7O@;(B $(C@[<:GR(B
+		$(C0M@T4O4Y(B. $(C@L(B $(C8m7I5i@:(B $(C8p5N(B Meta$(C<h(B-x$(C7N(B $(C:N8&(B $(C<v(B
+		$(C@V=@4O4Y(B. $(C>n62(B $(C8m7I5i?!(B $(C4kGX<-4B(B $(C00@:(B $(C8m7I@;(B $(C=GG`GO4B(B,
+		$(CGQ5N03@G(B $(C9.@Z7N(B $(C5H(B $(C<xBw?!(B $(C4kGQ(B $(C8q7O55(B $(C8m7I(B $(CGY=I>n0!(B
+		$(C@[<:GU4O4Y(B.
+
+>> C-h a file<Return>$(C@;(B $(CCD(B $(C:8=J=C?@(B.
+
+$(C1W7/8i(B $(C@L8'?!(B "file"$(C@L(B $(C5i>n(B $(C@V4B(B $(C8p5g(B M-x $(C8m7I5i@G(B $(C8q7O@L(B $(C@[<:5G?)(B
+$(C4Y8%(B $(CC"?!(B $(CH-8i(B $(CG%=C5K4O4Y(B.  find-file$(C0z(B $(C00@:(B $(C8m7I5i?!4B(B C-x C-f$(C?M(B $(C00@:(B
+$(C9.@Z(B $(C8m7I@G(B $(C8q7O@L(B $(CGX4gGO4B(B $(C8m7I@G(B $(C?7?!(B $(C@[<:5G>n(B $(C@V4B(B $(C0M@;(B $(C:<(B  $(C<v(B $(C@V@;(B
+$(C0M@T4O4Y(B.
+
+>> C-M-v$(C8&(B $(CCD<-(B $(C55?r8;(B $(CC"@;(B $(C5N7g8;1b(B $(CGO=J=C?@(B.  $(C@L8&(B $(C8n(B $(C9x(B $(CGO=J=C?@(B.
+
+>> C-x 1$(C@;(B $(CCD<-(B $(C55?r8;(B $(CC"@;(B $(CAv?l=J=C?@(B.
+
+   C-h i	$(C?B6s@N(B $(C<38m<-8&(B $(C@P1b(B ($(CAo(B Info).  $(C@L(B $(C8m7I@:(B
+		`*info*'$(C6s4B(B $(CF/:0GQ(B $(C;g@LD-?!<-(B $(C=C=:E[?!(B $(C<3D!5H(B
+		$(C2Y7/9L@G(B $(C?B6s@N(B $(C<38m<-8&(B $(C:8?)A]4O4Y(B.  m emacs
+		<$(C:91M<h(B>$(C8&(B  $(CD!8i(B $(C@L8F=:(B $(C<38m<-8&(B $(C@P@;(B $(C<v(B $(C@V=@4O4Y(B.
+		$(C@|?!(B Info$(C8&(B $(C@P>n(B $(C:;(B $(C@{@L(B $(C>x@88i(B ?$(C8&(B $(CD!=J=C?@(B.  $(C1W7/8i(B
+		$(C@L8F=:0!(B Info $(C9f=D@L(B $(C>n62(B $(C1b4I@L(B $(C@V4B(B $(CAv8&(B $(C>H3;GO4B(B
+		$(C?)G`@L(B $(C=C@[5K4O4Y(B.  $(C@L(B $(CAvD'<-8&(B $(C@|:N(B $(C86D!8i(B $(C@L8F=:@G(B
+		Info $(C<38m<-8&(B $(CAV5H(B $(C9.<-H-7N(B $(C;}0"GX<-(B $(C@P>n>_(B $(CGU4O4Y(B.
+
+* $(C0a7P(B
+------
+
+Emacs$(C8&(B $(C?O@|Hw(B $(C3*0!1b(B $(C@'GX<-4B(B C-x C-c$(C8&(B $(C>44Y4B(B $(C;g=G@;(B $(C1b>oGO=J=C?@(B.
+$(C@O=C@{@87N(B $(CA60!:q7N(B $(C3*0!<-(B $(CHD?!(B $(C4Y=C(B Emacs$(C?!(B $(C5G59>F(B $(C?C(B $(C<v(B $(C@V1b(B
+$(C@'GX<-4B(B C-z$(C8&(B $(C;g?kGO=J=C?@(B.
+
+$(C@L(B $(CAvD'<-4B(B $(C;u7N?n(B $(C;g?k@Z5i(B $(C8p5N0!(B $(C@LGXGR(B $(C<v(B $(C@V557O(B $(C885i>nA3@89G7N(B
+$(C:R:P8mGQ(B $(C;gGW@L(B $(C9_0_5G8i(B $(C>I>F<-(B $(C@Z1b(B $(C@Z=E@;(B $(CE?GOAv(B $(C8;0m(B $(C:RFrGO=J=C?@(B!
+
+
+$(C:9;g(B $(CA60G(B
+---------
+
+$(C@L(B $(CAvD'<-4B(B Stuart Cracraft$(C>>0!(B Emacs $(C1Y?x(B $(C@Z7a8&(B $(C@'GX(B $(C>4(B, $(C1d(B Emacs
+$(CAvD'<-8&(B $(C8pC<7N(B $(CGO?)(B $(C@[<:5H(B $(C0M@L4Y(B.
+
+GNU Emacs$(C?M(B $(C00@L(B $(C@L(B $(CAvD'<-(B $(CFG@:(B $(C@z@[1G@L(B $(C@V@88g(B $(CF/A$GQ(B $(CA60G@;(B $(C88A7GR(B
+$(C6'?!(B $(C:9;g:;@;(B $(C9hFwGR(B $(C<v(B $(C@V4B(B $(CGc0!8&(B $(C0.0m(B $(C3*?B(B $(C0M@L4Y(B:
+
+$(C@z@[1G(B (c) 1985, 1996 Free Software Foundation
+
+   $(C@L(B $(C9.<-4B(B $(C@L(B $(C@z@[1G(B $(C0x0m?M(B $(CGc?k(B $(C0x0m0!(B $(C1W4k7N(B $(C@/Av5G0m(B, $(C9hFw@Z0!(B
+   $(C<vCk@Z?!0T(B $(C@L(B $(C0x0m?!(B $(C5{6s(B $(CGc?k5G4B(B $(C0MC373(B $(C6G(B $(C@g:P9hGO4B(B $(C0M@;(B
+   $(CGc?kGO4B(B $(CA60G@87N(B, $(C>n62(B $(C8EC<7N5gAv(B $(C9^@:(B $(C1W4k7N8&(B $(C:9;gGO0E3*(B
+   $(C:9;g:;@L(B $(C4Y8%(B $(C@L?!0T(B $(C9hFw5G4B(B $(C0M@L(B $(CGc?k5H4Y(B.
+
+   $(C@L(B $(C9.<-@G(B $(C<vA$FG@L3*(B $(C<vA$FG@G(B $(C@O:N:P@:(B $(C@'@G(B $(CA60G0z(B $(CGT22(B, $(C6GGQ(B $(C4)0!(B
+   $(C86Av87@87N(B $(C:/0fG_4BAv8&(B $(C4+?!(B $(C6g0T(B $(C3*E83=4Y4B(B $(CA60G@87N(B $(C9hFw5G4B(B $(C0M@L(B
+   $(CGc?k5H4Y(B.
+
+Emacs $(C@ZC<8&(B $(C:9;gGO4B(B $(C0M@:(B $(CA;(B $(C4u(B $(C:9@bGOAv88(B $(C00@:(B $(C3;?k@T4O4Y(B.
+COPYING$(C@L6s4B(B $(CFD@O@;(B $(C@P0m(B $(C3-(B $(CHD?!(B GNU Emacs$(C@G(B $(C:9;g:;@;(B $(CD#18?!0T(B
+$(CAV=J=C?@(B.  $(C@Z@/(B $(C<RGAF.?~>n8&(B $(C>20m(B $(C885i0m(B $(C0x@/GT@87N=a(B $(C<RGAF.?~>n(B
+$(C9fGX8&(B ("$(C<R@/1G(B") $(C1Y@}GO4B5%(B $(C55?s=C4Y(B.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ÿÿÿÿÿÿ    ÿÿÿÿ                   þÿüÿýÿ           ÿÿþÿüÿýÿÿÿ    þÿûÿùÿúÿýÿ   þÿ          úÿùÿõÿ÷ÿ      øÿôÿîÿøÿýÿ            øÿüÿ       þÿ         ûÿøÿùÿõÿêÿëÿéÿöÿøÿ              øÿúÿöÿæÿðÿôÿöÿ 
+    ùÿýÿÿÿ  ýÿÿÿ  ûÿ÷ÿëÿîÿæÿáÿçÿ  Copyright (c) 1985 Free Software Foundation, Inc;  Zie de voorwaarden onderaan.
+Je leest nu de Emacs uitleg, zoals vertaald door Pieter Schoenmakers.
+
+De meeste Emacs commando's gebruiken de CONTROL toets (soms CTRL of CTL
+genaamd) en/of de META toets (soms genaamd EDIT of ALT).  In plaats van
+steeds de volledige naam te noemen, gebruiken we de volgende afkortingen:
+
+ C-<chr>  betekent: houd de CONTROL toets ingedrukt en type de toets <chr>
+	  Dus C-f wordt: houd de CONTROL toets ingedrukt en type f.
+ M-<chr>  betekent: houd de META, EDIT of ALT toets ingedrukt en type de
+	  toets <chr>.  Als er geen toets META, EDIT of ALT is, kun je ook
+	  eerst de ESC toets typen, gevolgd door <chr>.  We refereren aan
+	  de ESC toets als <ESC>.
+
+BELANGRIJK: om Emacs te verlaten, type C-x C-c (twee tekens).
+De tekens ">>" tegen de linker kantlijn nodigen je uit om een
+bepaald commando te proberen.  Bijvoorbeeld:
+<<Blank lines inserted here by startup of help-with-tutorial>>
+>>  Type nu C-v (volgend scherm) om naar het volgende scherm te gaan.
+	(Geef nu het commando door de control toets ingedrukt te houden
+	terwijl je de v typt.)
+	Vanaf nu moet je dit steeds herhalen als je klaar bent met het
+	lezen van een scherm.
+
+Merk op dat er een tweeregelige overlap is als je van een scherm naar
+het volgende scherm gaat; dit zorgt voor continuiteit bij het lezen van
+de tekst.
+
+Het eerste wat je moet weten is hoe je naar verschillende plaatsen in de
+tekst

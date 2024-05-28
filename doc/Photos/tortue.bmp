@@ -1,0 +1,195 @@
+                           ** set 32*sin(angle)
+ \!removept\!dimenB#3%                              ** set 32*cos(angle)
+ \ignorespaces}
+
+
+% *****************************************************************
+% ***  RULES  (Draws rules, i.e., horizontal & vertical lines)  ***
+% *****************************************************************
+
+% **  User command:
+% **    \putrule [<XDIMEN,YDIMEN>] from  XCOORD1 YCOORD1 
+% **      to  XCOORD2 YCOORD2 
+
+% **  Internal commands:
+% **    \!puthline [<XDIMEN,YDIMEN>]    (h = horizontal)
+% **      Set by dashpat to either: \!putsolidhline  or \!putdashedhline
+% **    \!putvline [<XDIMEN,YDIMEN>]    (v = vertical)
+% **      Either:  \!putsolidvline  or  \!putdashedvline
+
+
+% **  \putrule [<XDIMEN,YDIMEN>] from XCOORD1 YCOORD1
+% **    to XCOORD2 YCOORD2
+% **  Draws a rule -- dashed or solid depending on the current dash pattern --
+% **    from (X1,Y1) to (X2,Y2).  Uses TEK's  \hrule & \vrule & \leaders  
+% **    constructions to handle horizontal & vertical lines efficiently both
+% **    in terms of execution time and space in the DVI file.  
+% **  See Subsection 4.1 of the manual.
+\def\putrule#1from #2 #3 to #4 #5 {%
+  \!xloc=\!M{#2}\!xunit  \!xxloc=\!M{#4}\!xunit%   
+  \!yloc=\!M{#3}\!yunit  \!yyloc=\!M{#5}\!yunit%           
+  \!dxpos=\!xxloc  \advance\!dxpos by -\!xloc
+  \!dypos=\!yyloc  \advance\!dypos by -\!yloc
+%
+  \ifdim\!dypos=\!zpt
+    \def\!!Line{\!puthline{#1}}\ignorespaces
+  \else
+    \ifdim\!dxpos=\!zpt
+      \def\!!Line{\!putvline{#1}}\ignorespaces
+    \else 
+       \def\!!Line{}
+    \fi
+  \fi
+  \let\!ML=\!M%           ** save current coord\dimen mode
+  \!setdimenmode%         ** express locations in dimens
+  \!!Line%
+  \let\!M=\!ML%           ** restore previous c/d mode
+  \ignorespaces}
+ 
+ 
+% **  \!putsolidhline [<XDIMEN,YDIMEN>]
+% **  Place horizontal solid line
+\def\!putsolidhline#1{%
+  \ifdim\!dxpos>\!zpt 
+    \put{\!hline\!dxpos}#1[l] at {\!xloc} {\!yloc}
+  \else 
+    \put{\!hline{-\!dxpos}}#1[l] at {\!xxloc} {\!yyloc}
+  \fi
+  \ignorespaces}
+ 
+% **  \!putsolidvline [shifted <XDIMEN,YDIMEN>]
+% **  Place vertical solid line
+\def\!putsolidvline#1{%
+  \ifdim\!dypos>\!zpt 
+    \put{\!vline\!dypos}#1[b] at {\!xloc} {\!yloc}
+  \else 
+    \put{\!vline{-\!dypos}}#1[b] at {\!xxloc} {\!yyloc}
+  \fi
+  \ignorespaces}
+ 
+\def\!hline#1{\hbox to #1{\leaders \hrule height\linethickness\hfill}}
+\def\!vline#1{\vbox to #1{\leaders \vrule width\linethickness\vfill}}
+ 
+ 
+% **  \!putdashedhline [<XDIMEN,YDIMEN>]
+% **  Place dashed horizontal line
+\def\!putdashedhline#1{%
+  \ifdim\!dxpos>\!zpt 
+    \!DLsetup\!Flist\!dxpos
+    \put{\hbox to \!totalleaderlength{\!hleaders}\!hpartialpattern\!Rtrunc}
+      #1[l] at {\!xloc} {\!yloc} 
+  \else 
+    \!DLsetup\!Blist{-\!dxpos}
+    \put{\!hpartialpattern\!Ltrunc\hbox to \!totalleaderlength{\!hleaders}}
+      #1[r] at {\!xloc} {\!yloc} 
+  \fi
+  \ignorespaces}
+ 
+% **  \!putdashedhline [<XDIMEN,YDIMEN>]
+% **  Place dashed vertical line
+\def\!putdashedvline#1{%
+  \!dypos=-\!dypos%            ** vertical leaders go from top to bottom
+  \ifdim\!dypos>\!zpt 
+    \!DLsetup\!Flist\!dypos 
+    \put{\vbox{\vbox to \!totalleaderlength{\!vleaders}
+      \!vpartialpattern\!Rtrunc}}#1[t] at {\!xloc} {\!yloc} 
+  \else 
+    \!DLsetup\!Blist{-\!dypos}
+    \put{\vbox{\!vpartialpattern\!Ltrunc
+      \vbox to \!totalleaderlength{\!vleaders}}}#1[b] at {\!xloc} {\!yloc} 
+  \fi
+  \ignorespaces}
+ 
+
+% **  The rest of the macros in this section are subroutines used by 
+% **  \!putdashedhline and \!putdashedvline.
+\def\!DLsetup#1#2{%            ** Dashed-Line set up
+  \let\!RSlist=#1%             ** set !Rule-Skip list
+  \!countB=#2%                 ** convert rule length to integer (number of sps)
+  \!countA=\!leaderlength%     ** ditto, leaderlength
+  \divide\!countB by \!countA% ** number of complete leader units
+  \!totalleaderlength=\!countB\!leaderlength
+  \!Rresiduallength=#2%
+  \advance \!Rresiduallength by -\!totalleaderlength%  \** excess length
+  \!Lresiduallength=\!leaderlength
+  \advance \!Lresiduallength by -\!Rresiduallength
+  \ignorespaces}
+ 
+\def\!hleaders{%
+  \def\!Rule##1{\vrule height\linethickness width##1}%
+  \def\!Skip##1{\hskip##1}%
+  \leaders\hbox{\!RSlist}\hfill}
+ 
+\def\!hpartialpattern#1{%
+  \!dimenA=\!zpt \!dimenB=\!zpt 
+  \def\!Rule##1{#1{##1}\vrule height\linethickness width\!dimenD}%
+  \def\!Skip##1{#1{##1}\hskip\!dimenD}%
+  \!RSlist}
+ 
+\def\!vleaders{%
+  \def\!Rule##1{\hrule width\linethickness height##1}%
+  \def\!Skip##1{\vskip##1}%
+  \leaders\vbox{\!RSlist}\vfill}
+ 
+\def\!vpartialpattern#1{%
+  \!dimenA=\!zpt \!dimenB=\!zpt 
+  \def\!Rule##1{#1{##1}\hrule width\linethickness height\!dimenD}%
+  \def\!Skip##1{#1{##1}\vskip\!dimenD}%
+  \!RSlist}
+ 
+\def\!Rtrunc#1{\!trunc{#1}>\!Rresiduallength}
+\def\!Ltrunc#1{\!trunc{#1}<\!Lresiduallength}
+ 
+\def\!trunc#1#2#3{%          
+  \!dimenA=\!dimenB         
+  \advance\!dimenB by #1%
+  \!dimenD=\!dimenB  \ifdim\!dimenD#2#3\!dimenD=#3\fi
+  \!dimenC=\!dimenA  \ifdim\!dimenC#2#3\!dimenC=#3\fi
+  \advance \!dimenD by -\!dimenC}
+ 
+
+%  ****************************************************************
+%  ***  LINEAR ARC  (Draws straight lines -- solid and dashed)  ***
+%  ****************************************************************
+ 
+%  **  User commands
+%  **    \inboundscheckoff
+%  **    \inboundscheckon
+   
+%  **  Internal commands 
+%  **    \!start (XCOORD,YCOORD)
+%  **    \!ljoin (XCOORD,YCOORD)
+%  **    \!drawlinearsegment  --  set by \dashpat to either
+%  **      \!linearsolid  or  \!lineardashed
+%  **    \!advancedashing     --  set by \dashpat to either
+%  **       \relax  or  \!!advancedashing
+%  **    \!plotifinbounds     --  set by \inboundscheck off/on to either
+%  **       \!plot  or  \!!plotifinbounds
+%  **    \!initinboundscheck  --  set by \inboundscheck off/on to either
+%  **       \relax  or  \!!initinboundscheck
+ 
+ 
+%  \plotsymbolspacing  ** distance between consecutive plot positions
+%  \!xS                ** starting x
+%  \!yS                ** starting y
+%  \!xE                ** ending   x
+%  \!yE                ** ending   y
+%  \!xdiff             ** x_end - x_start
+%  \!ydiff             ** y_end - y_start
+%  \!distacross        ** how far along curve next point to be plotted is
+%  \!arclength         ** approximate length of arc for current interval
+%  \!downlength        ** remaining length for "pen" to be down    
+%  \!uplength          ** length for "pen" to be down    
+%  \!intervalno        ** counts segments to curve
+%  \totalarclength     ** cumulative distance along curve
+%  \!npoints           ** approximately  (arc length / plotsymbolspacing)
+ 
+%  **  Calls -- \!Pythag, \!divide, \!plot
+ 
+ 
+%  **  \!start (XCOORD,YCOORD)
+%  **  Sets initial point for linearly (or quadratically) interpolated curve
+\def\!start (#1,#2){%
+  \!plotxorigin=\!xorigin  \advance \!plotxorigin by \!plotsymbolxshift
+  \!plotyorigin=\!yorigin  \advance \!plotyorigin by \!plotsymbolyshift
+  \!xS=\!M{#1}\!xunit \!yS=\

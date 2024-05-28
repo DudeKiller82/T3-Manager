@@ -1,0 +1,557 @@
+rocess, then to let a running Emacs
+     or XEmacs do the job (via `gnudoit'), then to invoke Mosaic, then
+     to invoke Lynx in an xterm.
+
+     To specify `netscape-6.0' as browser, use the setting:
+
+          Ddd*wwwCommand: \
+               netscape-6.0 -remote 'openURL(@URL@)' \
+            || netscape-6.0 '@URL@'
+
+     This command first tries to connect to a running `netscape-6.0'
+     browser; if this fails, it starts a new `netscape-6.0' process.
+
+   This is the default WWW Page shown by `Help => DDD WWW Page':
+
+ - Resource: wwwPage (class WWWPage)
+     The DDD WWW page.  Value: `http://www.gnu.org/software/ddd/'
+
+
+File: ddd.info,  Node: Customizing Undo,  Next: Customizing Windows,  Prev: Customizing Help,  Up: Customizing
+
+Customizing Undo
+----------------
+
+   DDD Undo can be customized in various ways.
+
+   To set a maximum size for the undo buffer, set `Edit => Preferences
+=> General => Undo Buffer Size'.
+
+   This is related to the `maxUndoSize' resource:
+
+ - Resource: maxUndoSize (class MaxUndoSize)
+     The maximum memory usage (in bytes) of the undo buffer.  Useful for
+     limiting DDD memory usage.  A negative value means to place no
+     limit.  Default is `2000000', or 2000 kBytes.
+
+   You can also limit the number of entries in the undo buffer,
+regardless of size (*note Customizing::):
+
+ - Resource: maxUndoDepth (class MaxUndoDepth)
+     The maximum number of entries in the undo buffer.  This limits the
+     number of actions that can be undone, and the number of states that
+     can be shown in historic mode.  Useful for limiting DDD memory
+     usage.  A negative value (default) means to place no limit.
+
+   To clear the undo buffer at any time, thus reducing memory usage, use
+`Edit => Preferences => General => Clear Undo Buffer'
+
+
+File: ddd.info,  Node: Customizing Windows,  Next: Debugger Settings,  Prev: Customizing Undo,  Up: Customizing
+
+Customizing the DDD Windows
+---------------------------
+
+   You can customize the DDD Windows in various ways.
+
+* Menu:
+
+* Splash Screen::               Turning off the splash screen.
+* Window Layout::               Re-arranging windows.
+* Customizing Fonts::           Using alternate fonts.
+* Toggling Windows::            Turning off windows.
+* Text Fields::                 Popdown histories.
+* Icons::                       Iconifying DDD windows.
+* Adding Buttons::              Create your own button set.
+* More Customizations::
+
+
+File: ddd.info,  Node: Splash Screen,  Next: Window Layout,  Up: Customizing Windows
+
+Splash Screen
+.............
+
+   You can turn off the DDD splash screen shown upon startup.  Just
+select `Edit => Preferences => Startup DDD Splash Screen'.
+
+   The value applies only to the next DDD invocation.
+
+   This setting is related to the following resource:
+
+ - Resource: splashScreen (class SplashScreen)
+     If `on' (default), show a DDD splash screen upon start-up.
+
+   You can also customize the appearance of the splash screen (*note
+Customizing::):
+
+ - Resource: splashScreenColorKey (class ColorKey)
+     The color key to use for the DDD splash screen.  Possible values
+     include:
+
+        * `c' (default) for a color visual,
+
+        * `g' for a multi-level greyscale visual,
+
+        * `g4' for a 4-level greyscale visual, and
+
+        * `m' for a dithered monochrome visual.
+
+        * `best' chooses the best visual available for your display.
+
+     Please note: if DDD runs on a monochrome display, or if DDD was
+     compiled without the XPM library, only the monochrome version
+     (`m') can be shown.
+
+
+File: ddd.info,  Node: Window Layout,  Next: Customizing Fonts,  Prev: Splash Screen,  Up: Customizing Windows
+
+Window Layout
+.............
+
+   By default, DDD stacks commands, source, and data in one single
+top-level window.  To have separate top-level windows for source, data,
+and debugger console, set `Edit => Preferences => Startup => Window
+Layout => Separate Windows'.
+
+   Here are the related DDD resources:
+
+ - Resource: separateDataWindow (class Separate)
+     If `on', the data window and the debugger console are realized in
+     different top-level windows.  If `off' (default), the data window
+     is attached to the debugger console.
+
+ - Resource: separateSourceWindow (class Separate)
+     If `on', the source window and the debugger console are realized in
+     different top-level windows.  If `off' (default), the source window
+     is attached to the debugger console.
+
+   By default, the DDD tool bars are located on top of the window.  If
+you prefer the tool bar being located at the bottom, as in DDD 2.x and
+earlier, set `Edit => Preferences => Startup => Tool Bar Appearance =>
+Bottom'.
+
+   This is related to the `toolbarsAtBottom' resource:
+
+ - Resource: toolbarsAtBottom (class ToolbarsAtBottom)
+     Whether source and data tool bars should be placed above source and
+     data, respectively (`off', default), or below, as in DDD 2.x
+     (`on').
+
+   The bottom setting is only supported for separate tool bars--that is,
+you must either choose separate windows or configure the tool bar to
+have neither images nor captions (*note Customizing the Tool Bar::).
+
+   If you use stacked windows, you can choose whether there should be
+one tool bar or two tool bars.  By default, DDD uses two tool bars if
+you use separate windows and disable captions and images, but you can
+also explicitly change the setting via this resource:
+
+ - Resource: commonToolBar (class ToolBar)
+     Whether the tool bar buttons should be shown in one common tool
+     bar at the top of the common DDD window (`on', default), or
+     whether they should be placed in two separate tool bars, one for
+     data, and one for source operations, as in DDD 2.x (`off').
+
+   You can also change the location of the _status line_ (*note
+Customizing::):
+
+ - Resource: statusAtBottom (class StatusAtBottom)
+     If `on' (default), the status line is placed at the bottom of the
+     DDD source window.  If `off', the status line is placed at the top
+     of the DDD source window (as in DDD 1.x).
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Customizing Fonts,  Next: Toggling Windows,  Prev: Window Layout,  Up: Customizing Windows
+
+Customizing Fonts
+.................
+
+   You can configure the basic DDD fonts at run-time.  Each font is
+specified using two members:
+
+   * The "font family" is an X font specifications, where the initial
+     `FOUNDRY-' specification may be omitted, as well as any
+     specification after FAMILY.  Thus, a pair `FAMILY-WEIGHT' usually
+     suffices.
+
+   * The "font size" is given as (resolution-independent) 1/10 points.
+
+   To specify fonts, select `Edit => Preferences => Fonts'.
+
+   The `Browse' button opens a font selection program, where you can
+select fonts and attributes interactively.  Clicking `quit' or `select'
+in the font selector causes all non-default values to be transferred to
+the DDD font preferences panel.
+
+   The following fonts can be set using the preferences panel:
+
+`Default Font'
+     The default DDD font to use for labels, menus, and buttons.
+     Default is `helvetica-bold'.
+
+`Variable Width'
+     The variable width DDD font to use for help texts and messages.
+     Default is `helvetica-medium'.
+
+`Fixed Width'
+     The fixed width DDD font to use for source code, the debugger
+     console, text fields, and the execution window.  Default is
+     `lucidatypewriter-medium'.
+
+`Data'
+     The DDD font to use for data displays.  Default is
+     `lucidatypewriter-medium'.
+
+   Changes in this panel will take effect only in the next DDD session.
+To make it effective right now, restart DDD (using `File => Restart
+DDD').
+
+   After having made changes in the panel, DDD will automatically offer
+you to restart itself, such that you can see the changes taking effect.
+
+   The `Reset' button restores the most recently saved preferences.
+
+   Here are the resources related to font specifications:
+
+ - Resource: defaultFont (class Font)
+     The default DDD font to use for labels, menus, buttons, etc.  The
+     font is specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `helvetica-bold'.
+
+     To set the default DDD font to, say, `helvetica medium', insert a
+     line
+
+          Ddd*defaultFont: helvetica-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: defaultFontSize (class FontSize)
+     The size of the default DDD font, in 1/10 points.  This resource
+     overrides any font size specification in the `defaultFont' resource
+     (see above).  The default value is `120' for a 12.0 point font.
+
+ - Resource: variableWidthFont (class Font)
+     The variable width DDD font to use for help texts and messages.
+     The font is specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `helvetica-medium-r'.
+
+     To set the variable width DDD font family to, say, `times', insert
+     a line
+
+          Ddd*fixedWidthFont: times-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: variableWidthFontSize (class FontSize)
+     The size of the variable width DDD font, in 1/10 points.  This
+     resource overrides any font size specification in the
+     `variableWidthFont' resource (see above).  The default value is
+     `120' for a 12.0 point font.
+
+ - Resource: fixedWidthFont (class Font)
+     The fixed width DDD font to use for source code, the debugger
+     console, text fields, and the execution window.  The font is
+     specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `lucidatypewriter-medium'.
+
+     To set the fixed width DDD font family to, say, `courier', insert
+     a line
+
+          Ddd*fixedWidthFont: courier-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: fixedWidthFontSize (class FontSize)
+     The size of the fixed width DDD font, in 1/10 points.  This
+     resource overrides any font size specification in the
+     `fixedWidthFont' resource (see above).  The default value is `120'
+     for a 12.0 point font.
+
+ - Resource: dataFont (class Font)
+     The fixed width DDD font to use data displays.  The font is
+     specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `lucidatypewriter-medium'.
+
+     To set the DDD data font family to, say, `courier', insert a line
+
+          Ddd*dataFont: courier-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: dataFontSize (class FontSize)
+     The size of the DDD data font, in 1/10 points.  This resource
+     overrides any font size specification in the `dataFont' resource
+     (see above).  The default value is `120' for a 12.0 point font.
+
+   As all font size resources have the same class (and by default the
+same value), you can easily change the default DDD font size to, say,
+9.0 points by inserting a line
+
+     Ddd*FontSize: 90
+
+in your `~/.ddd/init' file.
+
+   Here's how to specify the command to select fonts:
+
+ - Resource: fontSelectCommand (class FontSelectCommand)
+     A command to select from a list of fonts.  The string `@FONT@' is
+     replaced by the current DDD default font; the string `@TYPE@' is
+     replaced by a symbolic name of the DDD font to edit.  The program
+     must either place the name of the selected font in the `PRIMARY'
+     selection or print the selected font on standard output.  A
+     typical value is:
+          Ddd*fontSelectCommand: xfontsel -print
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Toggling Windows,  Next: Text Fields,  Prev: Customizing Fonts,  Up: Customizing Windows
+
+Toggling Windows
+................
+
+   In the default stacked window setting, you can turn the individual
+DDD windows on and off by toggling the respective items in the `View'
+menu (*note View Menu::).  When using separate windows (*note Window
+Layout::), you can close the individual windows via `File => Close' or
+by closing them via your window manager.
+
+   Whether windows are opened or closed when starting DDD is controlled
+by the following resources, immediately tied to the `View' menu items:
+
+ - Resource: openDataWindow (class Window)
+     If `off' (default), the data window is closed upon start-up.
+
+ - Resource: openDebuggerConsole (class Window)
+     If `off', the debugger console is closed upon start-up.
+
+ - Resource: openSourceWindow (class Window)
+     If `off', the source window is closed upon start-up.
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Text Fields,  Next: Icons,  Prev: Toggling Windows,  Up: Customizing Windows
+
+Text Fields
+...........
+
+   The DDD text fields can be customized using the following resources:
+
+ - Resource: popdownHistorySize (class HistorySize)
+     The maximum number of items to display in pop-down value
+     histories.  A value of `0' (default) means an unlimited number of
+     values.
+
+ - Resource: sortPopdownHistory (class SortPopdownHistory)
+     If `on' (default), items in the pop-down value histories are sorted
+     alphabetically.  If `off', most recently used values will appear at
+     the top.
+
+
+File: ddd.info,  Node: Icons,  Next: Adding Buttons,  Prev: Text Fields,  Up: Customizing Windows
+
+Icons
+.....
+
+   If you frequently switch between DDD and other multi-window
+applications, you may like to set `Edit => Preferences => General =>
+Iconify all windows at once'.  This way, all DDD windows are iconified
+and deiconified as a group.
+
+   This is tied to the following resource:
+
+ - Resource: groupIconify (class GroupIconify)
+     If this is `on', (un)iconifying any DDD window causes all other
+     DDD windows to (un)iconify as well.  Default is `off', meaning
+     that each DDD window can be iconified on its own.
+
+   If you want to keep DDD off your desktop during a longer
+computation, you may like to set `Edit => Preferences => General =>
+Uniconify when ready'.  This way, you can iconify DDD while it is busy
+on a command (e.g. running a program); DDD will automatically pop up
+again after becoming ready (e.g. after the debugged program has stopped
+at a breakpoint).  *Note Program Stop::, for a discussion.
+
+   Here is the related resource:
+
+ - Resource: uniconifyWhenReady (class UniconifyWhenReady)
+     If this is `on' (default), the DDD windows are uniconified
+     automatically whenever GDB becomes ready.  This way, you can
+     iconify DDD during some longer operation and have it uniconify
+     itself as soon as the program stops.  Setting this to `off' leaves
+     the DDD windows iconified.
+
+
+File: ddd.info,  Node: Adding Buttons,  Next: More Customizations,  Prev: Icons,  Up: Customizing Windows
+
+Adding Buttons
+..............
+
+   You can extend DDD with new buttons.  *Note Defining Buttons::, for
+details.
+
+
+File: ddd.info,  Node: More Customizations,  Prev: Adding Buttons,  Up: Customizing Windows
+
+More Customizations
+...................
+
+   You can change just about any label, color, keyboard mapping, etc.
+by changing resources from the `Ddd' application defaults file which
+comes with the DDD source distribution.  Here's how it works:
+
+   * Identify the appropriate resource in the `Ddd' file.
+
+   * Copy the resource line to your `~/.ddd/init' file and change it at
+     will.
+
+   *Note Application Defaults::, for details on the application-defaults
+file.
+
+
+File: ddd.info,  Node: Debugger Settings,  Prev: Customizing Windows,  Up: Customizing
+
+Debugger Settings
+-----------------
+
+   For most inferior debuggers, you can change their internal settings
+using `Edit => Settings'.  Using the settings editor, you can determine
+whether C++ names are to be demangled, how many array elements are to
+print, and so on.
+
+   The capabilities of the settings editor depend on the capabilities of
+your inferior debugger.  Clicking on `?' gives an an explanation on the
+specific item; the GDB documentation gives more details.
+
+   Use `Edit => Undo' to undo changes.  Clicking on `Reset' restores
+the most recently saved settings.
+
+   Some debugger settings are insensitive and cannot be changed, because
+doing so would endanger DDD operation.  See the `gdbInitCommands' and
+`dbxInitCommands' resources for details.
+
+   All debugger settings (except source and object paths) are saved with
+DDD options.
+
+
+File: ddd.info,  Node: Navigating,  Next: Stopping,  Prev: Windows,  Up: Top
+
+Navigating through the Code
+***************************
+
+   This chapter discusses how to access code from within DDD.
+
+* Menu:
+
+* Compiling for Debugging::     Always use `-g' to compile.
+* Opening Files::               How to open a program for debugging.
+* Looking up Items::            Searching files and functions.
+* Customizing Source::          Arranging the source window.
+
+
+File: ddd.info,  Node: Compiling for Debugging,  Next: Opening Files,  Up: Navigating
+
+Compiling for Debugging
+=======================
+
+   In order to debug a program effectively, you need to generate
+debugging information when you compile it.  This debugging information
+is stored in the object file; it describes the data type of each
+variable or function and the correspondence between source line numbers
+and addresses in the executable code.(1)
+
+   To request debugging information, specify the `-g' option when you
+run the compiler.
+
+   Many C compilers are unable to handle the `-g' and `-O' options
+together.  Using those compilers, you cannot generate optimized
+executables containing debugging information.
+
+   GCC, the GNU C compiler, supports `-g' with or without `-O', making
+it possible to debug optimized code.  We recommend that you _always_
+use `-g' whenever you compile a program.  You may think your program is
+correct, but there is no sense in pushing your luck.
+
+   When you debug a program compiled with `-g -O', remember that the
+optimizer is rearranging your code; the debugger shows you what is
+really there.  Do not be too surprised when the execution path does not
+exactly match your source file!  An extreme example: if you define a
+variable, but never use it, DDD never sees that variable--because the
+compiler optimizes it out of existence.
+
+   ---------- Footnotes ----------
+
+   (1) If you use DDD to debug Perl, Python or Bash scripts, then this
+section does not apply.
+
+
+File: ddd.info,  Node: Opening Files,  Next: Looking up Items,  Prev: Compiling for Debugging,  Up: Navigating
+
+Opening Files
+=============
+
+   If you did not invoke DDD specifying a program to be debugged, you
+can use the `File' menu to open programs, core dumps and sources.
+
+* Menu:
+
+* Opening Programs::            How to open a program for debugging.
+* Opening Core Dumps::          Analyze a previous crash.
+* Opening Source Files::        Open a source file of the program.
+* Filtering Files::             DDD only lists matching files.
+
+
+File: ddd.info,  Node: Opening Programs,  Next: Opening Core Dumps,  Up: Opening Files
+
+Opening Programs
+----------------
+
+   To open a program to be debugged, select `File => Open Program'.(1)
+Click on `Open' to open the program
+
+   In JDB, select `File => Open Class' instead.  This gives you a list
+of available classes to choose from.
+
+   To re-open a recently debugged program or class, select `File =>
+Open Recent' and choose a program or class from the list.
+
+   If no sources are found, *Note Source Path::, for specifying source
+directories.
+
+   ---------- Footnotes ----------
+
+   (1) With XDB and some DBX variants, the debugged program must be
+specified upon invocation and cannot be changed at run time.
+
+
+File: ddd.info,  Node: Opening Core Dumps,  Next: Opening Source Files,  Prev: Opening Programs,  Up: Opening Files
+
+Opening Core Dumps
+------------------
+
+   If a previous run of the program has crashed and you want to find out
+why, you can have DDD examine its "core dump".(1)
+
+   To open a core dump for the program, select `File => Open Core
+Dump'.  Click on `Open' to open the core dump.
+
+   Before `Open Core Dump', you should first use `File => Open Program'
+to specify the program that generated the core dump and to load it

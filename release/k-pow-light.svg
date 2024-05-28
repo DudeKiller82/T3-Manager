@@ -1,0 +1,219 @@
+.cmchar "The gothic letter A";
+.beginchar("A",10.65u#,1.065cap_height#,0);
+.adjust_fit(cap_serif_fit#,cap_serif_fit#);
+x1=x2=.75w; y1=0.157h; y2=0.762h;
+penpos1(cap_stem,0);
+penpos2(cap_stem,0);
+penpos3(stem,-90);
+x3=x1l; y3=0.4h; x4=0.15w;
+y4=y1-cap_hair; penpos4(cap_hair,-30);
+x5=x1; z5-z4=whatever*dir60;
+penpos5(cap_hair,-30);
+penpos6(cap_hair,60);
+penpos7(cap_curve,-120);
+z7l=z5l; y6r=y3r; 
+z6=whatever[z5l,z4l];
+penstroke z6e{dir150}...{dir-30}z7e;
+penstroke z4e--z5e;
+penstroke z1e--z2e;
+y3.1=y3r; y3.2=y3l;
+z3.1=whatever[z4r,z5r];
+z3.2=whatever[z4r,z5r];
+filldraw z3r--z3.1 & z3.1--z3.2
+& z3.2--z3l & z3l--z3r & cycle;
+penpos8(cap_stem,60);
+penpos9(cap_stem,60);
+y8l=0; x8l=0.45w; 
+z9-z8=whatever*dir150;
+z9=whatever[z4r,z5r];
+penstroke z8e...z9e;
+y1.1=0; x1.1=0.8w; 
+penpos1.2(cap_hair,-42);
+z1.2r-z1.1=whatever*dir48;
+x1.2r=w=x1.3; 
+z1.3-z1.2l=whatever*(z1.2r-z1.1);
+x1.4=x1r; x1.5=x1l;
+z1.5-z8l=whatever*(z1.2r-z1.1);
+y1.4=y1.3;
+filldraw z1l--z1.1 & z1.1--z1.2r
+& z1.2r--z1.3 & z1.3--z1.2l...
+z1.4{up} & z1.4--z1r & z1r--z1l
+& cycle;
+x1.6=x1l; 
+z1.6-z8r=whatever*(z1.5-z8l);
+filldraw z8l--z1.5 & z1.5--z1.6
+& z1.6--z8r & z8r--z8l & cycle;
+x5.1=x1.1; 
+z5.1=whatever[z5r,z5l];
+x5.3=x5.2=w; y5.2=0.5[y5.1,h];
+y5.3=y5.2-0.5cap_hair;
+x2.1=x2l; z2.1=whatever[z4r,z5r];
+filldraw z5r--z5.1 & 
+z5.1{z5.1-(0,y3l)}...{right}z5.2
+& z5.2--z5.3 & z5.3{left}...
+{down}z2r & z2r--z2l & 
+z2l--z2.1 & z2.1--z5r & cycle;
+x4.1=x4; y4.1=0;
+filldraw z4l{z4l-z5l}...
+z4.1{right}...z4r{dir120} &
+z4r--z4l & cycle;
+x10=x3.2; 
+y10=y2;
+x5.15=x5.1; y5.15=0.75[y2,y5.1];
+filldraw z10{z5.1-z10}...
+z2.1{right} & z2.1--z5.15 &
+z5.15{left}...z10{dir225} &
+cycle;
+transform katebasma;
+katebasma=identity 
+shifted (0,-apex_o);
+%transform megalwma;
+%megalwma=identity scaled 1.065;
+picture krufo;
+%krufo= currentpicture transformed
+%megalwma;
+krufo:= currentpicture transformed
+katebasma;
+picture currentpicture;
+currentpicture=krufo;
+.endchar;
+
+
+.cmchar "The gothic letter B";
+.beginchar("B",10.72u#,cap_height#,0);
+.adjust_fit(cap_serif_fit#,cap_serif_fit#);
+x1=x2=0.39w; y2=0.85h; 
+y1=y7=y18=1/6h;
+penpos1(cap_stem,0);
+penpos2(cap_stem,0);
+penstroke z1e--z2e;
+penpos3(cap_hair,0);
+penpos2'(cap_stem,180); z2'=z2;
+x3l=0; y3=y2; 
+x3.5=0.5[x3,x2]; 
+penpos3.5(0.5[cap_hair,cap_stem],
+-90); y3.5l=h+apex_o;
+penstroke z3e{dir60}...z3.5e...
+z2'e{down};
+penpos4(1.2cap_hair,-90);
+penpos9(1.2cap_hair,-90);
+x4=x3r; 
+y4r=0.56h;
+y9l=y12.2-2cap_hair=0.56h;
+z4.1-z4l=whatever*(z2r-z4r);
+y4.1=y2;
+filldraw z4r--z2r--z4.1--z4l--z4r &
+cycle;
+penpos5(1.2cap_hair,-90); z5l=z2r;
+penpos6(whatever,angle(z2r-z4r)-90);
+z6l=whatever[z4r,z5l];
+z6r-z5r=whatever*(z5l-z4r);
+y6l=h+apex_o; 
+filldraw z5l--z6l--z6r--z5r--z5l
+& cycle;
+x7=0.54w; penpos7(0.9cap_hair,0);
+z8.1=whatever[z4r,z6l];
+x8.1=x7l; x8.2=x7r;
+z8.2=whatever[z4r,z6l];
+filldraw z7r--z8.2--z8.1--z7l--z7r
+& cycle;
+penpos11(1.118cap_stem,
+angle(z6l-z4r));
+z11=whatever[z4r,z6l]; x11r=x6l;
+x9l=x7l; 
+z10.1-z6=whatever*(z6r-z6l);
+z10.1-z9l=whatever*(z6l-z4r);
+z10.4=whatever[z9l,z10.1];
+z10.4-z11l=whatever*(z10.1-z6);
+filldraw z10.4--z11l--z11r--z10.1
+--z10.4 & cycle;
+z10.2-z9r=whatever*(z10.1-z9l);
+z10.2=whatever[z6,z10.1];
+z12.1=whatever[z9r,z10.2];
+z12.1=whatever[z11l,z10.4];
+filldraw z9l--z10.1--z10.2--z9r
+--z9l & cycle;
+x12.2=w; 
+z12.4=(x7l,y9l);
+%z12.4=whatever[z9l,z10.1];
+%x12.4=x7r;
+x12.2-x12.3=1.2cap_stem; 
+z12.3-z12.4=whatever*(z12.2-z12.1);
+filldraw z12.4--z12.1--z12.2--z12.3
+--z12.4 & cycle;
+x1.1=x1l; y1.1=0.247h;
+x13.2=x1l; y13.2=0.56h;
+z13.1-z13.2=
+whatever*dir(angle(z6l-z4r)+100);
+z13.1=whatever[z4r,z5l];
+filldraw z4l{dir-30}...z1.1{down}
+& z1.1--z13.2--z13.1--z4l &
+cycle;
+unfill z4l{dir-30}...z1.1{down}
+& z1.1--(x4l,y1.1)--z4l &
+cycle;
+z15=(0,-apex_o); z17=(0.73w,-apex_o);
+x18=w; z19=(x12.3,y18);
+filldraw z15{dir80}...{right}(x1,y1.1)
+...(w,-apex_o){dir-50} &
+(w,-apex_o)--z17 & z17{dir135}...
+z15{dir225} & cycle;
+x18.2=x18.1=x12.3+cap_stem;
+y18.2=7/8[y18,y12.2];
+y18.1=1/8[y18,y12.2];
+filldraw z12.3--(x12.3,y12.2)--z12.2 &
+z12.2{left}...z18.2{down}--
+z18.1{down}...z18{right} & 
+z18--(w,-apex_o)--(0.8w,-apex_o)
+--z12.3 & cycle;
+unfilldraw z17{dir60}...z18{right}
+& z18--(w,-apex_o)--z17 &
+cycle;
+unfilldraw z17{dir60}...z18{right}
+& z18--(w,-apex_o)--z17 &
+cycle;
+.endchar;
+
+.cmchar "The gothic letter C";
+.beginchar("C",11.39u#,cap_height#,0);
+.adjust_fit(cap_serif_fit#,cap_serif_fit#-0.5u#);
+penpos1(0.765cap_stem,0);
+z1l=(0,0.5h); 
+penpos2(cap_stem,37.5);
+z2l=(2/3w,-apex_o);
+penpos3(cap_hair,-40);
+penpos4(cap_hair,0); 
+z4r-z2r=whatever*dir153;
+x4=0.5w; %x3r=x4r; 
+penpos2'(cap_stem,37.5);
+x2'r=0.36w-0.5cap_stem;
+z2'-z2=whatever*(z4r-z2r);
+z4'=(x4,h); penpos4'(cap_hair,0);
+%penstroke z4e--z4'e;
+penpos2.1(cap_hair,angle(z2'-z2));
+z2.1=z2'l; 
+z5=whatever[z2'l,z2'r];
+z6=whatever[z2'l,z2'r];
+x5=x4r; x6=0.86w;
+penpos5(whatever,-90);
+z5l-z2.1l=whatever*(z5-z2.1);
+penpos6(whatever,-27.5);
+z6l-z2.1l=whatever*(z6-z2.1);
+z7.1=whatever[z5l,z6l];
+x7.1=x2'r; x7.2=x7.1+1.2cap_stem;
+z7.2=whatever[z5l,z6l];
+z14'=(x2l,h);
+z3l=z14';
+penpos8.1(1.2cap_hair,-40);
+z8.1=(x7.1,0.8h);
+penstroke z2e..z2'e..z1e{up}...
+z8.1e---z3e{dir24};
+z8.2=(z1{up}..z3{dir34})
+intersectionpoint (z7.2--(x7.2,h));
+penpos12(1.2cap_stem,angle(z8.2-z8.1));
+ z12r=z14'; 
+%
+%
+%
+filldraw z7.1--z7.2--z8.2--z8.1--
+z7

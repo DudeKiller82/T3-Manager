@@ -1,0 +1,9 @@
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\Interop.MSXML2.dll
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3 Manager.vbproj.ResolveComReference.cache
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\ResolveAssemblyReference.cache
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3Manager.Calibration.resources
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3Manager.Preview.resources
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3Manager.Scrolling_Mod.resources
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3Manager.Scrolling_Mod_Configuration.resources
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3Manager.T3_Manager.resources
+E:\nosave\Documents\Programme\T3 Manager.net\T3Manager.NET\obj\Debug\T3 Manager.vbproj.GenerateResource.Cache

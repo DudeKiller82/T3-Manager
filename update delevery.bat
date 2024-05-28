@@ -1,0 +1,8 @@
+COPY ".\release\Documentation Tortue T3.pdf" ".\delevery"
+COPY ".\release\T3 Manager.exe" ".\delevery"
+COPY ".\release\T3 Manager.ini" ".\delevery"
+COPY ".\release\T3 Manager.exe.manifest" ".\delevery"
+COPY ".\release\*.t3p" ".\delevery"
+COPY ".\release\*.svg" ".\delevery"
+COPY "C:\WINDOWS\system32\VB6FR.DLL" ".\delevery"
+COPY "C:\WINDOWS\system32\MSCOMM32.OCX" ".\delevery"

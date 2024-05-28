@@ -1,0 +1,2169 @@
+;;; gnus-sum.el --- summary mode commands for Gnus
+;; Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002
+;;        Free Software Foundation, Inc.
+
+;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
+;; Keywords: news
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
+
+;;; Commentary:
+
+;;; Code:
+
+(eval-when-compile (require 'cl))
+
+(require 'gnus)
+(require 'gnus-group)
+(require 'gnus-spec)
+(require 'gnus-range)
+(require 'gnus-int)
+(require 'gnus-undo)
+(require 'gnus-util)
+(require 'mm-decode)
+;; Recursive :-(.
+;; (require 'gnus-art)
+(require 'nnoo)
+(autoload 'gnus-summary-limit-include-cached "gnus-cache" nil t)
+(autoload 'gnus-cache-write-active "gnus-cache")
+(autoload 'mm-uu-dissect "mm-uu")
+
+(defcustom gnus-kill-summary-on-exit t
+  "*If non-nil, kill the summary buffer when you exit from it.
+If nil, the summary will become a \"*Dead Summary*\" buffer, and
+it will be killed sometime later."
+  :group 'gnus-summary-exit
+  :type 'boolean)
+
+(defcustom gnus-fetch-old-headers nil
+  "*Non-nil means that Gnus will try to build threads by grabbing old headers.
+If an unread article in the group refers to an older, already read (or
+just marked as read) article, the old article will not normally be
+displayed in the Summary buffer.  If this variable is non-nil, Gnus
+will attempt to grab the headers to the old articles, and thereby
+build complete threads.  If it has the value `some', only enough
+headers to connect otherwise loose threads will be displayed.  This
+variable can also be a number.  In that case, no more than that number
+of old headers will be fetched.  If it has the value `invisible', all
+old headers will be fetched, but none will be displayed.
+
+The server has to support NOV for any of this to work."
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 (const some)
+		 number
+		 (sexp :menu-tag "other" t)))
+
+(defcustom gnus-refer-thread-limit 200
+  "*The number of old headers to fetch when doing \\<gnus-summary-mode-map>\\[gnus-summary-refer-thread].
+If t, fetch all the available old headers."
+  :group 'gnus-thread
+  :type '(choice number
+		 (sexp :menu-tag "other" t)))
+
+(defcustom gnus-summary-make-false-root 'adopt
+  "*nil means that Gnus won't gather loose threads.
+If the root of a thread has expired or been read in a previous
+session, the information necessary to build a complete thread has been
+lost.  Instead of having many small sub-threads from this original thread
+scattered all over the summary buffer, Gnus can gather them.
+
+If non-nil, Gnus will try to gather all loose sub-threads from an
+original thread into one large thread.
+
+If this variable is non-nil, it should be one of `none', `adopt',
+`dummy' or `empty'.
+
+If this variable is `none', Gnus will not make a false root, but just
+present the sub-threads after another.
+If this variable is `dummy', Gnus will create a dummy root that will
+have all the sub-threads as children.
+If this variable is `adopt', Gnus will make one of the \"children\"
+the parent and mark all the step-children as such.
+If this variable is `empty', the \"children\" are printed with empty
+subject fields.	 (Or rather, they will be printed with a string
+given by the `gnus-summary-same-subject' variable.)"
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 (const none)
+		 (const dummy)
+		 (const adopt)
+		 (const empty)))
+
+(defcustom gnus-summary-gather-exclude-subject "^ *$\\|^(none)$"
+  "*A regexp to match subjects to be excluded from loose thread gathering.
+As loose thread gathering is done on subjects only, that means that
+there can be many false gatherings performed.  By rooting out certain
+common subjects, gathering might become saner."
+  :group 'gnus-thread
+  :type 'regexp)
+
+(defcustom gnus-summary-gather-subject-limit nil
+  "*Maximum length of subject comparisons when gathering loose threads.
+Use nil to compare full subjects.  Setting this variable to a low
+number will help gather threads that have been corrupted by
+newsreaders chopping off subject lines, but it might also mean that
+unrelated articles that have subject that happen to begin with the
+same few characters will be incorrectly gathered.
+
+If this variable is `fuzzy', Gnus will use a fuzzy algorithm when
+comparing subjects."
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 (const fuzzy)
+		 (sexp :menu-tag "on" t)))
+
+(defcustom gnus-simplify-subject-functions nil
+  "List of functions taking a string argument that simplify subjects.
+The functions are applied recursively.
+
+Useful functions to put in this list include: `gnus-simplify-subject-re',
+`gnus-simplify-subject-fuzzy' and `gnus-simplify-whitespace'."
+  :group 'gnus-thread
+  :type '(repeat function))
+
+(defcustom gnus-simplify-ignored-prefixes nil
+  "*Regexp, matches for which are removed from subject lines when simplifying fuzzily."
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 regexp))
+
+(defcustom gnus-build-sparse-threads nil
+  "*If non-nil, fill in the gaps in threads.
+If `some', only fill in the gaps that are needed to tie loose threads
+together.  If `more', fill in all leaf nodes that Gnus can find.  If
+non-nil and non-`some', fill in all gaps that Gnus manages to guess."
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 (const some)
+		 (const more)
+		 (sexp :menu-tag "all" t)))
+
+(defcustom gnus-summary-thread-gathering-function
+  'gnus-gather-threads-by-subject
+  "*Function used for gathering loose threads.
+There are two pre-defined functions: `gnus-gather-threads-by-subject',
+which only takes Subjects into consideration; and
+`gnus-gather-threads-by-references', which compared the References
+headers of the articles to find matches."
+  :group 'gnus-thread
+  :type '(radio (function-item gnus-gather-threads-by-subject)
+		(function-item gnus-gather-threads-by-references)
+		(function :tag "other")))
+
+(defcustom gnus-summary-same-subject ""
+  "*String indicating that the current article has the same subject as the previous.
+This variable will only be used if the value of
+`gnus-summary-make-false-root' is `empty'."
+  :group 'gnus-summary-format
+  :type 'string)
+
+(defcustom gnus-summary-goto-unread t
+  "*If t, many commands will go to the next unread article.
+This applies to marking commands as well as other commands that
+\"naturally\" select the next article, like, for instance, `SPC' at
+the end of an article.
+
+If nil, the marking commands do NOT go to the next unread article
+(they go to the next article instead).  If `never', commands that
+usually go to the next unread article, will go to the next article,
+whether it is read or not."
+  :group 'gnus-summary-marks
+  :link '(custom-manual "(gnus)Setting Marks")
+  :type '(choice (const :tag "off" nil)
+		 (const never)
+		 (sexp :menu-tag "on" t)))
+
+(defcustom gnus-summary-default-score 0
+  "*Default article score level.
+All scores generated by the score files will be added to this score.
+If this variable is nil, scoring will be disabled."
+  :group 'gnus-score-default
+  :type '(choice (const :tag "disable")
+		 integer))
+
+(defcustom gnus-summary-zcore-fuzz 0
+  "*Fuzziness factor for the zcore in the summary buffer.
+Articles with scores closer than this to `gnus-summary-default-score'
+will not be marked."
+  :group 'gnus-summary-format
+  :type 'integer)
+
+(defcustom gnus-simplify-subject-fuzzy-regexp nil
+  "*Strings to be removed when doing fuzzy matches.
+This can either be a regular expression or list of regular expressions
+that will be removed from subject strings if fuzzy subject
+simplification is selected."
+  :group 'gnus-thread
+  :type '(repeat regexp))
+
+(defcustom gnus-show-threads t
+  "*If non-nil, display threads in summary mode."
+  :group 'gnus-thread
+  :type 'boolean)
+
+(defcustom gnus-thread-hide-subtree nil
+  "*If non-nil, hide all threads initially.
+If threads are hidden, you have to run the command
+`gnus-summary-show-thread' by hand or use `gnus-select-article-hook'
+to expose hidden threads."
+  :group 'gnus-thread
+  :type 'boolean)
+
+(defcustom gnus-thread-hide-killed t
+  "*If non-nil, hide killed threads automatically."
+  :group 'gnus-thread
+  :type 'boolean)
+
+(defcustom gnus-thread-ignore-subject t
+  "*If non-nil, which is the default, ignore subjects and do all threading based on the Reference header.
+If nil, articles that have different subjects from their parents will
+start separate threads."
+  :group 'gnus-thread
+  :type 'boolean)
+
+(defcustom gnus-thread-operation-ignore-subject t
+  "*If non-nil, subjects will be ignored when doing thread commands.
+This affects commands like `gnus-summary-kill-thread' and
+`gnus-summary-lower-thread'.
+
+If this variable is nil, articles in the same thread with different
+subjects will not be included in the operation in question.  If this
+variable is `fuzzy', only articles that have subjects that are fuzzily
+equal will be included."
+  :group 'gnus-thread
+  :type '(choice (const :tag "off" nil)
+		 (const fuzzy)
+		 (sexp :tag "on" t)))
+
+(defcustom gnus-thread-indent-level 4
+  "*Number that says how much each sub-thread should be indented."
+  :group 'gnus-thread
+  :type 'integer)
+
+(defcustom gnus-auto-extend-newsgroup t
+  "*If non-nil, extend newsgroup forward and backward when requested."
+  :group 'gnus-summary-choose
+  :type 'boolean)
+
+(defcustom gnus-auto-select-first t
+  "*If nil, don't select the first unread article when entering a group.
+If this variable is `best', select the highest-scored unread article
+in the group.  If t, select the first unread article.
+
+This variable can also be a function to place point on a likely
+subject line.  Useful values include `gnus-summary-first-unread-subject',
+`gnus-summary-first-unread-article' and
+`gnus-summary-best-unread-article'.
+
+If you want to prevent automatic selection of the first unread article
+in some newsgroups, set the variable to nil in
+`gnus-select-group-hook'."
+  :group 'gnus-group-select
+  :type '(choice (const :tag "none" nil)
+		 (const best)
+		 (sexp :menu-tag "first" t)
+		 (function-item gnus-summary-first-unread-subject)
+		 (function-item gnus-summary-first-unread-article)
+		 (function-item gnus-summary-best-unread-article)))
+
+(defcustom gnus-auto-select-next t
+  "*If non-nil, offer to go to the next group from the end of the previous.
+If the value is t and the next newsgroup is empty, Gnus will exit
+summary mode and go back to group mode.	 If the value is neither nil
+nor t, Gnus will select the following unread newsgroup.	 In
+particular, if the value is the symbol `quietly', the next unread
+newsgroup will be selected without any confirmation, and if it is
+`almost-quietly', the next group will be selected without any
+confirmation if you are located on the last article in the group.
+Finally, if this variable is `slightly-quietly', the `Z n' command
+will go to the next group without confirmation."
+  :group 'gnus-summary-maneuvering
+  :type '(choice (const :tag "off" nil)
+		 (const quietly)
+		 (const almost-quietly)
+		 (const slightly-quietly)
+		 (sexp :menu-tag "on" t)))
+
+(defcustom gnus-auto-select-same nil
+  "*If non-nil, select the next article with the same subject.
+If there are no more articles with the same subject, go to
+the first unread article."
+  :group 'gnus-summary-maneuvering
+  :type 'boolean)
+
+(defcustom gnus-summary-check-current nil
+  "*If non-nil, consider the current article when moving.
+The \"unread\" movement commands will stay on the same line if the
+current article is unread."
+  :group 'gnus-summary-maneuvering
+  :type 'boolean)
+
+(defcustom gnus-auto-center-summary t
+  "*If non-nil, always center the current summary buffer.
+In particular, if `vertical' do only vertical recentering.  If non-nil
+and non-`vertical', do both horizontal and vertical recentering."
+  :group 'gnus-summary-maneuvering
+  :type '(choice (const :tag "none" nil)
+		 (const vertical)
+		 (integer :tag "height")
+		 (sexp :menu-tag "both" t)))
+
+(defcustom gnus-show-all-headers nil
+  "*If non-nil, don't hide any headers."
+  :group 'gnus-article-hiding
+  :group 'gnus-article-headers
+  :type 'boolean)
+
+(defcustom gnus-summary-ignore-duplicates nil
+  "*If non-nil, ignore articles with identical Message-ID headers."
+  :group 'gnus-summary
+  :type 'boolean)
+
+(defcustom gnus-single-article-buffer t
+  "*If non-nil, display all articles in the same buffer.
+If nil, each group will get its own article buffer."
+  :group 'gnus-article-various
+  :type 'boolean)
+
+(defcustom gnus-break-pages t
+  "*If non-nil, do page breaking on articles.
+The page delimiter is specified by the `gnus-page-delimiter'
+variable."
+  :group 'gnus-article-various
+  :type 'boolean)
+
+(defcustom gnus-move-split-methods nil
+  "*Variable used to suggest where articles are to be moved to.
+It uses the same syntax as the `gnus-split-methods' variable."
+  :group 'gnus-summary-mail
+  :type '(repeat (choice (list :value (fun) function)
+			 (cons :value ("" "") regexp (repeat string))
+			 (sexp :value nil))))
+
+(defcustom gnus-unread-mark ?  ;Whitespace
+  "*Mark used for unread articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-ticked-mark ?!
+  "*Mark used for ticked articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-dormant-mark ??
+  "*Mark used for dormant articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-del-mark ?r
+  "*Mark used for del'd articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-read-mark ?R
+  "*Mark used for read articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-expirable-mark ?E
+  "*Mark used for expirable articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-killed-mark ?K
+  "*Mark used for killed articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-souped-mark ?F
+  "*Mark used for killed articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-kill-file-mark ?X
+  "*Mark used for articles killed by kill files."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-low-score-mark ?Y
+  "*Mark used for articles with a low score."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-catchup-mark ?C
+  "*Mark used for articles that are caught up."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-replied-mark ?A
+  "*Mark used for articles that have been replied to."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-cached-mark ?*
+  "*Mark used for articles that are in the cache."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-saved-mark ?S
+  "*Mark used for articles that have been saved to."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-ancient-mark ?O
+  "*Mark used for ancient articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-sparse-mark ?Q
+  "*Mark used for sparsely reffed articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-canceled-mark ?G
+  "*Mark used for canceled articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-duplicate-mark ?M
+  "*Mark used for duplicate articles."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-undownloaded-mark ?@
+  "*Mark used for articles that weren't downloaded."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-downloadable-mark ?%
+  "*Mark used for articles that are to be downloaded."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-unsendable-mark ?=
+  "*Mark used for articles that won't be sent."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-score-over-mark ?+
+  "*Score mark used for articles with high scores."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-score-below-mark ?-
+  "*Score mark used for articles with low scores."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-empty-thread-mark ?  ;Whitespace
+  "*There is no thread under the article."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-not-empty-thread-mark ?=
+  "*There is a thread under the article."
+  :group 'gnus-summary-marks
+  :type 'character)
+
+(defcustom gnus-view-pseudo-asynchronously nil
+  "*If non-nil, Gnus will view pseudo-articles asynchronously."
+  :group 'gnus-extract-view
+  :type 'boolean)
+
+(defcustom gnus-auto-expirable-marks
+  (list gnus-killed-mark gnus-del-mark gnus-catchup-mark
+	gnus-low-score-mark gnus-ancient-mark gnus-read-mark
+	gnus-souped-mark gnus-duplicate-mark)
+  "*The list of marks converted into expiration if a group is auto-expirable."
+  :version "21.1"
+  :group 'gnus-summary
+  :type '(repeat character))
+
+(defcustom gnus-inhibit-user-auto-expire t
+  "*If non-nil, user marking commands will not mark an article as expirable, even if the group has auto-expire turned on."
+  :version "21.1"
+  :group 'gnus-summary
+  :type 'boolean)
+
+(defcustom gnus-view-pseudos nil
+  "*If `automatic', pseudo-articles will be viewed automatically.
+If `not-confirm', pseudos will be viewed automatically, and the user
+will not be asked to confirm the command."
+  :group 'gnus-extract-view
+  :type '(choice (const :tag "off" nil)
+		 (const automatic)
+		 (const not-confirm)))
+
+(defcustom gnus-view-pseudos-separately t
+  "*If non-nil, one pseudo-article will be created for each file to be viewed.
+If nil, all files that use the same viewing command will be given as a
+list of parameters to that command."
+  :group 'gnus-extract-view
+  :type 'boolean)
+
+(defcustom gnus-insert-pseudo-articles t
+  "*If non-nil, insert pseudo-articles when decoding articles."
+  :group 'gnus-extract-view
+  :type 'boolean)
+
+(defcustom gnus-summary-dummy-line-format
+  "  %(:                          :%) %S\n"
+  "*The format specification for the dummy roots in the summary buffer.
+It works along the same lines as a normal formatting string,
+with some simple extensions.
+
+%S  The subject"
+  :group 'gnus-threading
+  :type 'string)
+
+(defcustom gnus-summary-mode-line-format "Gnus: %g [%A] %Z"
+  "*The format specification for the summary mode line.
+It works along the same lines as a normal formatting string,
+with some simple extensions:
+
+%G  Group name
+%p  Unprefixed group name
+%A  Current article number
+%z  Current article score
+%V  Gnus version
+%U  Number of unread articles in the group
+%e  Number of unselected articles in the group
+%Z  A string with unread/unselected article counts
+%g  Shortish group name
+%S  Subject of the current article
+%u  User-defined spec
+%s  Current score file name
+%d  Number of dormant articles
+%r  Number of articles that have been marked as read in this session
+%E  Number of articles expunged by the score files"
+  :group 'gnus-summary-format
+  :type 'string)
+
+(defcustom gnus-list-identifiers nil
+  "Regexp that matches list identifiers to be removed from subject.
+This can also be a list of regexps."
+  :version "21.1"
+  :group 'gnus-summary-format
+  :group 'gnus-article-hiding
+  :type '(choice (const :tag "none" nil)
+		 (regexp :value ".*")
+		 (repeat :value (".*") regexp)))
+
+(defcustom gnus-summary-mark-below 0
+  "*Mark all articles with a score below this variable as read.
+This variable is local to each summary buffer and usually set by the
+score file."
+  :group 'gnus-score-default
+  :type 'integer)
+
+(defcustom gnus-article-sort-functions '(gnus-article-sort-by-number)
+  "*List of functions used for sorting articles in the summary buffer.
+This variable is only used when not using a threaded display."
+  :group 'gnus-summary-sort
+  :type '(repeat (choice (function-item gnus-article-sort-by-number)
+			 (function-item gnus-article-sort-by-author)
+			 (function-item gnus-article-sort-by-subject)
+			 (function-item gnus-article-sort-by-date)
+			 (function-item gnus-article-sort-by-score)
+			 (function :tag "other"))))
+
+(defcustom gnus-thread-sort-functions '(gnus-thread-sort-by-number)
+  "*List of functions used for sorting threads in the summary buffer.
+By default, threads are sorted by article number.
+
+Each function takes two threads and return non-nil if the first thread
+should be sorted before the other.  If you use more than one function,
+the primary sort function should be the last.  You should probably
+always include `gnus-thread-sort-by-number' in the list of sorting
+functions -- preferably first.
+
+Ready-made functions include `gnus-thread-sort-by-number',
+`gnus-thread-sort-by-author', `gnus-thread-sort-by-subject',
+`gnus-thread-sort-by-date', `gnus-thread-sort-by-score' and
+`gnus-thread-sort-by-total-score' (see `gnus-thread-score-function')."
+  :group 'gnus-summary-sort
+  :type '(repeat (choice (function-item gnus-thread-sort-by-number)
+			 (function-item gnus-thread-sort-by-author)
+			 (function-item gnus-thread-sort-by-subject)
+			 (function-item gnus-thread-sort-by-date)
+			 (function-item gnus-thread-sort-by-score)
+			 (function-item gnus-thread-sort-by-total-score)
+			 (function :tag "other"))))
+
+(defcustom gnus-thread-score-function '+
+  "*Function used for calculating the total score of a thread.
+
+The function is called with the scores of the article and each
+subthread and should then return the score of the thread.
+
+Some functions you can use are `+', `max', or `min'."
+  :group 'gnus-summary-sort
+  :type 'function)
+
+(defcustom gnus-summary-expunge-below nil
+  "All articles that have a score less than this variable will be expunged.
+This variable is local to the summary buffers."
+  :group 'gnus-score-default
+  :type '(choice (const :tag "off" nil)
+		 integer))
+
+(defcustom gnus-thread-expunge-below nil
+  "All threads that have a total score less than this variable will be expunged.
+See `gnus-thread-score-function' for en explanation of what a
+\"thread score\" is.
+
+This variable is local to the summary buffers."
+  :group 'gnus-threading
+  :group 'gnus-score-default
+  :type '(choice (const :tag "off" nil)
+		 integer))
+
+(defcustom gnus-summary-mode-hook nil
+  "*A hook for Gnus summary mode.
+This hook is run before any variables are set in the summary buffer."
+  :options '(turn-on-gnus-mailing-list-mode)
+  :group 'gnus-summary-various
+  :type 'hook)
+
+(defcustom gnus-summary-menu-hook nil
+  "*Hook run after the creation of the summary mode menu."
+  :group 'gnus-summary-visual
+  :type 'hook)
+
+(defcustom gnus-summary-exit-hook nil
+  "*A hook called on exit from the summary buffer.
+It will be called with point in the group buffer."
+  :group 'gnus-summary-exit
+  :type 'hook)
+
+(defcustom gnus-summary-prepare-hook nil
+  "*A hook called after the summary buffer has been generated.
+If you want to modify the summary buffer, you can use this hook."
+  :group 'gnus-summary-various
+  :type 'hook)
+
+(defcustom gnus-summary-prepared-hook nil
+  "*A hook called as the last thing after the summary buffer has been generated."
+  :group 'gnus-summary-various
+  :type 'hook)
+
+(defcustom gnus-summary-generate-hook nil
+  "*A hook run just before generating the summary buffer.
+This hook is commonly used to customize threading variables and the
+like."
+  :group 'gnus-summary-various
+  :type 'hook)
+
+(defcustom gnus-select-group-hook nil
+  "*A hook called when a newsgroup is selected.
+
+If you'd like to simplify subjects like the
+`gnus-summary-next-same-subject' command does, you can use the
+following hook:
+
+ (setq gnus-select-group-hook
+      (list
+	(lambda ()
+	  (mapcar (lambda (header)
+		     (mail-header-set-subject
+		      header
+		      (gnus-simplify-subject
+		       (mail-header-subject header) 're-only)))
+		  gnus-newsgroup-headers))))"
+  :group 'gnus-group-select
+  :type 'hook)
+
+(defcustom gnus-select-article-hook nil
+  "*A hook called when an article is selected."
+  :group 'gnus-summary-choose
+  :type 'hook)
+
+(defcustom gnus-visual-mark-article-hook
+  (list 'gnus-highlight-selected-summary)
+  "*Hook run after selecting an article in the summary buffer.
+It is meant to be used for highlighting the article in some way.  It
+is not run if `gnus-visual' is nil."
+  :group 'gnus-summary-visual
+  :type 'hook)
+
+(defcustom gnus-parse-headers-hook nil
+  "*A hook called before parsing the headers."
+  :group 'gnus-various
+  :type 'hook)
+
+(defcustom gnus-exit-group-hook nil
+  "*A hook called when exiting summary mode.
+This hook is not called from the non-updating exit commands like `Q'."
+  :group 'gnus-various
+  :type 'hook)
+
+(defcustom gnus-summary-update-hook
+  (list 'gnus-summary-highlight-line)
+  "*A hook called when a summary line is changed.
+The hook will not be called if `gnus-visual' is nil.
+
+The default function `gnus-summary-highlight-line' will
+highlight the line according to the `gnus-summary-highlight'
+variable."
+  :group 'gnus-summary-visual
+  :type 'hook)
+
+(defcustom gnus-mark-article-hook '(gnus-summary-mark-read-and-unread-as-read)
+  "*A hook called when an article is selected for the first time.
+The hook is intended to mark an article as read (or unread)
+automatically when it is selected."
+  :group 'gnus-summary-choose
+  :type 'hook)
+
+(defcustom gnus-group-no-more-groups-hook nil
+  "*A hook run when returning to group mode having no more (unread) groups."
+  :group 'gnus-group-select
+  :type 'hook)
+
+(defcustom gnus-ps-print-hook nil
+  "*A hook run before ps-printing something from Gnus."
+  :group 'gnus-summary
+  :type 'hook)
+
+(defcustom gnus-summary-selected-face 'gnus-summary-selected-face
+  "Face used for highlighting the current article in the summary buffer."
+  :group 'gnus-summary-visual
+  :type 'face)
+
+(defcustom gnus-summary-highlight
+  '(((= mark gnus-canceled-mark)
+     . gnus-summary-cancelled-face)
+    ((and (> score default)
+	  (or (= mark gnus-dormant-mark)
+	      (= mark gnus-ticked-mark)))
+     . gnus-summary-high-ticked-face)
+    ((and (< score default)
+	  (or (= mark gnus-dormant-mark)
+	      (= mark gnus-ticked-mark)))
+     . gnus-summary-low-ticked-face)
+    ((or (= mark gnus-dormant-mark)
+	 (= mark gnus-ticked-mark))
+     . gnus-summary-normal-ticked-face)
+    ((and (> score default) (= mark gnus-ancient-mark))
+     . gnus-summary-high-ancient-face)
+    ((and (< score default) (= mark gnus-ancient-mark))
+     . gnus-summary-low-ancient-face)
+    ((= mark gnus-ancient-mark)
+     . gnus-summary-normal-ancient-face)
+    ((and (> score default) (= mark gnus-unread-mark))
+     . gnus-summary-high-unread-face)
+    ((and (< score default) (= mark gnus-unread-mark))
+     . gnus-summary-low-unread-face)
+    ((= mark gnus-unread-mark)
+     . gnus-summary-normal-unread-face)
+    ((and (> score default) (memq mark (list gnus-downloadable-mark
+					     gnus-undownloaded-mark)))
+     . gnus-summary-high-unread-face)
+    ((and (< score default) (memq mark (list gnus-downloadable-mark
+					     gnus-undownloaded-mark)))
+     . gnus-summary-low-unread-face)
+    ((memq mark (list gnus-downloadable-mark gnus-undownloaded-mark))
+     . gnus-summary-normal-unread-face)
+    ((> score default)
+     . gnus-summary-high-read-face)
+    ((< score default)
+     . gnus-summary-low-read-face)
+    (t
+     . gnus-summary-normal-read-face))
+  "*Controls the highlighting of summary buffer lines.
+
+A list of (FORM . FACE) pairs.  When deciding how a a particular
+summary line should be displayed, each form is evaluated.  The content
+of the face field after the first true form is used.  You can change
+how those summary lines are displayed, by editing the face field.
+
+You can use the following variables in the FORM field.
+
+score:   The articles score
+default: The default article score.
+below:   The score below which articles are automatically marked as read.
+mark:    The articles mark."
+  :group 'gnus-summary-visual
+  :type '(repeat (cons (sexp :tag "Form" nil)
+		       face)))
+
+(defcustom gnus-alter-header-function nil
+  "Function called to allow alteration of article header structures.
+The function is called with one parameter, the article header vector,
+which it may alter in any way.")
+
+(defvar gnus-decode-encoded-word-function 'mail-decode-encoded-word-string
+  "Variable that says which function should be used to decode a string with encoded words.")
+
+(defcustom gnus-extra-headers nil
+  "*Extra headers to parse."
+  :version "21.1"
+  :group 'gnus-summary
+  :type '(repeat symbol))
+
+(defcustom gnus-ignored-from-addresses
+  (and user-mail-address (regexp-quote user-mail-address))
+  "*Regexp of From headers that may be suppressed in favor of To headers."
+  :version "21.1"
+  :group 'gnus-summary
+  :type 'regexp)
+
+(defcustom gnus-group-charset-alist
+  '(("^hk\\>\\|^tw\\>\\|\\<big5\\>" cn-big5)
+    ("^cn\\>\\|\\<chinese\\>" cn-gb-2312)
+    ("^fj\\>\\|^japan\\>" iso-2022-jp-2)
+    ("^tnn\\>\\|^pin\\>\\|^sci.lang.japan" iso-2022-7bit)
+    ("^relcom\\>" koi8-r)
+    ("^fido7\\>" koi8-r)
+    ("^\\(cz\\|hun\\|pl\\|sk\\|hr\\)\\>" iso-8859-2)
+    ("^israel\\>" iso-8859-1)
+    ("^han\\>" euc-kr)
+    ("^alt.chinese.text.big5\\>" chinese-big5)
+    ("^soc.culture.vietnamese\\>" vietnamese-viqr)
+    ("^\\(comp\\|rec\\|alt\\|sci\\|soc\\|news\\|gnu\\|bofh\\)\\>" iso-8859-1)
+    (".*" iso-8859-1))
+  "Alist of regexps (to match group names) and default charsets to be used when reading."
+  :type '(repeat (list (regexp :tag "Group")
+		       (symbol :tag "Charset")))
+  :group 'gnus-charset)
+
+(defcustom gnus-newsgroup-ignored-charsets '(unknown-8bit x-unknown)
+  "List of charsets that should be ignored.
+When these charsets are used in the \"charset\" parameter, the
+default charset will be used instead."
+  :version "21.1"
+  :type '(repeat symbol)
+  :group 'gnus-charset)
+
+(defcustom gnus-group-ignored-charsets-alist
+  '(("alt\\.chinese\\.text" iso-8859-1))
+  "Alist of regexps (to match group names) and charsets that should be ignored.
+When these charsets are used in the \"charset\" parameter, the
+default charset will be used instead."
+  :type '(repeat (cons (regexp :tag "Group")
+		       (repeat symbol)))
+  :group 'gnus-charset)
+
+(defcustom gnus-group-highlight-words-alist nil
+  "Alist of group regexps and highlight regexps.
+This variable uses the same syntax as `gnus-emphasis-alist'."
+  :version "21.1"
+  :type '(repeat (cons (regexp :tag "Group")
+		       (repeat (list (regexp :tag "Highlight regexp")
+				     (number :tag "Group for entire word" 0)
+				     (number :tag "Group for displayed part" 0)
+				     (symbol :tag "Face"
+					     gnus-emphasis-highlight-words)))))
+  :group 'gnus-summary-visual)
+
+(defcustom gnus-summary-show-article-charset-alist
+  nil
+  "Alist of number and charset.
+The article will be shown with the charset corresponding to the
+numbered argument.
+For example: ((1 . cn-gb-2312) (2 . big5))."
+  :version "21.1"
+  :type '(repeat (cons (number :tag "Argument" 1)
+		       (symbol :tag "Charset")))
+  :group 'gnus-charset)
+
+(defcustom gnus-preserve-marks t
+  "Whether marks are preserved when moving, copying and respooling messages."
+  :version "21.1"
+  :type 'boolean
+  :group 'gnus-summary-marks)
+
+(defcustom gnus-alter-articles-to-read-function nil
+  "Function to be called to alter the list of articles to be selected."
+  :type '(choice (const nil) function)
+  :group 'gnus-summary)
+
+(defcustom gnus-orphan-score nil
+  "*All orphans get this score added.  Set in the score file."
+  :group 'gnus-score-default
+  :type '(choice (const nil)
+		 integer))
+
+(defcustom gnus-summary-save-parts-default-mime "image/.*"
+  "*A regexp to match MIME parts when saving multiple parts of a message
+with gnus-summary-save-parts (X m). This regexp will be used by default
+when prompting the user for which type of files to save."
+  :group 'gnus-summary
+  :type 'regexp)
+
+
+;;; Internal variables
+
+(defvar gnus-article-mime-handles nil)
+(defvar gnus-article-decoded-p nil)
+(defvar gnus-scores-exclude-files nil)
+(defvar gnus-page-broken nil)
+(defvar gnus-inhibit-mime-unbuttonizing nil)
+
+(defvar gnus-original-article nil)
+(defvar gnus-article-internal-prepare-hook nil)
+(defvar gnus-newsgroup-process-stack nil)
+
+(defvar gnus-thread-indent-array nil)
+(defvar gnus-thread-indent-array-level gnus-thread-indent-level)
+(defvar gnus-sort-gathered-threads-function 'gnus-thread-sort-by-number
+  "Function called to sort the articles within a thread after it has been gathered together.")
+
+(defvar gnus-summary-save-parts-type-history nil)
+(defvar gnus-summary-save-parts-last-directory nil)
+
+;; Avoid highlighting in kill files.
+(defvar gnus-summary-inhibit-highlight nil)
+(defvar gnus-newsgroup-selected-overlay nil)
+(defvar gnus-inhibit-limiting nil)
+(defvar gnus-newsgroup-adaptive-score-file nil)
+(defvar gnus-current-score-file nil)
+(defvar gnus-current-move-group nil)
+(defvar gnus-current-copy-group nil)
+(defvar gnus-current-crosspost-group nil)
+
+(defvar gnus-newsgroup-dependencies nil)
+(defvar gnus-newsgroup-adaptive nil)
+(defvar gnus-summary-display-article-function nil)
+(defvar gnus-summary-highlight-line-function nil
+  "Function called after highlighting a summary line.")
+
+(defvar gnus-summary-line-format-alist
+  `((?N ,(macroexpand '(mail-header-number gnus-tmp-header)) ?d)
+    (?S ,(macroexpand '(mail-header-subject gnus-tmp-header)) ?s)
+    (?s gnus-tmp-subject-or-nil ?s)
+    (?n gnus-tmp-name ?s)
+    (?A (car (cdr (funcall gnus-extract-address-components gnus-tmp-from)))
+	?s)
+    (?a (or (car (funcall gnus-extract-address-components gnus-tmp-from))
+	    gnus-tmp-from) ?s)
+    (?F gnus-tmp-from ?s)
+    (?x ,(macroexpand '(mail-header-xref gnus-tmp-header)) ?s)
+    (?D ,(macroexpand '(mail-header-date gnus-tmp-header)) ?s)
+    (?d (gnus-dd-mmm (mail-header-date gnus-tmp-header)) ?s)
+    (?o (gnus-date-iso8601 (mail-header-date gnus-tmp-header)) ?s)
+    (?M ,(macroexpand '(mail-header-id gnus-tmp-header)) ?s)
+    (?r ,(macroexpand '(mail-header-references gnus-tmp-header)) ?s)
+    (?c (or (mail-header-chars gnus-tmp-header) 0) ?d)
+    (?L gnus-tmp-lines ?d)
+    (?I gnus-tmp-indentation ?s)
+    (?T (if (= gnus-tmp-level 0) "" (make-string (frame-width) ? )) ?s)
+    (?R gnus-tmp-replied ?c)
+    (?\[ gnus-tmp-opening-bracket ?c)
+    (?\] gnus-tmp-closing-bracket ?c)
+    (?\> (make-string gnus-tmp-level ? ) ?s)
+    (?\< (make-string (max 0 (- 20 gnus-tmp-level)) ? ) ?s)
+    (?i gnus-tmp-score ?d)
+    (?z gnus-tmp-score-char ?c)
+    (?l (bbb-grouplens-score gnus-tmp-header) ?s)
+    (?V (gnus-thread-total-score (and (boundp 'thread) (car thread))) ?d)
+    (?U gnus-tmp-unread ?c)
+    (?f (gnus-summary-from-or-to-or-newsgroups gnus-tmp-header) ?s)
+    (?t (gnus-summary-number-of-articles-in-thread
+	 (and (boundp 'thread) (car thread)) gnus-tmp-level)
+	?d)
+    (?e (gnus-summary-number-of-articles-in-thread
+	 (and (boundp 'thread) (car thread)) gnus-tmp-level t)
+	?c)
+    (?u gnus-tmp-user-defined ?s)
+    (?P (gnus-pick-line-number) ?d))
+  "An alist of format specifications that can appear in summary lines.
+These are paired with what variables they correspond with, along with
+the type of the variable (string, integer, character, etc).")
+
+(defvar gnus-summary-dummy-line-format-alist
+  `((?S gnus-tmp-subject ?s)
+    (?N gnus-tmp-number ?d)
+    (?u gnus-tmp-user-defined ?s)))
+
+(defvar gnus-summary-mode-line-format-alist
+  `((?G gnus-tmp-group-name ?s)
+    (?g (gnus-short-group-name gnus-tmp-group-name) ?s)
+    (?p (gnus-group-real-name gnus-tmp-group-name) ?s)
+    (?A gnus-tmp-article-number ?d)
+    (?Z gnus-tmp-unread-and-unselected ?s)
+    (?V gnus-version ?s)
+    (?U gnus-tmp-unread-and-unticked ?d)
+    (?S gnus-tmp-subject ?s)
+    (?e gnus-tmp-unselected ?d)
+    (?u gnus-tmp-user-defined ?s)
+    (?d (length gnus-newsgroup-dormant) ?d)
+    (?t (length gnus-newsgroup-marked) ?d)
+    (?r (length gnus-newsgroup-reads) ?d)
+    (?z (gnus-summary-article-score gnus-tmp-article-number) ?d)
+    (?E gnus-newsgroup-expunged-tally ?d)
+    (?s (gnus-current-score-file-nondirectory) ?s)))
+
+(defvar gnus-last-search-regexp nil
+  "Default regexp for article search command.")
+
+(defvar gnus-last-shell-command nil
+  "Default shell command on article.")
+
+(defvar gnus-newsgroup-begin nil)
+(defvar gnus-newsgroup-end nil)
+(defvar gnus-newsgroup-last-rmail nil)
+(defvar gnus-newsgroup-last-mail nil)
+(defvar gnus-newsgroup-last-folder nil)
+(defvar gnus-newsgroup-last-file nil)
+(defvar gnus-newsgroup-auto-expire nil)
+(defvar gnus-newsgroup-active nil)
+
+(defvar gnus-newsgroup-data nil)
+(defvar gnus-newsgroup-data-reverse nil)
+(defvar gnus-newsgroup-limit nil)
+(defvar gnus-newsgroup-limits nil)
+
+(defvar gnus-newsgroup-unreads nil
+  "List of unread articles in the current newsgroup.")
+
+(defvar gnus-newsgroup-unselected nil
+  "List of unselected unread articles in the current newsgroup.")
+
+(defvar gnus-newsgroup-reads nil
+  "Alist of read articles and article marks in the current newsgroup.")
+
+(defvar gnus-newsgroup-expunged-tally nil)
+
+(defvar gnus-newsgroup-marked nil
+  "List of ticked articles in the current newsgroup (a subset of unread art).")
+
+(defvar gnus-newsgroup-killed nil
+  "List of ranges of articles that have been through the scoring process.")
+
+(defvar gnus-newsgroup-cached nil
+  "List of articles that come from the article cache.")
+
+(defvar gnus-newsgroup-saved nil
+  "List of articles that have been saved.")
+
+(defvar gnus-newsgroup-kill-headers nil)
+
+(defvar gnus-newsgroup-replied nil
+  "List of articles that have been replied to in the current newsgroup.")
+
+(defvar gnus-newsgroup-expirable nil
+  "List of articles in the current newsgroup that can be expired.")
+
+(defvar gnus-newsgroup-processable nil
+  "List of articles in the current newsgroup that can be processed.")
+
+(defvar gnus-newsgroup-downloadable nil
+  "List of articles in the current newsgroup that can be processed.")
+
+(defvar gnus-newsgroup-undownloaded nil
+  "List of articles in the current newsgroup that haven't been downloaded..")
+
+(defvar gnus-newsgroup-unsendable nil
+  "List of articles in the current newsgroup that won't be sent.")
+
+(defvar gnus-newsgroup-bookmarks nil
+  "List of articles in the current newsgroup that have bookmarks.")
+
+(defvar gnus-newsgroup-dormant nil
+  "List of dormant articles in the current newsgroup.")
+
+(defvar gnus-newsgroup-scored nil
+  "List of scored articles in the current newsgroup.")
+
+(defvar gnus-newsgroup-headers nil
+  "List of article headers in the current newsgroup.")
+
+(defvar gnus-newsgroup-threads nil)
+
+(defvar gnus-newsgroup-prepared nil
+  "Whether the current group has been prepared properly.")
+
+(defvar gnus-newsgroup-ancient nil
+  "List of `gnus-fetch-old-headers' articles in the current newsgroup.")
+
+(defvar gnus-newsgroup-sparse nil)
+
+(defvar gnus-current-article nil)
+(defvar gnus-article-current nil)
+(defvar gnus-current-headers nil)
+(defvar gnus-have-all-headers nil)
+(defvar gnus-last-article nil)
+(defvar gnus-newsgroup-history nil)
+(defvar gnus-newsgroup-charset nil)
+(defvar gnus-newsgroup-ephemeral-charset nil)
+(defvar gnus-newsgroup-ephemeral-ignored-charsets nil)
+
+(defconst gnus-summary-local-variables
+  '(gnus-newsgroup-name
+    gnus-newsgroup-begin gnus-newsgroup-end
+    gnus-newsgroup-last-rmail gnus-newsgroup-last-mail
+    gnus-newsgroup-last-folder gnus-newsgroup-last-file
+    gnus-newsgroup-auto-expire gnus-newsgroup-unreads
+    gnus-newsgroup-unselected gnus-newsgroup-marked
+    gnus-newsgroup-reads gnus-newsgroup-saved
+    gnus-newsgroup-replied gnus-newsgroup-expirable
+    gnus-newsgroup-processable gnus-newsgroup-killed
+    gnus-newsgroup-downloadable gnus-newsgroup-undownloaded
+    gnus-newsgroup-unsendable
+    gnus-newsgroup-bookmarks gnus-newsgroup-dormant
+    gnus-newsgroup-headers gnus-newsgroup-threads
+    gnus-newsgroup-prepared gnus-summary-highlight-line-function
+    gnus-current-article gnus-current-headers gnus-have-all-headers
+    gnus-last-article gnus-article-internal-prepare-hook
+    gnus-newsgroup-dependencies gnus-newsgroup-selected-overlay
+    gnus-newsgroup-scored gnus-newsgroup-kill-headers
+    gnus-thread-expunge-below
+    gnus-score-alist gnus-current-score-file
+    (gnus-summary-expunge-below . global)
+    (gnus-summary-mark-below . global)
+    (gnus-orphan-score . global)
+    gnus-newsgroup-active gnus-scores-exclude-files
+    gnus-newsgroup-history gnus-newsgroup-ancient
+    gnus-newsgroup-sparse gnus-newsgroup-process-stack
+    (gnus-newsgroup-adaptive . gnus-use-adaptive-scoring)
+    gnus-newsgroup-adaptive-score-file (gnus-reffed-article-number . -1)
+    (gnus-newsgroup-expunged-tally . 0)
+    gnus-cache-removable-articles gnus-newsgroup-cached
+    gnus-newsgroup-data gnus-newsgroup-data-reverse
+    gnus-newsgroup-limit gnus-newsgroup-limits
+    gnus-newsgroup-charset)
+  "Variables that are buffer-local to the summary buffers.")
+
+;; Byte-compiler warning.
+(eval-when-compile (defvar gnus-article-mode-map))
+
+;; MIME stuff.
+
+(defvar gnus-decode-encoded-word-methods
+  '(mail-decode-encoded-word-string)
+  "List of methods used to decode encoded words.
+
+This variable is a list of FUNCTION or (REGEXP . FUNCTION).  If item is
+FUNCTION, FUNCTION will be apply to all newsgroups.  If item is a
+(REGEXP . FUNCTION), FUNCTION will be only apply to thes newsgroups
+whose names match REGEXP.
+
+For example:
+((\"chinese\" . gnus-decode-encoded-word-string-by-guess)
+ mail-decode-encoded-word-string
+ (\"chinese\" . rfc1843-decode-string))")
+
+(defvar gnus-decode-encoded-word-methods-cache nil)
+
+(defun gnus-multi-decode-encoded-word-string (string)
+  "Apply the functions from `gnus-encoded-word-methods' that match."
+  (unless (and gnus-decode-encoded-word-methods-cache
+	       (eq gnus-newsgroup-name
+		   (car gnus-decode-encoded-word-methods-cache)))
+    (setq gnus-decode-encoded-word-methods-cache (list gnus-newsgroup-name))
+    (mapcar (lambda (x)
+	      (if (symbolp x)
+		  (nconc gnus-decode-encoded-word-methods-cache (list x))
+		(if (and gnus-newsgroup-name
+			 (string-match (car x) gnus-newsgroup-name))
+		    (nconc gnus-decode-encoded-word-methods-cache
+			   (list (cdr x))))))
+	  gnus-decode-encoded-word-methods))
+  (let ((xlist gnus-decode-encoded-word-methods-cache))
+    (pop xlist)
+    (while xlist
+      (setq string (funcall (pop xlist) string))))
+  string)
+
+;; Subject simplification.
+
+(defun gnus-simplify-whitespace (str)
+  "Remove excessive whitespace from STR."
+  (let ((mystr str))
+    ;; Multiple spaces.
+    (while (string-match "[ \t][ \t]+" mystr)
+      (setq mystr (concat (substring mystr 0 (match-beginning 0))
+                          " "
+                          (substring mystr (match-end 0)))))
+    ;; Leading spaces.
+    (when (string-match "^[ \t]+" mystr)
+      (setq mystr (substring mystr (match-end 0))))
+    ;; Trailing spaces.
+    (when (string-match "[ \t]+$" mystr)
+      (setq mystr (substring mystr 0 (match-beginning 0))))
+    mystr))
+
+(defsubst gnus-simplify-subject-re (subject)
+  "Remove \"Re:\" from subject lines."
+  (if (string-match "^[Rr][Ee]: *" subject)
+      (substring subject (match-end 0))
+    subject))
+
+(defun gnus-simplify-subject (subject &optional re-only)
+  "Remove `Re:' and words in parentheses.
+If RE-ONLY is non-nil, strip leading `Re:'s only."
+  (let ((case-fold-search t))		;Ignore case.
+    ;; Remove `Re:', `Re^N:', `Re(n)', and `Re[n]:'.
+    (when (string-match "\\`\\(re\\([[(^][0-9]+[])]?\\)?:[ \t]*\\)+" subject)
+      (setq subject (substring subject (match-end 0))))
+    ;; Remove uninteresting prefixes.
+    (when (and (not re-only)
+	       gnus-simplify-ignored-prefixes
+	       (string-match gnus-simplify-ignored-prefixes subject))
+      (setq subject (substring subject (match-end 0))))
+    ;; Remove words in parentheses from end.
+    (unless re-only
+      (while (string-match "[ \t\n]*([^()]*)[ \t\n]*\\'" subject)
+	(setq subject (substring subject 0 (match-beginning 0)))))
+    ;; Return subject string.
+    subject))
+
+;; Remove any leading "re:"s, any trailing paren phrases, and simplify
+;; all whitespace.
+(defsubst gnus-simplify-buffer-fuzzy-step (regexp &optional newtext)
+  (goto-char (point-min))
+  (while (re-search-forward regexp nil t)
+    (replace-match (or newtext ""))))
+
+(defun gnus-simplify-buffer-fuzzy ()
+  "Simplify string in the buffer fuzzily.
+The string in the accessible portion of the current buffer is simplified.
+It is assumed to be a single-line subject.
+Whitespace is generally cleaned up, and miscellaneous leading/trailing
+matter is removed.  Additional things can be deleted by setting
+`gnus-simplify-subject-fuzzy-regexp'."
+  (let ((case-fold-search t)
+	(modified-tick))
+    (gnus-simplify-buffer-fuzzy-step "\t" " ")
+
+    (while (not (eq modified-tick (buffer-modified-tick)))
+      (setq modified-tick (buffer-modified-tick))
+      (cond
+       ((listp gnus-simplify-subject-fuzzy-regexp)
+	(mapcar 'gnus-simplify-buffer-fuzzy-step
+		gnus-simplify-subject-fuzzy-regexp))
+       (gnus-simplify-subject-fuzzy-regexp
+	(gnus-simplify-buffer-fuzzy-step gnus-simplify-subject-fuzzy-regexp)))
+      (gnus-simplify-buffer-fuzzy-step "^ *\\[[-+?*!][-+?*!]\\] *")
+      (gnus-simplify-buffer-fuzzy-step
+       "^ *\\(re\\|fw\\|fwd\\)[[{(^0-9]*[])}]?[:;] *")
+      (gnus-simplify-buffer-fuzzy-step "^[[].*:\\( .*\\)[]]$" "\\1"))
+
+    (gnus-simplify-buffer-fuzzy-step " *[[{(][^()\n]*[]})] *$")
+    (gnus-simplify-buffer-fuzzy-step "  +" " ")
+    (gnus-simplify-buffer-fuzzy-step " $")
+    (gnus-simplify-buffer-fuzzy-step "^ +")))
+
+(defun gnus-simplify-subject-fuzzy (subject)
+  "Simplify a subject string fuzzily.
+See `gnus-simplify-buffer-fuzzy' for details."
+  (save-excursion
+    (gnus-set-work-buffer)
+    (let ((case-fold-search t))
+      ;; Remove uninteresting prefixes.
+      (when (and gnus-simplify-ignored-prefixes
+		 (string-match gnus-simplify-ignored-prefixes subject))
+	(setq subject (substring subject (match-end 0))))
+      (insert subject)
+      (inline (gnus-simplify-buffer-fuzzy))
+      (buffer-string))))
+
+(defsubst gnus-simplify-subject-fully (subject)
+  "Simplify a subject string according to gnus-summary-gather-subject-limit."
+  (cond
+   (gnus-simplify-subject-functions
+    (gnus-map-function gnus-simplify-subject-functions subject))
+   ((null gnus-summary-gather-subject-limit)
+    (gnus-simplify-subject-re subject))
+   ((eq gnus-summary-gather-subject-limit 'fuzzy)
+    (gnus-simplify-subject-fuzzy subject))
+   ((numberp gnus-summary-gather-subject-limit)
+    (gnus-limit-string (gnus-simplify-subject-re subject)
+		       gnus-summary-gather-subject-limit))
+   (t
+    subject)))
+
+(defsubst gnus-subject-equal (s1 s2 &optional simple-first)
+  "Check whether two subjects are equal.
+If optional argument simple-first is t, first argument is already
+simplified."
+  (cond
+   ((null simple-first)
+    (equal (gnus-simplify-subject-fully s1)
+	   (gnus-simplify-subject-fully s2)))
+   (t
+    (equal s1
+	   (gnus-simplify-subject-fully s2)))))
+
+(defun gnus-summary-bubble-group ()
+  "Increase the score of the current group.
+This is a handy function to add to `gnus-summary-exit-hook' to
+increase the score of each group you read."
+  (gnus-group-add-score gnus-newsgroup-name))
+
+
+;;;
+;;; Gnus summary mode
+;;;
+
+(put 'gnus-summary-mode 'mode-class 'special)
+
+(defvar gnus-article-commands-menu)
+
+(when t
+  ;; Non-orthogonal keys
+
+  (gnus-define-keys gnus-summary-mode-map
+    " " gnus-summary-next-page
+    "\177" gnus-summary-prev-page
+    [delete] gnus-summary-prev-page
+    [backspace] gnus-summary-prev-page
+    "\r" gnus-summary-scroll-up
+    "\M-\r" gnus-summary-scroll-down
+    "n" gnus-summary-next-unread-article
+    "p" gnus-summary-prev-unread-article
+    "N" gnus-summary-next-article
+    "P" gnus-summary-prev-article
+    "\M-\C-n" gnus-summary-next-same-subject
+    "\M-\C-p" gnus-summary-prev-same-subject
+    "\M-n" gnus-summary-next-unread-subject
+    "\M-p" gnus-summary-prev-unread-subject
+    "." gnus-summary-first-unread-article
+    "," gnus-summary-best-unread-article
+    "\M-s" gnus-summary-search-article-forward
+    "\M-r" gnus-summary-search-article-backward
+    "<" gnus-summary-beginning-of-article
+    ">" gnus-summary-end-of-article
+    "j" gnus-summary-goto-article
+    "^" gnus-summary-refer-parent-article
+    "\M-^" gnus-summary-refer-article
+    "u" gnus-summary-tick-article-forward
+    "!" gnus-summary-tick-article-forward
+    "U" gnus-summary-tick-article-backward
+    "d" gnus-summary-mark-as-read-forward
+    "D" gnus-summary-mark-as-read-backward
+    "E" gnus-summary-mark-as-expirable
+    "\M-u" gnus-summary-clear-mark-forward
+    "\M-U" gnus-summary-clear-mark-backward
+    "k" gnus-summary-kill-same-subject-and-select
+    "\C-k" gnus-summary-kill-same-subject
+    "\M-\C-k" gnus-summary-kill-thread
+    "\M-\C-l" gnus-summary-lower-thread
+    "e" gnus-summary-edit-article
+    "#" gnus-summary-mark-as-processable
+    "\M-#" gnus-summary-unmark-as-processable
+    "\M-\C-t" gnus-summary-toggle-threads
+    "\M-\C-s" gnus-summary-show-thread
+    "\M-\C-h" gnus-summary-hide-thread
+    "\M-\C-f" gnus-summary-next-thread
+    "\M-\C-b" gnus-summary-prev-thread
+    [(meta down)] gnus-summary-next-thread
+    [(meta up)] gnus-summary-prev-thread
+    "\M-\C-u" gnus-summary-up-thread
+    "\M-\C-d" gnus-summary-down-thread
+    "&" gnus-summary-execute-command
+    "c" gnus-summary-catchup-and-exit
+    "\C-w" gnus-summary-mark-region-as-read
+    "\C-t" gnus-summary-toggle-truncation
+    "?" gnus-summary-mark-as-dormant
+    "\C-c\M-\C-s" gnus-summary-limit-include-expunged
+    "\C-c\C-s\C-n" gnus-summary-sort-by-number
+    "\C-c\C-s\C-l" gnus-summary-sort-by-lines
+    "\C-c\C-s\C-c" gnus-summary-sort-by-chars
+    "\C-c\C-s\C-a" gnus-summary-sort-by-author
+    "\C-c\C-s\C-s" gnus-summary-sort-by-subject
+    "\C-c\C-s\C-d" gnus-summary-sort-by-date
+    "\C-c\C-s\C-i" gnus-summary-sort-by-score
+    "=" gnus-summary-expand-window
+    "\C-x\C-s" gnus-summary-reselect-current-group
+    "\M-g" gnus-summary-rescan-group
+    "w" gnus-summary-stop-page-breaking
+    "\C-c\C-r" gnus-summary-caesar-message
+    "f" gnus-summary-followup
+    "F" gnus-summary-followup-with-original
+    "C" gnus-summary-cancel-article
+    "r" gnus-summary-reply
+    "R" gnus-summary-reply-with-original
+    "\C-c\C-f" gnus-summary-mail-forward
+    "o" gnus-summary-save-article
+    "\C-o" gnus-summary-save-article-mail
+    "|" gnus-summary-pipe-output
+    "\M-k" gnus-summary-edit-local-kill
+    "\M-K" gnus-summary-edit-global-kill
+    ;; "V" gnus-version
+    "\C-c\C-d" gnus-summary-describe-group
+    "q" gnus-summary-exit
+    "Q" gnus-summary-exit-no-update
+    "\C-c\C-i" gnus-info-find-node
+    gnus-mouse-2 gnus-mouse-pick-article
+    "m" gnus-summary-mail-other-window
+    "a" gnus-summary-post-news
+    "x" gnus-summary-limit-to-unread
+    "s" gnus-summary-isearch-article
+    "t" gnus-summary-toggle-header
+    "g" gnus-summary-show-article
+    "l" gnus-summary-goto-last-article
+    "\C-c\C-v\C-v" gnus-uu-decode-uu-view
+    "\C-d" gnus-summary-enter-digest-group
+    "\M-\C-d" gnus-summary-read-document
+    "\M-\C-e" gnus-summary-edit-parameters
+    "\M-\C-a" gnus-summary-customize-parameters
+    "\C-c\C-b" gnus-bug
+    "*" gnus-cache-enter-article
+    "\M-*" gnus-cache-remove-article
+    "\M-&" gnus-summary-universal-argument
+    "\C-l" gnus-recenter
+    "I" gnus-summary-increase-score
+    "L" gnus-summary-lower-score
+    "\M-i" gnus-symbolic-argument
+    "h" gnus-summary-select-article-buffer
+
+    "b" gnus-article-view-part
+    "\M-t" gnus-summary-toggle-display-buttonized
+
+    "V" gnus-summary-score-map
+    "X" gnus-uu-extract-map
+    "S" gnus-summary-send-map)
+
+  ;; Sort of orthogonal keymap
+  (gnus-define-keys (gnus-summary-mark-map "M" gnus-summary-mode-map)
+    "t" gnus-summary-tick-article-forward
+    "!" gnus-summary-tick-article-forward
+    "d" gnus-summary-mark-as-read-forward
+    "r" gnus-summary-mark-as-read-forward
+    "c" gnus-summary-clear-mark-forward
+    " " gnus-summary-clear-mark-forward
+    "e" gnus-summary-mark-as-expirable
+    "x" gnus-summary-mark-as-expirable
+    "?" gnus-summary-mark-as-dormant
+    "b" gnus-summary-set-bookmark
+    "B" gnus-summary-remove-bookmark
+    "#" gnus-summary-mark-as-processable
+    "\M-#" gnus-summary-unmark-as-processable
+    "S" gnus-summary-limit-include-expunged
+    "C" gnus-summary-catchup
+    "H" gnus-summary-catchup-to-here
+    "\C-c" gnus-summary-catchup-all
+    "k" gnus-summary-kill-same-subject-and-select
+    "K" gnus-summary-kill-same-subject
+    "P" gnus-uu-mark-map)
+
+  (gnus-define-keys (gnus-summary-mscore-map "V" gnus-summary-mark-map)
+    "c" gnus-summary-clear-above
+    "u" gnus-summary-tick-above
+    "m" gnus-summary-mark-above
+    "k" gnus-summary-kill-below)
+
+  (gnus-define-keys (gnus-summary-limit-map "/" gnus-summary-mode-map)
+    "/" gnus-summary-limit-to-subject
+    "n" gnus-summary-limit-to-articles
+    "w" gnus-summary-pop-limit
+    "s" gnus-summary-limit-to-subject
+    "a" gnus-summary-limit-to-author
+    "u" gnus-summary-limit-to-unread
+    "m" gnus-summary-limit-to-marks
+    "M" gnus-summary-limit-exclude-marks
+    "v" gnus-summary-limit-to-score
+    "*" gnus-summary-limit-include-cached
+    "D" gnus-summary-limit-include-dormant
+    "T" gnus-summary-limit-include-thread
+    "d" gnus-summary-limit-exclude-dormant
+    "t" gnus-summary-limit-to-age
+    "x" gnus-summary-limit-to-extra
+    "E" gnus-summary-limit-include-expunged
+    "c" gnus-summary-limit-exclude-childless-dormant
+    "C" gnus-summary-limit-mark-excluded-as-read)
+
+  (gnus-define-keys (gnus-summary-goto-map "G" gnus-summary-mode-map)
+    "n" gnus-summary-next-unread-article
+    "p" gnus-summary-prev-unread-article
+    "N" gnus-summary-next-article
+    "P" gnus-summary-prev-article
+    "\C-n" gnus-summary-next-same-subject
+    "\C-p" gnus-summary-prev-same-subject
+    "\M-n" gnus-summary-next-unread-subject
+    "\M-p" gnus-summary-prev-unread-subject
+    "f" gnus-summary-first-unread-article
+    "b" gnus-summary-best-unread-article
+    "j" gnus-summary-goto-article
+    "g" gnus-summary-goto-subject
+    "l" gnus-summary-goto-last-article
+    "o" gnus-summary-pop-article)
+
+  (gnus-define-keys (gnus-summary-thread-map "T" gnus-summary-mode-map)
+    "k" gnus-summary-kill-thread
+    "l" gnus-summary-lower-thread
+    "i" gnus-summary-raise-thread
+    "T" gnus-summary-toggle-threads
+    "t" gnus-summary-rethread-current
+    "^" gnus-summary-reparent-thread
+    "s" gnus-summary-show-thread
+    "S" gnus-summary-show-all-threads
+    "h" gnus-summary-hide-thread
+    "H" gnus-summary-hide-all-threads
+    "n" gnus-summary-next-thread
+    "p" gnus-summary-prev-thread
+    "u" gnus-summary-up-thread
+    "o" gnus-summary-top-thread
+    "d" gnus-summary-down-thread
+    "#" gnus-uu-mark-thread
+    "\M-#" gnus-uu-unmark-thread)
+
+  (gnus-define-keys (gnus-summary-buffer-map "Y" gnus-summary-mode-map)
+    "g" gnus-summary-prepare
+    "c" gnus-summary-insert-cached-articles)
+
+  (gnus-define-keys (gnus-summary-exit-map "Z" gnus-summary-mode-map)
+    "c" gnus-summary-catchup-and-exit
+    "C" gnus-summary-catchup-all-and-exit
+    "E" gnus-summary-exit-no-update
+    "Q" gnus-summary-exit
+    "Z" gnus-summary-exit
+    "n" gnus-summary-catchup-and-goto-next-group
+    "R" gnus-summary-reselect-current-group
+    "G" gnus-summary-rescan-group
+    "N" gnus-summary-next-group
+    "s" gnus-summary-save-newsrc
+    "P" gnus-summary-prev-group)
+
+  (gnus-define-keys (gnus-summary-article-map "A" gnus-summary-mode-map)
+    " " gnus-summary-next-page
+    "n" gnus-summary-next-page
+    "\177" gnus-summary-prev-page
+    [delete] gnus-summary-prev-page
+    "p" gnus-summary-prev-page
+    "\r" gnus-summary-scroll-up
+    "\M-\r" gnus-summary-scroll-down
+    "<" gnus-summary-beginning-of-article
+    ">" gnus-summary-end-of-article
+    "b" gnus-summary-beginning-of-article
+    "e" gnus-summary-end-of-article
+    "^" gnus-summary-refer-parent-article
+    "r" gnus-summary-refer-parent-article
+    "D" gnus-summary-enter-digest-group
+    "R" gnus-summary-refer-references
+    "T" gnus-summary-refer-thread
+    "g" gnus-summary-show-article
+    "s" gnus-summary-isearch-article
+    "P" gnus-summary-print-article
+    "t" gnus-article-babel)
+
+  (gnus-define-keys (gnus-summary-wash-map "W" gnus-summary-mode-map)
+    "b" gnus-article-add-buttons
+    "B" gnus-article-add-buttons-to-head
+    "o" gnus-article-treat-overstrike
+    "e" gnus-article-emphasize
+    "w" gnus-article-fill-cited-article
+    "Q" gnus-article-fill-long-lines
+    "C" gnus-article-capitalize-sentences
+    "c" gnus-article-remove-cr
+    "q" gnus-article-de-quoted-unreadable
+    "6" gnus-article-de-base64-unreadable
+    "Z" gnus-article-decode-HZ
+    "h" gnus-article-wash-html
+    "f" gnus-article-display-x-face
+    "l" gnus-summary-stop-page-breaking
+    "r" gnus-summary-caesar-message
+    "t" gnus-summary-toggle-header
+    "v" gnus-summary-verbose-headers
+    "H" gnus-article-strip-headers-in-body
+    "d" gnus-article-treat-dumbquotes)
+
+  (gnus-define-keys (gnus-summary-wash-hide-map "W" gnus-summary-wash-map)
+    "a" gnus-article-hide
+    "h" gnus-article-hide-headers
+    "b" gnus-article-hide-boring-headers
+    "s" gnus-article-hide-signature
+    "c" gnus-article-hide-citation
+    "C" gnus-article-hide-citation-in-followups
+    "l" gnus-article-hide-list-identifiers
+    "p" gnus-article-hide-pgp
+    "B" gnus-article-strip-banner
+    "P" gnus-article-hide-pem
+    "\C-c" gnus-article-hide-citation-maybe)
+
+  (gnus-define-keys (gnus-summary-wash-highlight-map "H" gnus-summary-wash-map)
+    "a" gnus-article-highlight
+    "h" gnus-article-highlight-headers
+    "c" gnus-article-highlight-citation
+    "s" gnus-article-highlight-signature)
+
+  (gnus-define-keys (gnus-summary-wash-mime-map "M" gnus-summary-wash-map)
+    "w" gnus-article-decode-mime-words
+    "c" gnus-article-decode-charset
+    "v" gnus-mime-view-all-parts
+    "b" gnus-article-view-part)
+
+  (gnus-define-keys (gnus-summary-wash-time-map "T" gnus-summary-wash-map)
+    "z" gnus-article-date-ut
+    "u" gnus-article-date-ut
+    "l" gnus-article-date-local
+    "e" gnus-article-date-lapsed
+    "o" gnus-article-date-original
+    "i" gnus-article-date-iso8601
+    "s" gnus-article-date-user)
+
+  (gnus-define-keys (gnus-summary-wash-empty-map "E" gnus-summary-wash-map)
+    "t" gnus-article-remove-trailing-blank-lines
+    "l" gnus-article-strip-leading-blank-lines
+    "m" gnus-article-strip-multiple-blank-lines
+    "a" gnus-article-strip-blank-lines
+    "A" gnus-article-strip-all-blank-lines
+    "s" gnus-article-strip-leading-space
+    "e" gnus-article-strip-trailing-space)
+
+  (gnus-define-keys (gnus-summary-help-map "H" gnus-summary-mode-map)
+    "v" gnus-version
+    "f" gnus-summary-fetch-faq
+    "d" gnus-summary-describe-group
+    "h" gnus-summary-describe-briefly
+    "i" gnus-info-find-node)
+
+  (gnus-define-keys (gnus-summary-backend-map "B" gnus-summary-mode-map)
+    "e" gnus-summary-expire-articles
+    "\M-\C-e" gnus-summary-expire-articles-now
+    "\177" gnus-summary-delete-article
+    [delete] gnus-summary-delete-article
+    [backspace] gnus-summary-delete-article
+    "m" gnus-summary-move-article
+    "r" gnus-summary-respool-article
+    "w" gnus-summary-edit-article
+    "c" gnus-summary-copy-article
+    "B" gnus-summary-crosspost-article
+    "q" gnus-summary-respool-query
+    "t" gnus-summary-respool-trace
+    "i" gnus-summary-import-article
+    "p" gnus-summary-article-posted-p)
+
+  (gnus-define-keys (gnus-summary-save-map "O" gnus-summary-mode-map)
+    "o" gnus-summary-save-article
+    "m" gnus-summary-save-article-mail
+    "F" gnus-summary-write-article-file
+    "r" gnus-summary-save-article-rmail
+    "f" gnus-summary-save-article-file
+    "b" gnus-summary-save-article-body-file
+    "h" gnus-summary-save-article-folder
+    "v" gnus-summary-save-article-vm
+    "p" gnus-summary-pipe-output
+    "s" gnus-soup-add-article)
+
+  (gnus-define-keys (gnus-summary-mime-map "K" gnus-summary-mode-map)
+    "b" gnus-summary-display-buttonized
+    "m" gnus-summary-repair-multipart
+    "v" gnus-article-view-part
+    "o" gnus-article-save-part
+    "c" gnus-article-copy-part
+    "e" gnus-article-externalize-part
+    "i" gnus-article-inline-part
+    "|" gnus-article-pipe-part))
+
+(defun gnus-summary-make-menu-bar ()
+  (gnus-turn-off-edit-menu 'summary)
+
+  (unless (boundp 'gnus-summary-misc-menu)
+
+    (easy-menu-define
+     gnus-summary-kill-menu gnus-summary-mode-map ""
+     (cons
+      "Score"
+      (nconc
+       (list
+	["Enter score..." gnus-summary-score-entry t]
+	["Customize" gnus-score-customize t])
+       (gnus-make-score-map 'increase)
+       (gnus-make-score-map 'lower)
+       '(("Mark"
+	  ["Kill below" gnus-summary-kill-below t]
+	  ["Mark above" gnus-summary-mark-above t]
+	  ["Tick above" gnus-summary-tick-above t]
+	  ["Clear above" gnus-summary-clear-above t])
+	 ["Current score" gnus-summary-current-score t]
+	 ["Set score" gnus-summary-set-score t]
+	 ["Switch current score file..." gnus-score-change-score-file t]
+	 ["Set mark below..." gnus-score-set-mark-below t]
+	 ["Set expunge below..." gnus-score-set-expunge-below t]
+	 ["Edit current score file" gnus-score-edit-current-scores t]
+	 ["Edit score file" gnus-score-edit-file t]
+	 ["Trace score" gnus-score-find-trace t]
+	 ["Find words" gnus-score-find-favourite-words t]
+	 ["Rescore buffer" gnus-summary-rescore t]
+	 ["Increase score..." gnus-summary-increase-score t]
+	 ["Lower score..." gnus-summary-lower-score t]))))
+
+    ;; Define both the Article menu in the summary buffer and the equivalent
+    ;; Commands menu in the article buffer here for consistency.
+    (let ((innards
+           '(("Hide"
+              ["All" gnus-article-hide t]
+              ["Headers" gnus-article-hide-headers t]
+              ["Signature" gnus-article-hide-signature t]
+              ["Citation" gnus-article-hide-citation t]
+	      ["List identifiers" gnus-article-hide-list-identifiers t]
+              ["PGP" gnus-article-hide-pgp t]
+	      ["Banner" gnus-article-strip-banner t]
+              ["Boring headers" gnus-article-hide-boring-headers t])
+             ("Highlight"
+              ["All" gnus-article-highlight t]
+              ["Headers" gnus-article-highlight-headers t]
+              ["Signature" gnus-article-highlight-signature t]
+              ["Citation" gnus-article-highlight-citation t])
+	     ("MIME"
+	      ["Words" gnus-article-decode-mime-words t]
+	      ["Charset" gnus-article-decode-charset t]
+	      ["QP" gnus-article-de-quoted-unreadable t]
+	      ["Base64" gnus-article-de-base64-unreadable t]
+	      ["View all" gnus-mime-view-all-parts t])
+             ("Date"
+              ["Local" gnus-article-date-local t]
+              ["ISO8601" gnus-article-date-iso8601 t]
+              ["UT" gnus-article-date-ut t]
+              ["Original" gnus-article-date-original t]
+              ["Lapsed" gnus-article-date-lapsed t]
+              ["User-defined" gnus-article-date-user t])
+             ("Washing"
+              ("Remove Blanks"
+               ["Leading" gnus-article-strip-leading-blank-lines t]
+               ["Multiple" gnus-article-strip-multiple-blank-lines t]
+               ["Trailing" gnus-article-remove-trailing-blank-lines t]
+               ["All of the above" gnus-article-strip-blank-lines t]
+               ["All" gnus-article-strip-all-blank-lines t]
+               ["Leading space" gnus-article-strip-leading-space t]
+	       ["Trailing space" gnus-article-strip-trailing-space t])
+              ["Overstrike" gnus-article-treat-overstrike t]
+              ["Dumb quotes" gnus-article-treat-dumbquotes t]
+              ["Emphasis" gnus-article-emphasize t]
+              ["Word wrap" gnus-article-fill-cited-article t]
+	      ["Fill long lines" gnus-article-fill-long-lines t]
+	      ["Capitalize sentences" gnus-article-capitalize-sentences t]
+              ["CR" gnus-article-remove-cr t]
+              ["Show X-Face" gnus-article-display-x-face t]
+              ["Quoted-Printable" gnus-article-de-quoted-unreadable t]
+              ["Base64" gnus-article-de-base64-unreadable t]
+              ["Rot 13" gnus-summary-caesar-message
+	       :help "\"Caesar rotate\" article by 13"]
+              ["Unix pipe" gnus-summary-pipe-message t]
+              ["Add buttons" gnus-article-add-buttons t]
+              ["Add buttons to head" gnus-article-add-buttons-to-head t]
+              ["Stop page breaking" gnus-summary-stop-page-breaking t]
+              ["Verbose header" gnus-summary-verbose-headers t]
+              ["Toggle header" gnus-summary-toggle-header t]
+	      ["Html" gnus-article-wash-html t]
+	      ["HZ" gnus-article-decode-HZ t])
+             ("Output"
+              ["Save in default format" gnus-summary-save-article
+	       :help "Save article using default method"]
+              ["Save in file" gnus-summary-save-article-file
+	       :help "Save article in file"]
+              ["Save in Unix mail format" gnus-summary-save-article-mail t]
+              ["Save in MH folder" gnus-summary-save-article-folder t]
+              ["Save in VM folder" gnus-summary-save-article-vm t]
+              ["Save in RMAIL mbox" gnus-summary-save-article-rmail t]
+              ["Save body in file" gnus-summary-save-article-body-file t]
+              ["Pipe through a filter" gnus-summary-pipe-output t]
+              ["Add to SOUP packet" gnus-soup-add-article t]
+              ["Print" gnus-summary-print-article t])
+             ("Backend"
+              ["Respool article..." gnus-summary-respool-article t]
+              ["Move article..." gnus-summary-move-article
+               (gnus-check-backend-function
+                'request-move-article gnus-newsgroup-name)]
+              ["Copy article..." gnus-summary-copy-article t]
+              ["Crosspost article..." gnus-summary-crosspost-article
+               (gnus-check-backend-function
+                'request-replace-article gnus-newsgroup-name)]
+              ["Import file..." gnus-summary-import-article t]
+              ["Check if posted" gnus-summary-article-posted-p t]
+              ["Edit article" gnus-summary-edit-article
+               (not (gnus-group-read-only-p))]
+              ["Delete article" gnus-summary-delete-article
+               (gnus-check-backend-function
+                'request-expire-articles gnus-newsgroup-name)]
+              ["Query respool" gnus-summary-respool-query t]
+	      ["Trace respool" gnus-summary-respool-trace t]
+              ["Delete expirable articles" gnus-summary-expire-articles-now
+               (gnus-check-backend-function
+                'request-expire-articles gnus-newsgroup-name)])
+             ("Extract"
+              ["Uudecode" gnus-uu-decode-uu
+	       :help "Decode uuencoded article(s)"]
+              ["Uudecode and save" gnus-uu-decode-uu-and-save t]
+              ["Unshar" gnus-uu-decode-unshar t]
+              ["Unshar and save" gnus-uu-decode-unshar-and-save t]
+              ["Save" gnus-uu-decode-save t]
+              ["Binhex" gnus-uu-decode-binhex t]
+              ["Postscript" gnus-uu-decode-postscript t])
+             ("Cache"
+              ["Enter article" gnus-cache-enter-article t]
+              ["Remove article" gnus-cache-remove-article t])
+	     ["Translate" gnus-article-babel t]
+             ["Select article buffer" gnus-summary-select-article-buffer t]
+             ["Enter digest buffer" gnus-summary-enter-digest-group t]
+             ["Isearch article..." gnus-summary-isearch-article t]
+             ["Beginning of the article" gnus-summary-beginning-of-article t]
+             ["End of the article" gnus-summary-end-of-article t]
+             ["Fetch parent of article" gnus-summary-refer-parent-article t]
+             ["Fetch referenced articles" gnus-summary-refer-references t]
+             ["Fetch current thread" gnus-summary-refer-thread t]
+             ["Fetch article with id..." gnus-summary-refer-article t]
+             ["Redisplay" gnus-summary-show-article t])))
+      (easy-menu-define
+       gnus-summary-article-menu gnus-summary-mode-map ""
+       (cons "Article" innards))
+
+      (if (not (keymapp gnus-summary-article-menu))
+	  (easy-menu-define
+	    gnus-article-commands-menu gnus-article-mode-map ""
+	    (cons "Commands" innards))
+	;; in Emacs, don't share menu.
+	(setq gnus-article-commands-menu 
+	      (copy-keymap gnus-summary-article-menu))
+	(define-key gnus-article-mode-map [menu-bar commands]
+	  (cons "Commands" gnus-article-commands-menu))))
+
+    (easy-menu-define
+     gnus-summary-thread-menu gnus-summary-mode-map ""
+     '("Threads"
+       ["Toggle threading" gnus-summary-toggle-threads t]
+       ["Hide threads" gnus-summary-hide-all-threads t]
+       ["Show threads" gnus-summary-show-all-threads t]
+       ["Hide thread" gnus-summary-hide-thread t]
+       ["Show thread" gnus-summary-show-thread t]
+       ["Go to next thread" gnus-summary-next-thread t]
+       ["Go to previous thread" gnus-summary-prev-thread t]
+       ["Go down thread" gnus-summary-down-thread t]
+       ["Go up thread" gnus-summary-up-thread t]
+       ["Top of thread" gnus-summary-top-thread t]
+       ["Mark thread as read" gnus-summary-kill-thread t]
+       ["Lower thread score" gnus-summary-lower-thread t]
+       ["Raise thread score" gnus-summary-raise-thread t]
+       ["Rethread current" gnus-summary-rethread-current t]))
+
+    (easy-menu-define
+     gnus-summary-post-menu gnus-summary-mode-map ""
+     '("Post"
+       ["Post an article" gnus-summary-post-news
+	:help "Post an article"]
+       ["Followup" gnus-summary-followup
+	:help "Post followup to this article"]
+       ["Followup and yank" gnus-summary-followup-with-original
+	:help "Post followup to this article, quoting its contents"]
+       ["Supersede article" gnus-summary-supersede-article t]
+       ["Cancel article" gnus-summary-cancel-article
+	:help "Cancel an article you posted"]
+       ["Reply" gnus-summary-reply t]
+       ["Reply and yank" gnus-summary-reply-with-original t]
+       ["Wide reply" gnus-summary-wide-reply t]
+       ["Wide reply and yank" gnus-summary-wide-reply-with-original
+	:help "Mail a reply, quoting this article"]
+       ["Mail forward" gnus-summary-mail-forward t]
+       ["Post forward" gnus-summary-post-forward t]
+       ["Digest and mail" gnus-uu-digest-mail-forward t]
+       ["Digest and post" gnus-uu-digest-post-forward t]
+       ["Resend message" gnus-summary-resend-message t]
+       ["Send bounced mail" gnus-summary-resend-bounced-mail t]
+       ["Send a mail" gnus-summary-mail-other-window t]
+       ["Uuencode and post" gnus-uu-post-news
+	:help "Post a uuencoded article"]
+       ["Followup via news" gnus-summary-followup-to-mail t]
+       ["Followup via news and yank"
+	gnus-summary-followup-to-mail-with-original t]
+       ;;("Draft"
+       ;;["Send" gnus-summary-send-draft t]
+       ;;["Send bounced" gnus-resend-bounced-mail t])
+       ))
+
+    (easy-menu-define
+     gnus-summary-misc-menu gnus-summary-mode-map ""
+     '("Misc"
+       ("Mark Read"
+	["Mark as read" gnus-summary-mark-as-read-forward t]
+	["Mark same subject and select"
+	 gnus-summary-kill-same-subject-and-select t]
+	["Mark same subject" gnus-summary-kill-same-subject t]
+	["Catchup" gnus-summary-catchup
+	 :help "Mark unread articles in this group as read"]
+	["Catchup all" gnus-summary-catchup-all t]
+	["Catchup to here" gnus-summary-catchup-to-here t]
+	["Catchup region" gnus-summary-mark-region-as-read t]
+	["Mark excluded" gnus-summary-limit-mark-excluded-as-read t])
+       ("Mark Various"
+	["Tick" gnus-summary-tick-article-forward t]
+	["Mark as dormant" gnus-summary-mark-as-dormant t]
+	["Remove marks" gnus-summary-clear-mark-forward t]
+	["Set expirable mark" gnus-summary-mark-as-expirable t]
+	["Set bookmark" gnus-summary-set-bookmark t]
+	["Remove bookmark" gnus-summary-remove-bookmark t])
+       ("Mark Limit"
+	["Marks..." gnus-summary-limit-to-marks t]
+	["Subject..." gnus-summary-limit-to-subject t]
+	["Author..." gnus-summary-limit-to-author t]
+	["Age..." gnus-summary-limit-to-age t]
+	["Extra..." gnus-summary-limit-to-extra t]
+	["Score" gnus-summary-limit-to-score t]
+	["Unread" gnus-summary-limit-to-unread t]
+	["Non-dormant" gnus-summary-limit-exclude-dormant t]
+	["Articles" gnus-summary-limit-to-articles t]
+	["Pop limit" gnus-summary-pop-limit t]
+	["Show dormant" gnus-summary-limit-include-dormant t]
+	["Hide childless dormant"
+	 gnus-summary-limit-exclude-childless-dormant t]
+	;;["Hide thread" gnus-summary-limit-exclude-thread t]
+	["Hide marked" gnus-summary-limit-exclude-marks t]
+	["Show expunged" gnus-summary-show-all-expunged t])
+       ("Process Mark"
+	["Set mark" gnus-summary-mark-as-processable t]
+	["Remove mark" gnus-summary-unmark-as-processable t]
+	["Remove all marks" gnus-summary-unmark-all-processable t]
+	["Mark above" gnus-uu-mark-over t]
+	["Mark series" gnus-uu-mark-series t]
+	["Mark region" gnus-uu-mark-region t]
+	["Unmark region" gnus-uu-unmark-region t]
+	["Mark by regexp..." gnus-uu-mark-by-regexp t]
+        ["Unmark by regexp..." gnus-uu-unmark-by-regexp t]
+	["Mark all" gnus-uu-mark-all t]
+	["Mark buffer" gnus-uu-mark-buffer t]
+	["Mark sparse" gnus-uu-mark-sparse t]
+	["Mark thread" gnus-uu-mark-thread t]
+	["Unmark thread" gnus-uu-unmark-thread t]
+	("Process Mark Sets"
+	 ["Kill" gnus-summary-kill-process-mark t]
+	 ["Yank" gnus-summary-yank-process-mark
+	  gnus-newsgroup-process-stack]
+	 ["Save" gnus-summary-save-process-mark t]))
+       ("Scroll article"
+	["Page forward" gnus-summary-next-page
+	 :help "Show next page of article"]
+	["Page backward" gnus-summary-prev-page
+	 :help "Show previous page of article"]
+	["Line forward" gnus-summary-scroll-up t])
+       ("Move"
+	["Next unread article" gnus-summary-next-unread-article t]
+	["Previous unread article" gnus-summary-prev-unread-article t]
+	["Next article" gnus-summary-next-article t]
+	["Previous article" gnus-summary-prev-article t]
+	["Next unread subject" gnus-summary-next-unread-subject t]
+	["Previous unread subject" gnus-summary-prev-unread-subject t]
+	["Next article same subject" gnus-summary-next-same-subject t]
+	["Previous article same subject" gnus-summary-prev-same-subject t]
+	["First unread article" gnus-summary-first-unread-article t]
+	["Best unread article" gnus-summary-best-unread-article t]
+	["Go to subject number..." gnus-summary-goto-subject t]
+	["Go to article number..." gnus-summary-goto-article t]
+	["Go to the last article" gnus-summary-goto-last-article t]
+	["Pop article off history" gnus-summary-pop-article t])
+       ("Sort"
+	["Sort by number" gnus-summary-sort-by-number t]
+	["Sort by author" gnus-summary-sort-by-author t]
+	["Sort by subject" gnus-summary-sort-by-subject t]
+	["Sort by date" gnus-summary-sort-by-date t]
+	["Sort by score" gnus-summary-sort-by-score t]
+	["Sort by lines" gnus-summary-sort-by-lines t]
+	["Sort by characters" gnus-summary-sort-by-chars t])
+       ("Help"
+	["Fetch group FAQ" gnus-summary-fetch-faq t]
+	["Describe group" gnus-summary-describe-group t]
+	["Read manual" gnus-info-find-node t])
+       ("Modes"
+	["Pick and read" gnus-pick-mode t]
+	["Binary" gnus-binary-mode t])
+       ("Regeneration"
+	["Regenerate" gnus-summary-prepare t]
+	["Insert cached articles" gnus-summary-insert-cached-articles t]
+	["Toggle threading" gnus-summary-toggle-threads t])
+       ["Filter articles..." gnus-summary-execute-command t]
+       ["Run command on subjects..." gnus-summary-universal-argument t]
+       ["Search articles forward..." gnus-summary-search-article-forward t]
+       ["Search articles backward..." gnus-summary-search-article-backward t]
+       ["Toggle line truncation" gnus-summary-toggle-truncation t]
+       ["Expand window" gnus-summary-expand-window t]
+       ["Expire expirable articles" gnus-summary-expire-articles
+	(gnus-check-backend-function
+	 'request-expire-articles gnus-newsgroup-name)]
+       ["Edit local kill file" gnus-summary-edit-local-kill t]
+       ["Edit main kill file" gnus-summary-edit-global-kill t]
+       ["Edit group parameters" gnus-summary-edit-parameters t]
+       ["Customize group parameters" gnus-summary-customize-parameters t]
+       ["Send a bug report" gnus-bug t]
+       ("Exit"
+	["Catchup and exit" gnus-summary-catchup-and-exit
+	 :help "Mark unread articles in this group as read, then exit"]
+	["Catchup all and exit" gnus-summary-catchup-all-and-exit t]
+	["Catchup and goto next" gnus-summary-catchup-and-goto-next-group t]
+	["Exit group" gnus-summary-exit
+	 :help "Exit current group, return to group selection mode"]
+	["Exit group without updating" gnus-summary-exit-no-update t]
+	["Exit and goto next group" gnus-summary-next-group t]
+	["Exit and goto prev group" gnus-summary-prev-group t]
+	["Reselect group" gnus-summary-reselect-current-group t]
+	["Rescan group" gnus-summary-rescan-group t]
+	["Update dribble" gnus-summary-save-newsrc t])))
+
+    (gnus-run-hooks 'gnus-summary-menu-hook)))
+
+(defvar gnus-summary-tool-bar-map nil)
+
+;; Emacs 21 tool bar.  Should be no-op otherwise.
+(defun gnus-summary-make-tool-bar ()
+  (if (and (fboundp 'tool-bar-add-item-from-menu)
+	   (default-value 'tool-bar-mode)
+	   (not gnus-summary-tool-bar-map))
+      (setq gnus-summary-tool-bar-map
+	    (let ((tool-bar-map (make-sparse-keymap)))
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-prev-unread "prev-ur" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-next-unread "next-ur" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-post-news "post" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-followup-with-original "fuwo" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-followup "followup" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-reply-with-original "reply-wo" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-reply "reply" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-caesar-message "rot13" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-uu-decode-uu "uu-decode" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-save-article-file "save-aif" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-save-article "save-art" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-uu-post-news "uu-post" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-catchup "catchup" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-catchup-and-exit "cu-exit" gnus-summary-mode-map)
+	      (tool-bar-add-item-from-menu
+	       'gnus-summary-exit "exit-summ" gnus-summary-mode-map)
+	      tool-bar-map)))
+  (if gnus-summary-tool-bar-map
+      (set (make-local-variable 'tool-bar-map) gnus-summary-tool-bar-map)))
+
+(defun gnus-score-set-default (var value)
+  "A version of set that updates the GNU Emacs menu-bar."
+  (set var value)
+  ;; It is the message that forces the active status to be updated.
+  (message ""))
+
+(defun gnus-make-score-map (type)
+  "Make a summary score map of type TYPE."
+  (if t
+      nil
+    (let ((headers '(("author" "from" string)
+		     ("subject" "subject" string)
+		     ("article body" "body" string)
+		     ("article head" "head" string)
+		     ("xref" "xref" string)
+		     ("extra header" "extra" string)
+		     ("lines" "lines" number)
+		     ("followups to author" "followup" string)))
+	  (types '((number ("less than" <)
+			   ("greater than" >)
+			   ("equal" =))
+		   (string ("substring" s)
+			   ("exact string" e)
+			   ("fuzzy string" f)
+			   ("regexp" r))))
+	  (perms '(("temporary" (current-time-string))
+		   ("permanent" nil)
+		   ("immediate" now)))
+	  header)
+      (list
+       (apply
+	'nconc
+	(list
+	 (if (eq type 'lower)
+	     "Lower score"
+	   "Increase score"))
+	(let (outh)
+	  (while headers
+	    (setq header (car headers))
+	    (setq outh
+		  (cons
+		   (apply
+		    'nconc
+		    (list (car header))
+		    (let ((ts (cdr (assoc (nth 2 header) types)))
+			  outt)
+		      (while ts
+			(setq outt
+			      (cons
+			       (apply
+				'nconc
+				(list (caar ts))
+				(let ((ps perms)
+				      outp)
+				  (while ps
+				    (setq outp
+					  (cons
+					   (vector
+					    (caar ps)
+					    (list
+					     'gnus-summary-score-entry
+					     (nth 1 header)
+					     (if (or (string= (nth 1 header)
+							      "head")
+						     (string= (nth 1 header)
+							      "body"))
+						 ""
+					       (list 'gnus-summary-header
+						     (nth 1 header)))
+					     (list 'quote (nth 1 (car ts)))
+					     (list 'gnus-score-delta-default
+						   nil)
+					     (nth 1 (car ps))
+					     t)
+					    t)
+					   outp))
+				    (setq ps (cdr ps)))
+				  (list (nreverse outp))))
+			       outt))
+			(setq ts (cdr ts)))
+		      (list (nreverse outt))))
+		   outh))
+	    (setq headers (cdr headers)))
+	  (list (nreverse outh))))))))
+
+
+
+(defun gnus-summary-mode (&optional group)
+  "Major mode for reading articles.
+
+All normal editing commands are switched off.
+\\<gnus-summary-mode-map>
+Each line in this buffer represents one article.  To read an
+article, you can, for instance, type `\\[gnus-summary-next-page]'.  To move forwards
+and backwards while displaying articles, type `\\[gnus-summary-next-unread-article]' and `\\[gnus-summary-prev-unread-article]',
+respectively.
+
+You can also post articles and send mail from this buffer.  To
+follow up an article, type `\\[gnus-summary-followup]'.	 To mail a reply to the author
+of an article, type `\\[gnus-summary-reply]'.
+
+There are approx. one gazillion commands you can execute in this
+buffer; read the info pages for more information (`\\[gnus-info-find-node]').
+
+The following commands are available:
+
+\\{gnus-summary-mode-map}"
+  (interactive)
+  (kill-all-local-variables)
+  (when (gnus-visual-p 'summary-menu 'menu)
+    (gnus-summary-make-menu-bar)
+    (gnus-summary-make-tool-bar))
+  (gnus-summary-make-local-variables)
+  (gnus-make-thread-indent-array)
+  (gnus-simplify-mode-line)
+  (setq major-mode 'gnus-summary-mode)
+  (se
